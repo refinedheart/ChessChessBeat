@@ -1226,6 +1226,7 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_res.cpp
 qrc_res.cpp: ../../Image/res.qrc \
 		/Users/hewenshuo/Qt/6.8.2/macos/libexec/rcc \
+		../../Image/RoomBackGround.jpg \
 		../../Image/start-background.webp \
 		../../Image/Chess-19.jpeg
 	/Users/hewenshuo/Qt/6.8.2/macos/libexec/rcc -name res --no-zstd ../../Image/res.qrc -o qrc_res.cpp
@@ -1280,7 +1281,9 @@ gameroom.o: ../../gameroom.cpp ../../gameroom.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPaintEvent \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qevent.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPainter \
-		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpainter.h
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpainter.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QPushButton \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qpushbutton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gameroom.o ../../gameroom.cpp
 
 main.o: ../../main.cpp ../../widget.h \
@@ -1293,7 +1296,17 @@ main.o: ../../main.cpp ../../widget.h \
 moduleselect.o: ../../moduleselect.cpp ../../moduleselect.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qwidget.h \
-		../../gameroom.h
+		../../gameroom.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPainter \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpainter.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QLabel \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qlabel.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QFont \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qfont.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QPushButton \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPalette \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpalette.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moduleselect.o ../../moduleselect.cpp
 
 widget.o: ../../widget.cpp ../../widget.h \

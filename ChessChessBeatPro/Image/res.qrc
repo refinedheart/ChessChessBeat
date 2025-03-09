@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>Chess-19.jpeg</file>
         <file>start-background.webp</file>
+        <file>RoomBackGround.jpg</file>
     </qresource>
 </RCC>
