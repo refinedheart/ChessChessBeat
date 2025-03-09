@@ -1,12 +1,12 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'gameroom.h'
+** Meta object code from reading C++ file 'moduleselect.h'
 **
 ** Created by: The Qt Meta Object Compiler version 68 (Qt 6.8.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../gameroom.h"
+#include "../../moduleselect.h"
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>
@@ -16,7 +16,7 @@
 
 #include <QtCore/qxptype_traits.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'gameroom.h' doesn't include <QObject>."
+#error "The header file 'moduleselect.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 68
 #error "This file was generated using the moc from 6.8.2. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -31,21 +31,21 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 QT_WARNING_DISABLE_GCC("-Wuseless-cast")
 namespace {
-struct qt_meta_tag_ZN8GameRoomE_t {};
+struct qt_meta_tag_ZN12ModuleSelectE_t {};
 } // unnamed namespace
 
 
 #ifdef QT_MOC_HAS_STRINGDATA
-static constexpr auto qt_meta_stringdata_ZN8GameRoomE = QtMocHelpers::stringData(
-    "GameRoom",
-    "back_to_select",
+static constexpr auto qt_meta_stringdata_ZN12ModuleSelectE = QtMocHelpers::stringData(
+    "ModuleSelect",
+    "GoBack",
     ""
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
 #endif // !QT_MOC_HAS_STRINGDATA
 
-Q_CONSTINIT static const uint qt_meta_data_ZN8GameRoomE[] = {
+Q_CONSTINIT static const uint qt_meta_data_ZN12ModuleSelectE[] = {
 
  // content:
       12,       // revision
@@ -67,35 +67,35 @@ Q_CONSTINIT static const uint qt_meta_data_ZN8GameRoomE[] = {
        0        // eod
 };
 
-Q_CONSTINIT const QMetaObject GameRoom::staticMetaObject = { {
+Q_CONSTINIT const QMetaObject ModuleSelect::staticMetaObject = { {
     QMetaObject::SuperData::link<QWidget::staticMetaObject>(),
-    qt_meta_stringdata_ZN8GameRoomE.offsetsAndSizes,
-    qt_meta_data_ZN8GameRoomE,
+    qt_meta_stringdata_ZN12ModuleSelectE.offsetsAndSizes,
+    qt_meta_data_ZN12ModuleSelectE,
     qt_static_metacall,
     nullptr,
-    qt_incomplete_metaTypeArray<qt_meta_tag_ZN8GameRoomE_t,
+    qt_incomplete_metaTypeArray<qt_meta_tag_ZN12ModuleSelectE_t,
         // Q_OBJECT / Q_GADGET
-        QtPrivate::TypeAndForceComplete<GameRoom, std::true_type>,
-        // method 'back_to_select'
+        QtPrivate::TypeAndForceComplete<ModuleSelect, std::true_type>,
+        // method 'GoBack'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
 } };
 
-void GameRoom::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void ModuleSelect::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    auto *_t = static_cast<GameRoom *>(_o);
+    auto *_t = static_cast<ModuleSelect *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->back_to_select(); break;
+        case 0: _t->GoBack(); break;
         default: ;
         }
     }
     if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _q_method_type = void (GameRoom::*)();
-            if (_q_method_type _q_method = &GameRoom::back_to_select; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
+            using _q_method_type = void (ModuleSelect::*)();
+            if (_q_method_type _q_method = &ModuleSelect::GoBack; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
                 *result = 0;
                 return;
             }
@@ -103,20 +103,20 @@ void GameRoom::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
     }
 }
 
-const QMetaObject *GameRoom::metaObject() const
+const QMetaObject *ModuleSelect::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *GameRoom::qt_metacast(const char *_clname)
+void *ModuleSelect::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_ZN8GameRoomE.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_ZN12ModuleSelectE.stringdata0))
         return static_cast<void*>(this);
     return QWidget::qt_metacast(_clname);
 }
 
-int GameRoom::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int ModuleSelect::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
     if (_id < 0)
@@ -135,7 +135,7 @@ int GameRoom::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void GameRoom::back_to_select()
+void ModuleSelect::GoBack()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }

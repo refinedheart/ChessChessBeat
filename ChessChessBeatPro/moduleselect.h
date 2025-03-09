@@ -8,8 +8,9 @@ class ModuleSelect : public QWidget
     Q_OBJECT
 public:
     explicit ModuleSelect(QWidget *parent = nullptr);
-
+    void paintEvent(QPaintEvent *event);
 signals:
+    void GoBack();
 };
 
 #endif // MODULESELECT_H

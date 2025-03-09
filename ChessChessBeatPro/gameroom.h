@@ -8,6 +8,7 @@ public:
     explicit GameRoom(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event);
 signals:
+    void back_to_select();
 };
 
 #endif // GAMEROOM_H

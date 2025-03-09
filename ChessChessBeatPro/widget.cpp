@@ -29,6 +29,10 @@ Widget::Widget(QWidget *parent)
         SR -> close();
         this -> show();
     });
+    connect(ui -> StartButton, &QPushButton :: clicked, [=](){
+        this -> close();
+        SR -> show();
+    });
 
 }
 
