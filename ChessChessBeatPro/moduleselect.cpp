@@ -46,7 +46,8 @@ ModuleSelect::ModuleSelect(QWidget *parent)
     connect(backbtn, &QPushButton :: clicked, [=](){
         this -> GoBack();
     });
-
+    backbtn -> setFixedSize(200, 80);
+    backbtn -> move(300, 600);
 }
 
 void ModuleSelect :: paintEvent(QPaintEvent *event) {
