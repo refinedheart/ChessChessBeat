@@ -52,12 +52,16 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../../main.cpp \
+SOURCES       = ../../gameroom.cpp \
+		../../main.cpp \
 		../../widget.cpp qrc_res.cpp \
+		moc_gameroom.cpp \
 		moc_widget.cpp
-OBJECTS       = main.o \
+OBJECTS       = gameroom.o \
+		main.o \
 		widget.o \
 		qrc_res.o \
+		moc_gameroom.o \
 		moc_widget.o
 DIST          = /Users/hewenshuo/Qt/6.8.2/macos/mkspecs/features/spec_pre.prf \
 		/Users/hewenshuo/Qt/6.8.2/macos/mkspecs/features/device_config.prf \
@@ -412,7 +416,9 @@ DIST          = /Users/hewenshuo/Qt/6.8.2/macos/mkspecs/features/spec_pre.prf \
 		/Users/hewenshuo/Qt/6.8.2/macos/mkspecs/features/exceptions.prf \
 		/Users/hewenshuo/Qt/6.8.2/macos/mkspecs/features/yacc.prf \
 		/Users/hewenshuo/Qt/6.8.2/macos/mkspecs/features/lex.prf \
-		../../../../ChessChessBeatPro.pro ../../widget.h ../../main.cpp \
+		../../../../ChessChessBeatPro.pro ../../gameroom.h \
+		../../widget.h ../../gameroom.cpp \
+		../../main.cpp \
 		../../widget.cpp
 QMAKE_TARGET  = ChessChessBeatPro
 DESTDIR       = 
@@ -1180,8 +1186,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../Image/res.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../../widget.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../main.cpp ../../widget.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../gameroom.h ../../widget.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../gameroom.cpp ../../main.cpp ../../widget.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../widget.ui $(DISTDIR)/
 
 
@@ -1218,9 +1224,13 @@ qrc_res.cpp: ../../Image/res.qrc \
 		../../Image/Chess-19.jpeg
 	/Users/hewenshuo/Qt/6.8.2/macos/libexec/rcc -name res --no-zstd ../../Image/res.qrc -o qrc_res.cpp
 
-compiler_moc_header_make_all: moc_widget.cpp
+compiler_moc_header_make_all: moc_gameroom.cpp moc_widget.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_widget.cpp
+	-$(DEL_FILE) moc_gameroom.cpp moc_widget.cpp
+moc_gameroom.cpp: ../../gameroom.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/libexec/moc
+	/Users/hewenshuo/Qt/6.8.2/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=16 -D__clang_minor__=0 -D__clang_patchlevel__=0 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/hewenshuo/Qt/6.8.2/macos/mkspecs/macx-clang -I/Users/hewenshuo/C++Work/ChessChessBeat/ChessChessBeatPro -I/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers -I/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers -I/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/hewenshuo/Qt/6.8.2/macos/lib ../../gameroom.h -o moc_gameroom.cpp
+
 moc_widget.cpp: ../../widget.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qwidget.h \
@@ -1250,6 +1260,9 @@ compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean
 
 ####### Compile
 
+gameroom.o: ../../gameroom.cpp ../../gameroom.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gameroom.o ../../gameroom.cpp
+
 main.o: ../../main.cpp ../../widget.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qwidget.h \
@@ -1260,11 +1273,22 @@ main.o: ../../main.cpp ../../widget.h \
 widget.o: ../../widget.cpp ../../widget.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qwidget.h \
-		ui_widget.h
+		ui_widget.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPainter \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpainter.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QPushButton \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QFont \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qfont.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPalette \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpalette.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o widget.o ../../widget.cpp
 
 qrc_res.o: qrc_res.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_res.o qrc_res.cpp
+
+moc_gameroom.o: moc_gameroom.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_gameroom.o moc_gameroom.cpp
 
 moc_widget.o: moc_widget.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_widget.o moc_widget.cpp
