@@ -6,7 +6,7 @@ class GameRoom : public QWidget
     Q_OBJECT
 public:
     explicit GameRoom(QWidget *parent = nullptr);
-
+    void paintEvent(QPaintEvent *event);
 signals:
 };
 

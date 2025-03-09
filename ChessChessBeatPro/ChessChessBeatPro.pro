@@ -11,10 +11,12 @@ CONFIG += c++17
 SOURCES += \
     gameroom.cpp \
     main.cpp \
+    moduleselect.cpp \
     widget.cpp
 
 HEADERS += \
     gameroom.h \
+    moduleselect.h \
     widget.h
 
 FORMS += \

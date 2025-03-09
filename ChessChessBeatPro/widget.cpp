@@ -4,6 +4,7 @@
 #include <QPushButton>
 #include <QFont>
 #include <QPalette>
+#include "moduleselect.h"
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Widget)
@@ -23,6 +24,11 @@ Widget::Widget(QWidget *parent)
     QPalette HeadP = ui -> StartHeadTitle -> palette();
     HeadP.setColor(QPalette :: WindowText, Qt :: red);
     ui -> StartHeadTitle -> setPalette(HeadP);
+    ModuleSelect *SR = new ModuleSelect;
+    connect(SR, &ModuleSelect :: GoBack, [=](){
+        SR -> close();
+        this -> show();
+    });
 
 }
 
