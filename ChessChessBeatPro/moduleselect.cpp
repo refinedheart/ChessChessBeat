@@ -8,11 +8,7 @@
 ModuleSelect::ModuleSelect(QWidget *parent)
     : QWidget{parent}
 {
-    GameRoom *GR = new GameRoom;
-    connect(GR, &GameRoom :: back_to_select, [=](){
-        GR -> close();
-        this -> show();
-    });
+
     this -> setFixedSize(800, 700);
     QLabel *SelectHead = new QLabel(this);
     SelectHead -> setText("选择你的模式！");
@@ -32,6 +28,10 @@ ModuleSelect::ModuleSelect(QWidget *parent)
     machineP.setColor(QPalette :: ButtonText, Qt :: black);
     machinebtn->setPalette(machineP);
     GameRoom *gameroom = new GameRoom;
+    connect(gameroom, &GameRoom :: back_to_select, [=](){
+        gameroom -> close();
+        this -> show();
+    });
     connect(machinebtn, &QPushButton :: clicked, [=]() {
         this -> close();
         gameroom -> show();
@@ -44,7 +44,7 @@ ModuleSelect::ModuleSelect(QWidget *parent)
     backP.setColor(QPalette :: ButtonText, Qt :: black);
     backbtn -> setPalette(backP);
     connect(backbtn, &QPushButton :: clicked, [=](){
-        this -> GoBack();
+        emit this -> GoBack();
     });
     backbtn -> setFixedSize(200, 80);
     backbtn -> move(300, 600);
