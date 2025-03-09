@@ -1,6 +1,8 @@
 #include "moduleselect.h"
 #include "gameroom.h"
 #include <QPainter>
+#include <QLabel>
+#include <QFont>
 ModuleSelect::ModuleSelect(QWidget *parent)
     : QWidget{parent}
 {
@@ -10,7 +12,11 @@ ModuleSelect::ModuleSelect(QWidget *parent)
         this -> show();
     });
     this -> setFixedSize(800, 700);
-
+    QLabel *SelectHead = new QLabel(this);
+    SelectHead -> setText("选择你的模式！");
+    QFont SelectFont("宋体", 50, QFont :: Bold);
+    SelectHead -> setFont(SelectFont);
+    SelectHead -> move(240, 50);
 }
 
 void ModuleSelect :: paintEvent(QPaintEvent *event) {
