@@ -36,6 +36,16 @@ ModuleSelect::ModuleSelect(QWidget *parent)
         this -> close();
         gameroom -> show();
     });
+    QPushButton *backbtn = new QPushButton(this);
+    backbtn -> setText("累了， 休息一下");
+    QFont backFont("宋体", 16, QFont :: Bold);
+    backbtn -> setFont(backFont);
+    QPalette backP = backbtn -> palette();
+    backP.setColor(QPalette :: ButtonText, Qt :: black);
+    backbtn -> setPalette(backP);
+    connect(backbtn, &QPushButton :: clicked, [=](){
+        this -> GoBack();
+    });
 
 }
 
