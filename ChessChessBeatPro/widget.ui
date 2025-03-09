@@ -26,6 +26,19 @@
     <string/>
    </property>
   </widget>
+  <widget class="QLabel" name="StartHeadTitle">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>50</y>
+     <width>421</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

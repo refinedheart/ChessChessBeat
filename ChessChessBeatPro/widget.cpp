@@ -3,6 +3,7 @@
 #include <QPainter>
 #include <QPushButton>
 #include <QFont>
+#include <QPalette>
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Widget)
@@ -14,6 +15,15 @@ Widget::Widget(QWidget *parent)
     ui -> StartButton -> setFont(startfont);
     ui -> StartButton -> setFixedSize(200, 120);
     ui -> StartButton -> move(300, 300);
+    ui -> StartHeadTitle -> setText("Chess Chess Beat");
+    QFont HeadFont("宋体", 50, QFont :: Bold);
+    ui -> StartHeadTitle -> setFont(HeadFont);
+    ui -> StartHeadTitle -> setFixedSize(600, 40);
+    ui -> StartHeadTitle -> move(170, 30);
+    QPalette HeadP = ui -> StartHeadTitle -> palette();
+    HeadP.setColor(QPalette :: WindowText, Qt :: red);
+    ui -> StartHeadTitle -> setPalette(HeadP);
+
 }
 
 Widget::~Widget()

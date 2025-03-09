@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
 
@@ -20,6 +21,7 @@ class Ui_Widget
 {
 public:
     QPushButton *StartButton;
+    QLabel *StartHeadTitle;
 
     void setupUi(QWidget *Widget)
     {
@@ -29,6 +31,9 @@ public:
         StartButton = new QPushButton(Widget);
         StartButton->setObjectName("StartButton");
         StartButton->setGeometry(QRect(250, 350, 100, 32));
+        StartHeadTitle = new QLabel(Widget);
+        StartHeadTitle->setObjectName("StartHeadTitle");
+        StartHeadTitle->setGeometry(QRect(100, 50, 421, 61));
 
         retranslateUi(Widget);
 
@@ -39,6 +44,7 @@ public:
     {
         Widget->setWindowTitle(QCoreApplication::translate("Widget", "Widget", nullptr));
         StartButton->setText(QString());
+        StartHeadTitle->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
     } // retranslateUi
 
 };
