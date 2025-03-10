@@ -15,21 +15,32 @@
 GameRoom::GameRoom(QWidget *parent)
     : QWidget{parent}
 {
+    // 页面设置
+    this -> setFixedSize(1400, 800);
 
     // make sure the first position
     // Tool *now = new Tool;
     // now -> show();
     // Tool::
     // 创建一个 QLabel 用于显示鼠标坐标
-    // label = new QLabel("Mouse Position: (0, 0)", this);
-    // label->setAlignment(Qt::AlignRight | Qt :: AlignBottom);
-    // // label -> move(1000, 1000);
+    \
+    // label -> move(1000, 1000);
 
-    // // 设置布局
-    // // QVBoxLayout *layout = new QVBoxLayout(this);
-    // // layout->addWidget(label);
-    // // setLayout(layout);
-    // setMouseTracking(true);
+    // 设置布局
+    // QVBoxLayout *layout = new QVBoxLayout(this);
+    // layout->addWidget(label);
+    // setLayout(layout);
+
+    // 创建一个 QLabel 用于显示鼠标坐标
+    label = new QLabel(this);
+    label->setGeometry(10, 10, 200, 20);
+
+    // 启用鼠标跟踪功能
+    setMouseTracking(true);
+
+
+
+    ////////////
 
 
 
@@ -48,8 +59,7 @@ GameRoom::GameRoom(QWidget *parent)
     backbtn -> move(1200, 700);
     backbtn -> setFixedSize(150, 50);
 
-    // 页面设置
-    this -> setFixedSize(1400, 800);
+
 
 
 

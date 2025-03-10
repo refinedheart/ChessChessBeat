@@ -1,6 +1,7 @@
 #include "player.h"
 
 #include <QLabel>
+#include <QDebug>
 
 
 Player::Player(QString pic)
@@ -9,12 +10,17 @@ Player::Player(QString pic)
     pix = pix.scaled(siz, siz, Qt::IgnoreAspectRatio, Qt::FastTransformation);
     pos = QPoint(StartXpos, StartYpos);
     item = new QLabel();
-    item -> setFixedSize(20, 20);
+    item->setScaledContents(true);
+    // item->adjustSize();
     QPoint getpos = QPoint(pos.x() - siz / 2, pos.y() - siz / 2);
-    item -> move(pos);
+    // getpos = QPoint(0, -200);
+    item -> move(getpos);
+    // qDebug() << getpos.x() << ' ' << getpos.y() << '\n';
     item -> setPixmap(pix);
     // item -> adjustSize();
     item -> show();
+    // qDebug() << "Parent window position:" << item->parentWidget()->pos();
+    // qDebug() << "Parent window size:" << item->parentWidget()->size();
 }
 
 Player :: ~Player() {

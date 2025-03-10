@@ -11,7 +11,7 @@
 // Delta d = 26
 const int gap = 26;
 const int StartXpos = 466;
-const int StartYpos = 188;
+const int StartYpos = 188 - 68 - gap; // (1, 1)
 const int siz = 20;
 
 class Player

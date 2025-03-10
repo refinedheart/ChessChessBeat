@@ -24,7 +24,7 @@ public:
         setLayout(layout);
 
         // 设置窗口大小
-        setFixedSize(400, 300);
+        // setFixedSize(400, 300);
         setMouseTracking(true);
     }
 protected:
