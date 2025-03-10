@@ -3,6 +3,7 @@
 #include <QWidget>
 #include <QMouseEvent>
 #include <QLabel>
+#include <QPainter>
 class GameRoom : public QWidget
 {
     Q_OBJECT

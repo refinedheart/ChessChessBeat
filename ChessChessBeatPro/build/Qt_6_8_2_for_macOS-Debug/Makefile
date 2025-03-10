@@ -1237,8 +1237,16 @@ compiler_rcc_clean:
 qrc_res.cpp: ../../Image/res.qrc \
 		/Users/hewenshuo/Qt/6.8.2/macos/libexec/rcc \
 		../../Image/RoomBackGround.jpg \
+		../../Image/M-right.png \
 		../../Image/start-background.webp \
-		../../Image/Chess-19.jpeg
+		../../Image/M-left.png \
+		../../Image/M-up.png \
+		../../Image/K-right.png \
+		../../Image/K-down.png \
+		../../Image/K-left.png \
+		../../Image/Chess-19.jpeg \
+		../../Image/M-down.png \
+		../../Image/K-up.png
 	/Users/hewenshuo/Qt/6.8.2/macos/libexec/rcc -name res --no-zstd ../../Image/res.qrc -o qrc_res.cpp
 
 compiler_moc_header_make_all: moc_gameroom.cpp moc_moduleselect.cpp moc_tool.cpp moc_widget.cpp
@@ -1247,6 +1255,10 @@ compiler_moc_header_clean:
 moc_gameroom.cpp: ../../gameroom.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QMouseEvent \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qevent.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QLabel \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qlabel.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/libexec/moc
 	/Users/hewenshuo/Qt/6.8.2/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=16 -D__clang_minor__=0 -D__clang_patchlevel__=0 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/hewenshuo/Qt/6.8.2/macos/mkspecs/macx-clang -I/Users/hewenshuo/C++Work/ChessChessBeat/ChessChessBeatPro -I/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers -I/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers -I/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/hewenshuo/Qt/6.8.2/macos/lib ../../gameroom.h -o moc_gameroom.cpp
 
@@ -1302,18 +1314,21 @@ compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean
 gameroom.o: ../../gameroom.cpp ../../gameroom.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qwidget.h \
-		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPaintEvent \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QMouseEvent \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qevent.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QLabel \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qlabel.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPaintEvent \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPainter \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpainter.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QPushButton \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../player.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPixmap \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpixmap.h \
 		../../tool.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QApplication \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qapplication.h \
-		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QMouseEvent \
-		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QLabel \
-		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qlabel.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QVBoxLayout \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qboxlayout.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gameroom.o ../../gameroom.cpp
@@ -1329,10 +1344,12 @@ moduleselect.o: ../../moduleselect.cpp ../../moduleselect.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../gameroom.h \
-		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPainter \
-		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpainter.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QMouseEvent \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qevent.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QLabel \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qlabel.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPainter \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpainter.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QFont \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qfont.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QPushButton \
@@ -1341,7 +1358,13 @@ moduleselect.o: ../../moduleselect.cpp ../../moduleselect.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpalette.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moduleselect.o ../../moduleselect.cpp
 
-player.o: ../../player.cpp ../../player.h
+player.o: ../../player.cpp ../../player.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPaintEvent \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qevent.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPixmap \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpixmap.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPainter \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpainter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o player.o ../../player.cpp
 
 tool.o: ../../tool.cpp ../../tool.h \

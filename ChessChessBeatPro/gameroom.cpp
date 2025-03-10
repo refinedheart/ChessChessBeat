@@ -3,15 +3,19 @@
 #include <QPainter>
 #include <QPushButton>
 
+#include "player.h"
+
 
 #include "tool.h"
 
 #include <QLabel>
 
+#include <QPainter>
 
 GameRoom::GameRoom(QWidget *parent)
     : QWidget{parent}
 {
+
     // make sure the first position
     // Tool *now = new Tool;
     // now -> show();
@@ -51,6 +55,9 @@ GameRoom::GameRoom(QWidget *parent)
 
     // LeftTop = (466, 188)
     // Delta d = 26
+
+    Player *machinePlayer = new Player(":/M-up.png");
+
 
 }
 

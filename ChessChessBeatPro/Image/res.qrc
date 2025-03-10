@@ -3,5 +3,13 @@
         <file>Chess-19.jpeg</file>
         <file>start-background.webp</file>
         <file>RoomBackGround.jpg</file>
+        <file>K-down.png</file>
+        <file>K-left.png</file>
+        <file>K-right.png</file>
+        <file>K-up.png</file>
+        <file>M-down.png</file>
+        <file>M-left.png</file>
+        <file>M-right.png</file>
+        <file>M-up.png</file>
     </qresource>
 </RCC>
