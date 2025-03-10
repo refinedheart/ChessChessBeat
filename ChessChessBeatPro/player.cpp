@@ -19,10 +19,33 @@ Player::Player(QString pic)
     item -> setPixmap(pix);
     // item -> adjustSize();
     item -> show();
-    // qDebug() << "Parent window position:" << item->parentWidget()->pos();
-    // qDebug() << "Parent window size:" << item->parentWidget()->size();
+    moveD = 0;
+
 }
 
 Player :: ~Player() {
     // delete item;
+}
+
+
+void Player :: UpdatePos() {
+    QPoint getpos = QPoint(pos.x() - siz / 2, pos.y() - siz/2);
+    item -> move(getpos);
+}
+
+void Player :: moveUp() {
+    pos = GetNextPos(pos, UP);
+    UpdatePos();
+}
+void Player :: moveLeft() {
+    pos = GetNextPos(pos, LEFT);
+    UpdatePos();
+}
+void Player :: moveDown() {
+    pos = GetNextPos(pos, DOWN);
+    UpdatePos();
+}
+void Player :: moveRight() {
+    pos = GetNextPos(pos, RIGHT);
+    UpdatePos();
 }

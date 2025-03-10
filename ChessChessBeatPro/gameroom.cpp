@@ -32,11 +32,11 @@ GameRoom::GameRoom(QWidget *parent)
     // setLayout(layout);
 
     // 创建一个 QLabel 用于显示鼠标坐标
-    label = new QLabel(this);
-    label->setGeometry(10, 10, 200, 20);
+    // label = new QLabel(this);
+    // label->setGeometry(10, 10, 200, 20);
 
-    // 启用鼠标跟踪功能
-    setMouseTracking(true);
+    // // 启用鼠标跟踪功能
+    // setMouseTracking(true);
 
 
 
