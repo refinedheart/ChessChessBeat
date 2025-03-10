@@ -43,6 +43,7 @@ public:
     void moveLeft();
     void moveRight();
     void UpdatePos();
+    bool checkOutOfWidget(QPoint npos);
 };
 
 #endif // PLAYER_H

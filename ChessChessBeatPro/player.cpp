@@ -34,18 +34,30 @@ void Player :: UpdatePos() {
 }
 
 void Player :: moveUp() {
-    pos = GetNextPos(pos, UP);
+    QPoint npos = GetNextPos(pos, UP);
+    if(checkOutOfWidget(npos)) return ;
+    pos = npos;
     UpdatePos();
 }
 void Player :: moveLeft() {
-    pos = GetNextPos(pos, LEFT);
+    QPoint npos = GetNextPos(pos, LEFT);
+    if(checkOutOfWidget(npos)) return ;
+    pos = npos;
     UpdatePos();
 }
 void Player :: moveDown() {
-    pos = GetNextPos(pos, DOWN);
+    QPoint npos = GetNextPos(pos, DOWN);
+    if(checkOutOfWidget(npos)) return ;
+    pos = npos;
     UpdatePos();
 }
 void Player :: moveRight() {
-    pos = GetNextPos(pos, RIGHT);
+    QPoint npos = GetNextPos(pos, RIGHT);
+    if(checkOutOfWidget(npos)) return ;
+    pos = npos;
     UpdatePos();
+}
+bool Player :: checkOutOfWidget(QPoint npos) {
+    if(npos.x() < StartXpos || npos.y() < StartYpos) return true;
+    return false;
 }
