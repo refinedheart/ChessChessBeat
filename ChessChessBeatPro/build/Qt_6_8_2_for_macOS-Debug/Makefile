@@ -60,6 +60,7 @@ SOURCES       = ../../gameroom.cpp \
 		../../widget.cpp qrc_res.cpp \
 		moc_gameroom.cpp \
 		moc_moduleselect.cpp \
+		moc_player.cpp \
 		moc_tool.cpp \
 		moc_widget.cpp
 OBJECTS       = gameroom.o \
@@ -71,6 +72,7 @@ OBJECTS       = gameroom.o \
 		qrc_res.o \
 		moc_gameroom.o \
 		moc_moduleselect.o \
+		moc_player.o \
 		moc_tool.o \
 		moc_widget.o
 DIST          = /Users/hewenshuo/Qt/6.8.2/macos/mkspecs/features/spec_pre.prf \
@@ -1249,9 +1251,9 @@ qrc_res.cpp: ../../Image/res.qrc \
 		../../Image/K-up.png
 	/Users/hewenshuo/Qt/6.8.2/macos/libexec/rcc -name res --no-zstd ../../Image/res.qrc -o qrc_res.cpp
 
-compiler_moc_header_make_all: moc_gameroom.cpp moc_moduleselect.cpp moc_tool.cpp moc_widget.cpp
+compiler_moc_header_make_all: moc_gameroom.cpp moc_moduleselect.cpp moc_player.cpp moc_tool.cpp moc_widget.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_gameroom.cpp moc_moduleselect.cpp moc_tool.cpp moc_widget.cpp
+	-$(DEL_FILE) moc_gameroom.cpp moc_moduleselect.cpp moc_player.cpp moc_tool.cpp moc_widget.cpp
 moc_gameroom.cpp: ../../gameroom.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qwidget.h \
@@ -1259,6 +1261,8 @@ moc_gameroom.cpp: ../../gameroom.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qevent.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QLabel \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qlabel.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPainter \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpainter.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/libexec/moc
 	/Users/hewenshuo/Qt/6.8.2/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=16 -D__clang_minor__=0 -D__clang_patchlevel__=0 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/hewenshuo/Qt/6.8.2/macos/mkspecs/macx-clang -I/Users/hewenshuo/C++Work/ChessChessBeat/ChessChessBeatPro -I/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers -I/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers -I/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/hewenshuo/Qt/6.8.2/macos/lib ../../gameroom.h -o moc_gameroom.cpp
 
@@ -1267,6 +1271,22 @@ moc_moduleselect.cpp: ../../moduleselect.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qwidget.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/libexec/moc
 	/Users/hewenshuo/Qt/6.8.2/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=16 -D__clang_minor__=0 -D__clang_patchlevel__=0 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/hewenshuo/Qt/6.8.2/macos/mkspecs/macx-clang -I/Users/hewenshuo/C++Work/ChessChessBeat/ChessChessBeatPro -I/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers -I/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers -I/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/hewenshuo/Qt/6.8.2/macos/lib ../../moduleselect.h -o moc_moduleselect.cpp
+
+moc_player.cpp: ../../player.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPixmap \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpixmap.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/QPoint \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/qpoint.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/QVector \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/qvector.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/libexec/moc
+	/Users/hewenshuo/Qt/6.8.2/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=16 -D__clang_minor__=0 -D__clang_patchlevel__=0 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/hewenshuo/Qt/6.8.2/macos/mkspecs/macx-clang -I/Users/hewenshuo/C++Work/ChessChessBeat/ChessChessBeatPro -I/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers -I/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers -I/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/hewenshuo/Qt/6.8.2/macos/lib ../../player.h -o moc_player.cpp
 
 moc_tool.cpp: ../../tool.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QWidget \
@@ -1318,14 +1338,11 @@ gameroom.o: ../../gameroom.cpp ../../gameroom.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qevent.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QLabel \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qlabel.h \
-		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPaintEvent \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPainter \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpainter.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPaintEvent \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QPushButton \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qpushbutton.h \
-		../../player.h \
-		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPixmap \
-		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpixmap.h \
 		../../tool.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QApplication \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qapplication.h \
@@ -1358,13 +1375,19 @@ moduleselect.o: ../../moduleselect.cpp ../../moduleselect.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpalette.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moduleselect.o ../../moduleselect.cpp
 
-player.o: ../../player.cpp ../../player.h \
-		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPaintEvent \
-		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qevent.h \
+player.o: ../../player.cpp ../../Player.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPixmap \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpixmap.h \
-		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPainter \
-		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpainter.h
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/QPoint \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/qpoint.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/QVector \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/qvector.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o player.o ../../player.cpp
 
 tool.o: ../../tool.cpp ../../tool.h \
@@ -1403,6 +1426,9 @@ moc_gameroom.o: moc_gameroom.cpp
 
 moc_moduleselect.o: moc_moduleselect.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_moduleselect.o moc_moduleselect.cpp
+
+moc_player.o: moc_player.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_player.o moc_player.cpp
 
 moc_tool.o: moc_tool.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_tool.o moc_tool.cpp

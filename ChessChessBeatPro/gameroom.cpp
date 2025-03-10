@@ -57,6 +57,9 @@ GameRoom::GameRoom(QWidget *parent)
     // Delta d = 26
 
 
+    Player machine(":/M-up.png");
+    machine.item -> setParent(this);
+
 
 
 }
