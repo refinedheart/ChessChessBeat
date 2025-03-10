@@ -12,14 +12,12 @@ SOURCES += \
     gameroom.cpp \
     main.cpp \
     moduleselect.cpp \
-    player.cpp \
     tool.cpp \
     widget.cpp
 
 HEADERS += \
     gameroom.h \
     moduleselect.h \
-    player.h \
     tool.h \
     widget.h
 

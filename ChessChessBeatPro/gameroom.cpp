@@ -56,7 +56,7 @@ GameRoom::GameRoom(QWidget *parent)
     // LeftTop = (466, 188)
     // Delta d = 26
 
-    Player *machinePlayer = new Player(":/M-up.png");
+
 
 
 }
