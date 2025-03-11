@@ -4,14 +4,18 @@
 #include <QMouseEvent>
 #include <QLabel>
 #include <QPainter>
+#include "player.h"
 class GameRoom : public QWidget
 {
     Q_OBJECT
 public:
     explicit GameRoom(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event);
+    void MachineMode();
+    void ChessTogether();
 private:
     QLabel *label;
+
 protected:
     void mouseMoveEvent(QMouseEvent *event) override {
         // 获取鼠标当前位置的像素坐标

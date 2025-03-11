@@ -70,7 +70,8 @@ GameRoom::GameRoom(QWidget *parent)
     Player machine(":/M-up.png");
     machine.item -> setParent(this);
 
-
+    Player human(":/K-up.png", 1);
+    human.item -> setParent(this);
 
 }
 
@@ -81,4 +82,10 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
     painter.drawPixmap(0, 0, this -> width(), this -> height(), pix);
     pix.load(":/Chess-19.jpeg");
     painter.drawPixmap(450, 100, 500, 500, pix);
+}
+
+
+
+void GameRoom :: MachineMode() {
+
 }

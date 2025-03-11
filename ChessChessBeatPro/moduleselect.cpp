@@ -35,6 +35,7 @@ ModuleSelect::ModuleSelect(QWidget *parent)
     connect(machinebtn, &QPushButton :: clicked, [=]() {
         this -> close();
         gameroom -> show();
+        gameroom -> MachineMode();
     });
     QPushButton *backbtn = new QPushButton(this);
     backbtn -> setText("累了， 休息一下");

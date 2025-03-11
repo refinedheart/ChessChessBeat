@@ -9,9 +9,10 @@
 
 // LeftTop = (466, 188)
 // Delta d = 26
-const int gap = 26;
+const int gapx = 26;
+const double gapy = 25.5;
 const int StartXpos = 466;
-const int StartYpos = 188 - 68 - gap; // (1, 1)
+const int StartYpos = 188 - 68 - gapy; // (1, 1)
 const int siz = 20;
 
 const int UP = 0;
@@ -24,9 +25,13 @@ const int dy[] = {-1, 0, 1, 0};
 
 inline QPoint GetNextPos(QPoint now, int dir) {
     int x = now.x(), y = now.y();
-    x += dx[dir] * gap;
-    y += dy[dir] * gap;
+    x += dx[dir] * gapx;
+    y += dy[dir] * gapy;
     return QPoint(x, y);
+}
+inline QPoint GetCoordPos(int x, int y) {
+    // (1, 1) = (StartX, StartY)
+    return QPoint(StartXpos + (x - 1) * gapx, StartYpos + (y - 1) * gapy);
 }
 
 class Player
@@ -36,7 +41,7 @@ public:
     QPoint pos;
     QPixmap pix;
     int moveD;
-    Player(QString pic = "");
+    Player(QString pic = "", int fg = 0);
     ~Player();
     void moveUp();
     void moveDown();

@@ -4,12 +4,16 @@
 #include <QDebug>
 
 
-Player::Player(QString pic)
+Player::Player(QString pic, int fg)
 {
     pix.load(pic);
     pix = pix.scaled(siz, siz, Qt::IgnoreAspectRatio, Qt::FastTransformation);
-    pos = QPoint(StartXpos, StartYpos);
+    if(fg == 0) pos = QPoint(StartXpos, StartYpos);
+    else {
+        pos = GetCoordPos(19, 19);
+    }
     item = new QLabel();
+
     item->setScaledContents(true);
     // item->adjustSize();
     QPoint getpos = QPoint(pos.x() - siz / 2, pos.y() - siz / 2);
