@@ -11,8 +11,7 @@ class GameRoom : public QWidget
 public:
     explicit GameRoom(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event);
-    void MachineMode();
-    void ChessTogether();
+    int GameModule;
 private:
     QLabel *label;
 

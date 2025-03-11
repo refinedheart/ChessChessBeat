@@ -23,7 +23,7 @@ Player::Player(QString pic, int fg)
     item -> setPixmap(pix);
     // item -> adjustSize();
     item -> show();
-    moveD = 0;
+
 
 }
 

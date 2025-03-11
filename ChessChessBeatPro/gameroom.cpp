@@ -65,13 +65,21 @@ GameRoom::GameRoom(QWidget *parent)
 
     // LeftTop = (466, 188)
     // Delta d = 26
+    if(GameModule == 0) {
+
+        // 机器模式
+
+        Player machine(":/M-up.png");
+        machine.item -> setParent(this);
+
+        Player human(":/K-up.png", 1);
+        human.item -> setParent(this);
 
 
-    Player machine(":/M-up.png");
-    machine.item -> setParent(this);
 
-    Player human(":/K-up.png", 1);
-    human.item -> setParent(this);
+    }
+
+
 
 }
 
@@ -85,7 +93,3 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
 }
 
 
-
-void GameRoom :: MachineMode() {
-
-}
