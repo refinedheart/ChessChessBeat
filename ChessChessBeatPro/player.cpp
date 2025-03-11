@@ -35,6 +35,7 @@ Player :: ~Player() {
 void Player :: UpdatePos() {
     QPoint getpos = QPoint(pos.x() - siz / 2, pos.y() - siz/2);
     item -> move(getpos);
+    item -> show();
 }
 
 void Player :: moveUp() {
@@ -48,6 +49,7 @@ void Player :: moveLeft() {
     if(checkOutOfWidget(npos)) return ;
     pos = npos;
     UpdatePos();
+    qDebug() << "Left!";
 }
 void Player :: moveDown() {
     QPoint npos = GetNextPos(pos, DOWN);

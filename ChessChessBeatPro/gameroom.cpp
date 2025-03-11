@@ -2,6 +2,7 @@
 #include <QPaintEvent>
 #include <QPainter>
 #include <QPushButton>
+#include <QDebug>
 
 #include "player.h"
 
@@ -65,15 +66,31 @@ GameRoom::GameRoom(QWidget *parent)
 
     // LeftTop = (466, 188)
     // Delta d = 26
+
+    Player machine(":/M-up.png");
+    machine.item -> setParent(this); // A player, up down
+
+    Player human(":/K-up.png", 1);
+    human.item -> setParent(this); // B player, WASD
+
+    connect(this, &GameRoom :: upKeyPressed, [&](){
+        machine.moveUp();
+    });
+
+    connect(this, &GameRoom :: downKeyPressed, [&](){
+        machine.moveDown();
+    });
+    connect(this, &GameRoom :: leftKeyPressed, [&](){
+        machine.moveLeft();
+    });
+    connect(this, &GameRoom :: rightKeyPressed, [&](){
+        machine.moveRight();
+    });
     if(GameModule == 0) {
 
         // 机器模式
 
-        Player machine(":/M-up.png");
-        machine.item -> setParent(this);
 
-        Player human(":/K-up.png", 1);
-        human.item -> setParent(this);
 
 
 
@@ -92,4 +109,36 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
     painter.drawPixmap(450, 100, 500, 500, pix);
 }
 
-
+void GameRoom :: keyPressEvent(QKeyEvent *event) {
+    // qDebug() << "I get it!";
+    switch(event -> key()) {
+    case Qt :: Key_Up:
+        emit upKeyPressed();
+        // qDebug() << "up";
+        break;
+    case Qt :: Key_Down:
+        emit downKeyPressed();
+        // qDebug() << "down";
+        break;
+    case Qt :: Key_Left:
+        emit leftKeyPressed();
+        break;
+    case Qt :: Key_Right:
+        emit rightKeyPressed();
+        break;
+    case Qt :: Key_W:
+        emit wKeyPressed();
+        break;
+    case Qt :: Key_A:
+        emit aKeyPressed();
+        break;
+    case Qt :: Key_S:
+        emit sKeyPressed();
+        break;
+    case Qt :: Key_D:
+        emit dKeyPressed();
+        break;
+    default:
+        break;
+    }
+}

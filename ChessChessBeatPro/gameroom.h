@@ -11,6 +11,7 @@ class GameRoom : public QWidget
 public:
     explicit GameRoom(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event);
+    void keyPressEvent(QKeyEvent *event);
     int GameModule;
 private:
     QLabel *label;
@@ -23,36 +24,7 @@ protected:
         // 更新 QLabel 的文本以显示鼠标坐标
         label->setText(QString("Mouse Position: (%1, %2)").arg(pos.x()).arg(pos.y()));
     }
-    void keyPressEvent(QKeyEvent *event) override {
-        switch(event -> key()) {
-        case Qt :: Key_Up:
-            emit upKeyPressed();
-            break;
-        case Qt :: Key_Down:
-            emit downKeyPressed();
-            break;
-        case Qt :: Key_Left:
-            emit leftKeyPressed();
-            break;
-        case Qt :: Key_Right:
-            emit rightKeyPressed();
-            break;
-        case Qt :: Key_W:
-            emit wKeyPressed();
-            break;
-        case Qt :: Key_A:
-            emit aKeyPressed();
-            break;
-        case Qt :: Key_S:
-            emit sKeyPressed();
-            break;
-        case Qt :: Key_D:
-            emit dKeyPressed();
-            break;
-        default:
-            break;
-        }
-    }
+
 signals:
     void back_to_select();
     void upKeyPressed();
