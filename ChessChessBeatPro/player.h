@@ -25,6 +25,7 @@ const int dy[] = {-1, 0, 1, 0};
 
 inline QPoint GetNextPos(QPoint now, int dir) {
     int x = now.x(), y = now.y();
+    qDebug() << "dir = " << dir << " x = " << x << "dx = " << dx[dir];
     x += dx[dir] * gapx;
     y += dy[dir] * gapy;
     return QPoint(x, y);

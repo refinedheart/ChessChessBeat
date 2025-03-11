@@ -33,6 +33,7 @@ Player :: ~Player() {
 
 
 void Player :: UpdatePos() {
+    item -> close();
     QPoint getpos = QPoint(pos.x() - siz / 2, pos.y() - siz/2);
     item -> move(getpos);
     item -> show();
@@ -52,10 +53,15 @@ void Player :: moveLeft() {
     qDebug() << "Left!";
 }
 void Player :: moveDown() {
+    qDebug() << "down??";
+    qDebug() << pos.x() << " " << pos.y();
     QPoint npos = GetNextPos(pos, DOWN);
+    qDebug() << StartXpos << ' ' << StartYpos << ' ' << npos.x() << " " << npos.y();
+    // qDebug() << checkOutOfWidget(npos) << '\n';
     if(checkOutOfWidget(npos)) return ;
     pos = npos;
     UpdatePos();
+    qDebug() << "Down!";
 }
 void Player :: moveRight() {
     QPoint npos = GetNextPos(pos, RIGHT);
@@ -64,6 +70,7 @@ void Player :: moveRight() {
     UpdatePos();
 }
 bool Player :: checkOutOfWidget(QPoint npos) {
+    // return false;
     if(npos.x() < StartXpos || npos.y() < StartYpos) return true;
     return false;
 }

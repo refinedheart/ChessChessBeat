@@ -79,6 +79,7 @@ GameRoom::GameRoom(QWidget *parent)
 
     connect(this, &GameRoom :: downKeyPressed, [&](){
         machine.moveDown();
+        // qDebug() << "I go down!";
     });
     connect(this, &GameRoom :: leftKeyPressed, [&](){
         machine.moveLeft();
