@@ -115,6 +115,9 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
     // Draw Player Icon
     QPixmap machineG(machine.graph);
     bufferPainter.drawPixmap(machine.pos.x() - siz / 2, machine.pos.y() - siz / 2, siz, siz, machineG);
+    // Draw human Player
+    QPixmap humanG(human.graph);
+    bufferPainter.drawPixmap(human.pos.x() - siz / 2, human.pos.y() - siz / 2, siz, siz, humanG);
     QPainter painter(this);
     painter.drawPixmap(0, 0, buffer);
 
