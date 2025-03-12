@@ -12,7 +12,8 @@
 const int gapx = 26;
 const double gapy = 25.5;
 const int StartXpos = 466;
-const int StartYpos = 188 - 68 - gapy; // (1, 1)
+// const int StartYpos = 188 - 68 - gapy; // (1, 1)
+const int StartYpos = 188;
 const int siz = 20;
 
 const int UP = 0;
@@ -38,9 +39,9 @@ inline QPoint GetCoordPos(int x, int y) {
 class Player
 {
 public:
-    QLabel *item;
+    // QLabel *item;
     QPoint pos;
-    QPixmap pix;
+    QString graph;
     int moveD;
     Player(QString pic = "", int fg = 0);
     ~Player();

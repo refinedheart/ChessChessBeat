@@ -6,24 +6,23 @@
 
 Player::Player(QString pic, int fg)
 {
-    pix.load(pic);
-    pix = pix.scaled(siz, siz, Qt::IgnoreAspectRatio, Qt::FastTransformation);
+    graph = pic;
     if(fg == 0) pos = QPoint(StartXpos, StartYpos);
     else {
         pos = GetCoordPos(19, 19);
-        qDebug() << "Initial X = " << pos.x() << " Y = " << pos.y();
+        // qDebug() << "Initial X = " << pos.x() << " Y = " << pos.y();
     }
-    item = new QLabel();
+    // item = new QLabel();
 
-    item->setScaledContents(true);
+    // item->setScaledContents(true);
     // item->adjustSize();
-    QPoint getpos = QPoint(pos.x() - siz / 2, pos.y() - siz / 2);
+    // QPoint getpos = QPoint(pos.x() - siz / 2, pos.y() - siz / 2);
     // getpos = QPoint(0, -200);
-    item -> move(getpos);
+    // item -> move(getpos);
     // qDebug() << getpos.x() << ' ' << getpos.y() << '\n';
-    item -> setPixmap(pix);
+    // item -> setPixmap(pix);
     // item -> adjustSize();
-    item -> show();
+    // item -> show();
 
 
 }
@@ -34,10 +33,10 @@ Player :: ~Player() {
 
 
 void Player :: UpdatePos() {
-    item -> close();
-    QPoint getpos = QPoint(pos.x() - siz / 2, pos.y() - siz/2);
-    item -> move(getpos);
-    item -> show();
+    // item -> close();
+    // QPoint getpos = QPoint(pos.x() - siz / 2, pos.y() - siz/2);
+    // item -> move(getpos);
+    // item -> show();
 }
 
 void Player :: moveUp() {
@@ -51,18 +50,18 @@ void Player :: moveLeft() {
     if(checkOutOfWidget(npos)) return ;
     pos = npos;
     UpdatePos();
-    qDebug() << "Left!";
+    // qDebug() << "Left!";
 }
 void Player :: moveDown() {
-    qDebug() << "down??";
-    qDebug() << pos.x() << " " << pos.y();
+    // qDebug() << "down??";
+    // qDebug() << pos.x() << " " << pos.y();
     QPoint npos = GetNextPos(pos, DOWN);
-    qDebug() << StartXpos << ' ' << StartYpos << ' ' << npos.x() << " " << npos.y();
+    // qDebug() << StartXpos << ' ' << StartYpos << ' ' << npos.x() << " " << npos.y();
     // qDebug() << checkOutOfWidget(npos) << '\n';
     if(checkOutOfWidget(npos)) return ;
     pos = npos;
     UpdatePos();
-    qDebug() << "Down!";
+    // qDebug() << "Down!";
 }
 void Player :: moveRight() {
     QPoint npos = GetNextPos(pos, RIGHT);

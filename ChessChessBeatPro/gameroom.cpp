@@ -69,11 +69,11 @@ GameRoom::GameRoom(QWidget *parent)
     // Delta d = 26
 
     machine = Player(":/M-up.png");
-    machine.item -> setParent(this); // A player, up down
-    qDebug() << machine.pos.x() << " " << machine.pos.y();
+    // machine.item -> setParent(this); // A player, up down
+    // qDebug() << machine.pos.x() << " " << machine.pos.y();
     human = Player(":/K-up.png", 1);
-    human.item -> setParent(this); // B player, WASD
-    qDebug() << machine.pos.x() << " " << machine.pos.y();
+    // human.item -> setParent(this); // B player, WASD
+    // qDebug() << machine.pos.x() << " " << machine.pos.y();
     connect(this, &GameRoom :: upKeyPressed, [&](){
         machine.moveUp();
     });
@@ -112,8 +112,14 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
     bufferPainter.drawPixmap(0, 0, this -> width(), this -> height(), background);
     QPixmap centerMap(":/Chess-19.jpeg");
     bufferPainter.drawPixmap(450, 100, 500, 500, centerMap);
+    // Draw Player Icon
+    QPixmap machineG(machine.graph);
+    bufferPainter.drawPixmap(machine.pos.x() - siz / 2, machine.pos.y() - siz / 2, siz, siz, machineG);
     QPainter painter(this);
     painter.drawPixmap(0, 0, buffer);
+
+
+
     // QPainter painter(this);
     // QPixmap pix(":/RoomBackGround.jpg");
     // painter.drawPixmap(0, 0, this -> width(), this -> height(), pix);
