@@ -4,6 +4,7 @@
 #include <QMouseEvent>
 #include <QLabel>
 #include <QPainter>
+#include <player.h>
 class GameRoom : public QWidget
 {
     Q_OBJECT
@@ -12,6 +13,9 @@ public:
     void paintEvent(QPaintEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
     int GameModule;
+
+    Player machine;
+    Player human;
 private:
     QLabel *label;
 

@@ -7,11 +7,12 @@
 #include "player.h"
 
 
-#include "tool.h"
+// #include "tool.h"
 
 #include <QLabel>
 
 #include <QPainter>
+
 
 GameRoom::GameRoom(QWidget *parent)
     : QWidget{parent}
@@ -67,10 +68,10 @@ GameRoom::GameRoom(QWidget *parent)
     // LeftTop = (466, 188)
     // Delta d = 26
 
-    Player machine(":/M-up.png");
+    machine = Player(":/M-up.png");
     machine.item -> setParent(this); // A player, up down
     qDebug() << machine.pos.x() << " " << machine.pos.y();
-    Player human(":/K-up.png", 1);
+    human = Player(":/K-up.png", 1);
     human.item -> setParent(this); // B player, WASD
     qDebug() << machine.pos.x() << " " << machine.pos.y();
     connect(this, &GameRoom :: upKeyPressed, [&](){
