@@ -4,14 +4,13 @@
 #include <QMouseEvent>
 #include <QLabel>
 #include <QPainter>
-#include "player.h"
 class GameRoom : public QWidget
 {
     Q_OBJECT
 public:
     explicit GameRoom(QWidget *parent = nullptr);
-    void paintEvent(QPaintEvent *event);
-    void keyPressEvent(QKeyEvent *event);
+    void paintEvent(QPaintEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
     int GameModule;
 private:
     QLabel *label;

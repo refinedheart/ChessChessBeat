@@ -11,6 +11,7 @@ Player::Player(QString pic, int fg)
     if(fg == 0) pos = QPoint(StartXpos, StartYpos);
     else {
         pos = GetCoordPos(19, 19);
+        qDebug() << "Initial X = " << pos.x() << " Y = " << pos.y();
     }
     item = new QLabel();
 

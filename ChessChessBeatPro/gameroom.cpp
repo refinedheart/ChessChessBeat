@@ -69,15 +69,16 @@ GameRoom::GameRoom(QWidget *parent)
 
     Player machine(":/M-up.png");
     machine.item -> setParent(this); // A player, up down
-
+    qDebug() << machine.pos.x() << " " << machine.pos.y();
     Player human(":/K-up.png", 1);
     human.item -> setParent(this); // B player, WASD
-
+    qDebug() << machine.pos.x() << " " << machine.pos.y();
     connect(this, &GameRoom :: upKeyPressed, [&](){
         machine.moveUp();
     });
 
     connect(this, &GameRoom :: downKeyPressed, [&](){
+        qDebug() << machine.pos.x() << " " << machine.pos.y();
         machine.moveDown();
         // qDebug() << "I go down!";
     });
@@ -103,11 +104,20 @@ GameRoom::GameRoom(QWidget *parent)
 
 void GameRoom :: paintEvent(QPaintEvent *event) {
     Q_UNUSED(event);
+    QPixmap buffer(size());
+    // buffer.fill(Qt :: transparent);
+    QPainter bufferPainter(&buffer);
+    QPixmap background(":/RoomBackGround.jpg");
+    bufferPainter.drawPixmap(0, 0, this -> width(), this -> height(), background);
+    QPixmap centerMap(":/Chess-19.jpeg");
+    bufferPainter.drawPixmap(450, 100, 500, 500, centerMap);
     QPainter painter(this);
-    QPixmap pix(":/RoomBackGround.jpg");
-    painter.drawPixmap(0, 0, this -> width(), this -> height(), pix);
-    pix.load(":/Chess-19.jpeg");
-    painter.drawPixmap(450, 100, 500, 500, pix);
+    painter.drawPixmap(0, 0, buffer);
+    // QPainter painter(this);
+    // QPixmap pix(":/RoomBackGround.jpg");
+    // painter.drawPixmap(0, 0, this -> width(), this -> height(), pix);
+    // pix.load(":/Chess-19.jpeg");
+    // painter.drawPixmap(450, 100, 500, 500, pix);
 }
 
 void GameRoom :: keyPressEvent(QKeyEvent *event) {
