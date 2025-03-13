@@ -6,6 +6,11 @@
 #include "player.h"
 
 
+#include "chessbox.h"
+#include "chesspiece.h"
+
+// #include "chessbox.h"
+
 // #include "tool.h"
 
 #include <QLabel>
@@ -114,6 +119,19 @@ GameRoom::GameRoom(QWidget *parent)
     connect(this, &GameRoom :: dKeyPressed, [&](){
         human.moveRight();
     });
+
+
+
+    /*---------- generate chess------------*/
+
+
+
+
+
+
+
+    // human : white
+    //
     if(GameModule == 0) {
 
         // 机器模式
