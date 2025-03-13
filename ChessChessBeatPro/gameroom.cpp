@@ -100,6 +100,20 @@ GameRoom::GameRoom(QWidget *parent)
     connect(this, &GameRoom :: rightKeyPressed, [&](){
         machine.moveRight();
     });
+
+
+    connect(this, &GameRoom :: wKeyPressed, [&](){
+        human.moveUp();
+    });
+    connect(this, &GameRoom :: aKeyPressed, [&](){
+        human.moveLeft();
+    });
+    connect(this, &GameRoom :: sKeyPressed, [&](){
+        human.moveDown();
+    });
+    connect(this, &GameRoom :: dKeyPressed, [&](){
+        human.moveRight();
+    });
     if(GameModule == 0) {
 
         // 机器模式
