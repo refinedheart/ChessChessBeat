@@ -9,11 +9,11 @@
 
 // LeftTop = (466, 188)
 // Delta d = 26
-const int gapx = 26;
-const int gapy = 26;
-const int StartXpos = 466;
+const int gapx = 30;
+const int gapy = 30;
+const int StartXpos = 400;
 // const int StartYpos = 188 - 68 - gapy; // (1, 1)
-const int StartYpos = 188 - 68;
+const int StartYpos = 100;
 const int siz = 20;
 
 const int UP = 0;

@@ -12,6 +12,11 @@
 
 #include <QPainter>
 
+const int gridSize = 30;
+
+const int Mx = 400;
+const int My = 100;
+
 
 GameRoom::GameRoom(QWidget *parent)
     : QWidget{parent}
@@ -117,8 +122,26 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
     QPainter bufferPainter(&buffer);
     QPixmap background(":/RoomBackGround.jpg");
     bufferPainter.drawPixmap(0, 0, this -> width(), this -> height(), background);
-    QPixmap centerMap(":/Chess-19.jpeg");
-    bufferPainter.drawPixmap(450, 100, 500, 500, centerMap);
+
+
+    // Draw Game Room
+
+    QPen pen(Qt :: black);
+    pen.setWidth(1);
+    bufferPainter.setPen(pen);
+    for(int i = 0; i < 19; ++i) {
+        // bufferPainter.drawLine(Mx + i * gridSize, My + gridSize, Mx + i * gridSize, My + 18 * gridSize);
+        // bufferPainter.drawLine(Mx + gridSize, My + i * gridSize, Mx + 18 * gridSize, My + i * gridSize);
+        bufferPainter.drawLine(Mx + gridSize, My + (i + 1) * gridSize, Mx + (19) * gridSize, My + (i + 1) * gridSize);
+        bufferPainter.drawLine(Mx + (i + 1) * gridSize, My + gridSize, Mx + (i + 1) * gridSize, My + (19) * gridSize);
+    }
+
+    // QPixmap centerMap(":/Chess-19.jpeg");
+    // bufferPainter.drawPixmap(450, 100, 500, 500, centerMap);
+
+
+
+
     // Draw Player Icon
     QPixmap machineG(machine.graph);
     bufferPainter.drawPixmap(machine.pos.x() - siz / 2, machine.pos.y() - siz / 2, siz, siz, machineG);
