@@ -95,32 +95,40 @@ GameRoom::GameRoom(QWidget *parent)
     // qDebug() << machine.pos.x() << " " << machine.pos.y();
     connect(this, &GameRoom :: upKeyPressed, [&](){
         machine.moveUp();
+        checkCross();
     });
 
     connect(this, &GameRoom :: downKeyPressed, [&](){
         // qDebug() << machine.pos.x() << " " << machine.pos.y();
         machine.moveDown();
+        checkCross();
         // qDebug() << "I go down!";
     });
     connect(this, &GameRoom :: leftKeyPressed, [&](){
         machine.moveLeft();
+        checkCross();
     });
     connect(this, &GameRoom :: rightKeyPressed, [&](){
         machine.moveRight();
+        checkCross();
     });
 
 
     connect(this, &GameRoom :: wKeyPressed, [&](){
         human.moveUp();
+        checkCross();
     });
     connect(this, &GameRoom :: aKeyPressed, [&](){
         human.moveLeft();
+        checkCross();
     });
     connect(this, &GameRoom :: sKeyPressed, [&](){
         human.moveDown();
+        checkCross();
     });
     connect(this, &GameRoom :: dKeyPressed, [&](){
         human.moveRight();
+        checkCross();
     });
 
 
@@ -150,6 +158,28 @@ GameRoom::GameRoom(QWidget *parent)
 
 
 
+}
+
+
+
+void GameRoom :: checkCross() {
+    // human: eat black
+    for(int i = Chess.blackchess.l; i <= Chess.blackchess.r; ++i) {
+        int regx = regetposx(human.pos.x()), regy = regetposy(human.pos.y());
+        // qDebug() << "x = " << regx << " y = " << regy;
+        if(Chess.Xpos[i] == regx && Chess.Ypos[i] == regy) {
+            human.scores ++;
+            Chess.regeneratepos(i);
+            // qDebug() << "success!";
+        }
+    }
+    for(int i = Chess.whitechess.l; i <= Chess.whitechess.r; ++i) {
+        int regx = regetposx(machine.pos.x()), regy = regetposy(machine.pos.y());
+        if(Chess.Xpos[i] == regx && Chess.Ypos[i] == regy) {
+            machine.scores ++;
+            Chess.regeneratepos(i);
+        }
+    }
 }
 
 void GameRoom :: paintEvent(QPaintEvent *event) {

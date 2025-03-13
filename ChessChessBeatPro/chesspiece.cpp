@@ -18,9 +18,21 @@ ChessPiece::ChessPiece(int PieceCnt) {
             Xpos[i] = rd(1, 19);
             Ypos[i] = rd(1, 19);
         }
+        inq[Xpos[i]][Ypos[i]] = 1;
     }
 }
 
 int ChessPiece :: rd(int l, int r) {
     return (myrnd -> bounded(l, r));
+}
+
+void ChessPiece :: regeneratepos(int i) {
+    inq[Xpos[i]][Ypos[i]] = 0;
+    Xpos[i] = rd(1, 19);
+    Ypos[i] = rd(1, 19);
+    while(inq[Xpos[i]][Ypos[i]]) {
+        Xpos[i] = rd(1, 19);
+        Ypos[i] = rd(1, 19);
+    }
+    inq[Xpos[i]][Ypos[i]] = 1;
 }

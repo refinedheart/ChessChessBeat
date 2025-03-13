@@ -23,7 +23,7 @@ public:
     struct Seq {
         int l, r;
     }whitechess, blackchess;
-
+    void regeneratepos(int i);
 };
 
 #endif // CHESSPIECE_H

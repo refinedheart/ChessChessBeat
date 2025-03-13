@@ -12,6 +12,7 @@ class GameRoom : public QWidget
 {
     Q_OBJECT
 public:
+    void checkCross();
     explicit GameRoom(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;

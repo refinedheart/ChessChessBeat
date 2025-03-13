@@ -36,6 +36,13 @@ inline QPoint GetCoordPos(int x, int y) {
     return QPoint(StartXpos + (x - 1) * gapx, StartYpos + (y - 1) * gapy);
 }
 
+inline int regetposx(int x) {
+    return (x - StartXpos) / gapx + 1;
+}
+inline int regetposy(int y) {
+    return (y - StartYpos) / gapy + 1;
+}
+
 class Player
 {
 public:

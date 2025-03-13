@@ -6,8 +6,8 @@
 class ChessBox
 {
 public:
-    ChessBox();
-
+    ChessBox(int limit = 0);
+    int lim;
 };
 
 #endif // CHESSBOX_H
