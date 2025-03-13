@@ -2,6 +2,7 @@
 #define CHESSPIECE_H
 
 
+#include <vector>
 
 #include <QRandomGenerator>
 
@@ -12,9 +13,17 @@
 class ChessPiece
 {
 public:
-    ChessPiece();
+    ChessPiece(int PieceCnt = 0);
     QRandomGenerator *myrnd;
     int rd(int l, int r);
+    std :: vector <int> Xpos, Ypos;
+    bool vis[100];
+    bool inq[20][20];
+    int cnt;
+    struct Seq {
+        int l, r;
+    }whitechess, blackchess;
+
 };
 
 #endif // CHESSPIECE_H

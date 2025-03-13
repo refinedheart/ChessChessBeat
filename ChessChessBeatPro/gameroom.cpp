@@ -22,6 +22,8 @@ const int gridSize = 26;
 const int Mx = 450;
 const int My = 100;
 
+const int piececnt = 10;
+
 
 GameRoom::GameRoom(QWidget *parent)
     : QWidget{parent}
@@ -125,6 +127,9 @@ GameRoom::GameRoom(QWidget *parent)
     /*---------- generate chess------------*/
 
 
+    ChessPiece Chess(piececnt); // [1, cnt / 2] = white
+
+
 
 
 
@@ -178,6 +183,9 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
 
 
 
+    // Draw ChessPiece
+
+
 
     // Draw Player Icon
     QPixmap machineG(machine.graph);
@@ -191,11 +199,6 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
 
 
 
-    // QPainter painter(this);
-    // QPixmap pix(":/RoomBackGround.jpg");
-    // painter.drawPixmap(0, 0, this -> width(), this -> height(), pix);
-    // pix.load(":/Chess-19.jpeg");
-    // painter.drawPixmap(450, 100, 500, 500, pix);
 }
 
 void GameRoom :: keyPressEvent(QKeyEvent *event) {
