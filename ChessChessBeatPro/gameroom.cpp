@@ -3,7 +3,6 @@
 #include <QPainter>
 #include <QPushButton>
 #include <QDebug>
-
 #include "player.h"
 
 
@@ -20,6 +19,13 @@ GameRoom::GameRoom(QWidget *parent)
     // 页面设置
     this -> setFixedSize(1400, 800);
 
+
+    // timer-update
+    updateTimer.setInterval(16);
+    connect(&updateTimer, &QTimer :: timeout, [=](){
+        update();
+    });
+    updateTimer.start();
     // make sure the first position
     // Tool *now = new Tool;
     // now -> show();
@@ -33,7 +39,7 @@ GameRoom::GameRoom(QWidget *parent)
     // layout->addWidget(label);
     // setLayout(layout);
 
-    // 创建一个 QLabel 用于显示鼠标坐标
+    //创建一个 QLabel 用于显示鼠标坐标
     // label = new QLabel(this);
     // label->setGeometry(10, 10, 200, 20);
 
@@ -79,7 +85,7 @@ GameRoom::GameRoom(QWidget *parent)
     });
 
     connect(this, &GameRoom :: downKeyPressed, [&](){
-        qDebug() << machine.pos.x() << " " << machine.pos.y();
+        // qDebug() << machine.pos.x() << " " << machine.pos.y();
         machine.moveDown();
         // qDebug() << "I go down!";
     });
@@ -104,6 +110,7 @@ GameRoom::GameRoom(QWidget *parent)
 }
 
 void GameRoom :: paintEvent(QPaintEvent *event) {
+
     Q_UNUSED(event);
     QPixmap buffer(size());
     // buffer.fill(Qt :: transparent);
@@ -115,6 +122,7 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
     // Draw Player Icon
     QPixmap machineG(machine.graph);
     bufferPainter.drawPixmap(machine.pos.x() - siz / 2, machine.pos.y() - siz / 2, siz, siz, machineG);
+    // qDebug() << "machine : " << machine.pos.x() << ' ' << machine.pos.y();
     // Draw human Player
     QPixmap humanG(human.graph);
     bufferPainter.drawPixmap(human.pos.x() - siz / 2, human.pos.y() - siz / 2, siz, siz, humanG);

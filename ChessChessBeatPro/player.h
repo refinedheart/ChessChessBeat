@@ -10,10 +10,10 @@
 // LeftTop = (466, 188)
 // Delta d = 26
 const int gapx = 26;
-const double gapy = 25.5;
+const int gapy = 26;
 const int StartXpos = 466;
 // const int StartYpos = 188 - 68 - gapy; // (1, 1)
-const int StartYpos = 188;
+const int StartYpos = 188 - 68;
 const int siz = 20;
 
 const int UP = 0;
@@ -26,7 +26,7 @@ const int dy[] = {-1, 0, 1, 0};
 
 inline QPoint GetNextPos(QPoint now, int dir) {
     int x = now.x(), y = now.y();
-    qDebug() << "dir = " << dir << " x = " << x << "dx = " << dx[dir];
+    // qDebug() << "dir = " << dir << " x = " << x << "dx = " << dx[dir];
     x += dx[dir] * gapx;
     y += dy[dir] * gapy;
     return QPoint(x, y);

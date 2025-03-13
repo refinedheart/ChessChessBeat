@@ -72,5 +72,6 @@ void Player :: moveRight() {
 bool Player :: checkOutOfWidget(QPoint npos) {
     // return false;
     if(npos.x() < StartXpos || npos.y() < StartYpos) return true;
+    if(npos.x() > StartXpos + 18 * gapx || npos.y() > StartYpos + 18 * gapy) return true;
     return false;
 }
