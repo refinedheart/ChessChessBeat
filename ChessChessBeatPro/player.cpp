@@ -6,6 +6,7 @@
 
 Player::Player(QString pic, int fg)
 {
+    scores = 0;
     graph = pic;
     if(fg == 0) pos = QPoint(StartXpos, StartYpos);
     else {

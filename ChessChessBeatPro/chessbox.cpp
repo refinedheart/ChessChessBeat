@@ -1,5 +1,6 @@
 #include "chessbox.h"
 
-ChessBox::ChessBox() {
+ChessBox::ChessBox(int limit) {
+    lim = limit;
 
 }

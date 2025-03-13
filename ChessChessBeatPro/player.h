@@ -42,6 +42,7 @@ public:
     // QLabel *item;
     QPoint pos;
     QString graph;
+    int scores;
     // int scores;
     Player(QString pic = "", int fg = 0);
     ~Player();
