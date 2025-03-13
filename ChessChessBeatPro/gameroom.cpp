@@ -18,6 +18,7 @@
 #include <QPainter>
 
 const int gridSize = 26;
+const int Radius = 10;
 
 const int Mx = 450;
 const int My = 100;
@@ -127,9 +128,9 @@ GameRoom::GameRoom(QWidget *parent)
     /*---------- generate chess------------*/
 
 
-    ChessPiece Chess(piececnt); // [1, cnt / 2] = white
+    // [1, cnt / 2] = white
 
-
+    Chess = ChessPiece(piececnt);
 
 
 
@@ -184,7 +185,22 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
 
 
     // Draw ChessPiece
-
+    bufferPainter.setBrush(Qt :: white);
+    for(int i = Chess.whitechess.l; i <= Chess.whitechess.r; ++i) {
+        int x = Chess.Xpos[i], y = Chess.Ypos[i];
+        QPoint Zp = GetCoordPos(x, y);
+        int xx = Zp.x(), yy = Zp.y();
+        // (x, y)
+        bufferPainter.drawEllipse(xx - Radius, yy - Radius, Radius * 2, Radius * 2);
+    }
+    bufferPainter.setBrush(Qt :: black);
+    for(int i = Chess.blackchess.l; i <= Chess.blackchess.r; ++i) {
+        int x = Chess.Xpos[i], y = Chess.Ypos[i];
+        QPoint Zp = GetCoordPos(x, y);
+        int xx = Zp.x(), yy = Zp.y();
+        // (x, y)
+        bufferPainter.drawEllipse(xx - Radius, yy - Radius, Radius * 2, Radius * 2);
+    }
 
 
     // Draw Player Icon

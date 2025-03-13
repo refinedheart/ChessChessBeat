@@ -6,6 +6,8 @@
 #include <QPainter>
 #include <player.h>
 #include <QTimer>
+
+#include "chesspiece.h"
 class GameRoom : public QWidget
 {
     Q_OBJECT
@@ -17,6 +19,7 @@ public:
     QTimer updateTimer;
     Player machine;
     Player human;
+    ChessPiece Chess;
 private:
     QLabel *label;
 

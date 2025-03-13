@@ -3,10 +3,10 @@
 ChessPiece::ChessPiece(int PieceCnt) {
     myrnd = new QRandomGenerator(12);
     cnt = PieceCnt;
-    whitechess.l = 1;
-    whitechess.r = cnt / 2;
-    blackchess.l = cnt / 2 + 1;
-    blackchess.r = cnt;
+    whitechess.l = 0;
+    whitechess.r = cnt / 2 - 1;
+    blackchess.l = cnt / 2;
+    blackchess.r = cnt - 1;
     memset(vis, 0, sizeof vis);
     memset(inq, 0, sizeof inq);
     Xpos.resize(PieceCnt);
