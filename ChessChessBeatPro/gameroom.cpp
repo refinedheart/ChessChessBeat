@@ -17,9 +17,9 @@
 
 #include <QPainter>
 
-const int gridSize = 30;
+const int gridSize = 26;
 
-const int Mx = 400;
+const int Mx = 450;
 const int My = 100;
 
 
@@ -154,6 +154,11 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
     QPainter bufferPainter(&buffer);
     QPixmap background(":/RoomBackGround.jpg");
     bufferPainter.drawPixmap(0, 0, this -> width(), this -> height(), background);
+
+
+    // Graw chess borad
+    bufferPainter.setBrush(Qt :: yellow);
+    bufferPainter.drawRect(Mx, My, 20 * gridSize, 20 * gridSize);
 
 
     // Draw Game Room
