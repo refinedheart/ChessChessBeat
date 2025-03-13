@@ -131,13 +131,13 @@ GameRoom::GameRoom(QWidget *parent)
 
 
     // human : white
-    //
+    // machine : black
     if(GameModule == 0) {
 
         // 机器模式
 
 
-
+        // 策略：减弱来时路的概率后随机
 
 
     }
