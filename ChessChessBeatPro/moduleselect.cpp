@@ -27,17 +27,19 @@ ModuleSelect::ModuleSelect(QWidget *parent)
     QPalette machineP = machinebtn -> palette();
     machineP.setColor(QPalette :: ButtonText, Qt :: black);
     machinebtn->setPalette(machineP);
-    GameRoom *gameroom = new GameRoom;
-    connect(gameroom, &GameRoom :: back_to_select, [=](){
-        gameroom -> close();
-        this -> show();
-    });
+
     connect(machinebtn, &QPushButton :: clicked, [=]() {
         this -> close();
+        GameRoom *gameroom = new GameRoom;
+        connect(gameroom, &GameRoom :: back_to_select, [=](){
+            gameroom -> close();
+            this -> show();
+        });
         gameroom -> GameModule = 0;
         gameroom -> show();
 
     });
+
     QPushButton *backbtn = new QPushButton(this);
     backbtn -> setText("累了， 休息一下");
     QFont backFont("宋体", 16, QFont :: Bold);
