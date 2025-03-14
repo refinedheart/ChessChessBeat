@@ -26,7 +26,7 @@ const int My = 100;
 
 const int piececnt = 10;
 
-const int BoxLimit = 1;
+const int BoxLimit = 30;
 
 int GameRoom :: getDistance(QPoint machinePos, int id) {
     int x = regetposx(machinePos.x()), y = regetposy(machinePos.y());
@@ -260,23 +260,28 @@ GameRoom::GameRoom(QWidget *parent)
         // 实现后可以优化随机策略，从而进一步提升 bot 性能
         // Machine 模拟 M 吃白子 用上下左右键移动
 
-        QTimer MachineControl;
-        MachineControl.setInterval(20);
+        // QTimer MachineControl;
+        MachineControl.setInterval(200);
         connect(&MachineControl, &QTimer :: timeout, [&](){
-            if(abs(machineMoveX) + abs(machineMoveY) == 0) {
+            // qDebug() << "machine move!";
+            while(abs(machineMoveX) + abs(machineMoveY) == 0) {
                 updateMachineStrategy();
+                // qDebug() << "?????";
             }
             if(machineMoveX == 0 || machineMoveY == 0) {
-                if(machineMoveX == 0) machineMoveXopt();
-                else machineMoveYopt();
+                if(machineMoveX == 0) machineMoveYopt();
+                else machineMoveXopt();
             }
             else {
+                assert(machineMoveX != 0 && machineMoveY != 0);
                 int op = time(0) & 1;
                 if(op == 0) machineMoveXopt();
                 else machineMoveYopt();
             }
+            // qDebug() << "Xpos = " << machineMoveX << " Ypos = " << machineMoveY;
+            // qDebug() << "posx = " << machine
         });
-
+        MachineControl.start();
 
 
     }
@@ -289,22 +294,24 @@ GameRoom::GameRoom(QWidget *parent)
 void GameRoom :: machineMoveXopt() {
     if(machineMoveX < 0) {
         ++machineMoveX;
-        emit upKeyPressed();
+        emit leftKeyPressed();
     }
     else {
         --machineMoveX;
-        emit downKeyPressed();
+        emit rightKeyPressed();
     }
 }
 
 void GameRoom :: machineMoveYopt() {
     if(machineMoveY < 0) {
         ++machineMoveY;
-        emit leftKeyPressed();
+        emit upKeyPressed();
+
     }
     else {
         --machineMoveY;
-        emit rightKeyPressed();
+        emit downKeyPressed();
+
     }
 }
 

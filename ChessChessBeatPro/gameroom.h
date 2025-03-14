@@ -30,7 +30,7 @@ public:
     void keyPressEvent(QKeyEvent *event) override;
     int GameModule;
     int machineMoveX, machineMoveY;
-    QTimer updateTimer;
+    QTimer updateTimer, MachineControl;
     Player machine;
     Player human;
     ChessPiece Chess;
