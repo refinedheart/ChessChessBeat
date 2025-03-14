@@ -2,6 +2,8 @@
 
 #include <QPushButton>
 
+#include <QLabel>
+
 Settlement::Settlement(QWidget *parent)
     : QWidget{parent}
 {
@@ -12,7 +14,15 @@ Settlement::Settlement(QWidget *parent)
         emit back_to_module();
         this -> close();
     });
-    bckbtn -> setFixedSize(100, 30);
+    bckbtn -> setFixedSize(200, 100);
+    bckbtn -> move(400, 500);
+    QLabel *SHeadTitle = new QLabel(this);
+    if(humanScore == 0) {
+        SHeadTitle -> setText("Machine Killed Contest!");
+    }
+    else {
+        SHeadTitle -> setText("Human Killed Contest!");
+    }
 }
 
 void Settlement :: getHuman(int c) {

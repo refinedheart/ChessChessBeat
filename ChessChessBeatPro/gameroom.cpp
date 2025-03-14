@@ -26,7 +26,7 @@ const int My = 100;
 
 const int piececnt = 10;
 
-const int BoxLimit = 30;
+const int BoxLimit = 1;
 
 int GameRoom :: getDistance(QPoint machinePos, int id) {
     int x = regetposx(machinePos.x()), y = regetposy(machinePos.y());
@@ -330,7 +330,8 @@ void GameRoom :: updateMachineStrategy() {
 }
 
 void GameRoom :: updateInformation() {
-
+    SR -> getHuman(boxHuman.lim - machine.scores);
+    SR -> getMachine(boxMachine.lim - human.scores);
 }
 
 bool GameRoom :: checkend() {
