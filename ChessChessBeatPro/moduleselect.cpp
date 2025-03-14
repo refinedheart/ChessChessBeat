@@ -23,10 +23,33 @@ ModuleSelect::ModuleSelect(QWidget *parent)
     QFont machineFont("宋体", 20, QFont :: Bold);
     machinebtn -> setFont(machineFont);
     machinebtn -> setFixedSize(200, 80);
-    machinebtn -> move(300, 400);
+    machinebtn -> move(100, 400);
     QPalette machineP = machinebtn -> palette();
     machineP.setColor(QPalette :: ButtonText, Qt :: black);
     machinebtn->setPalette(machineP);
+
+
+    QPushButton *friendbtn = new QPushButton(this);
+    friendbtn -> setText("双人对抗！");
+    QFont friendFont("宋体", 20, QFont :: Bold);
+    friendbtn -> setFont(friendFont);
+    friendbtn -> setFixedSize(200, 80);
+    friendbtn -> move(500, 400);
+    QPalette friendP = friendbtn -> palette();
+    friendP.setColor(QPalette :: ButtonText, Qt :: black);
+    friendbtn->setPalette(friendP);
+
+    connect(friendbtn, &QPushButton :: clicked, [=](){
+        this -> close();
+        GameRoom *gameroom = new GameRoom;
+        connect(gameroom, &GameRoom :: back_to_select, [=](){
+            gameroom -> close();
+            this -> show();
+        });
+        gameroom -> GameModule = 1;
+        gameroom -> show();
+    });
+
 
     connect(machinebtn, &QPushButton :: clicked, [=]() {
         this -> close();
