@@ -15,6 +15,7 @@ SOURCES += \
     main.cpp \
     moduleselect.cpp \
     player.cpp \
+    settlement.cpp \
     tool.cpp \
     widget.cpp
 
@@ -24,6 +25,7 @@ HEADERS += \
     gameroom.h \
     moduleselect.h \
     player.h \
+    settlement.h \
     tool.h \
     widget.h
 

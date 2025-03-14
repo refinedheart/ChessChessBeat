@@ -4,6 +4,7 @@
 #include <QPushButton>
 #include <QDebug>
 #include "player.h"
+#include <settlement.h>
 
 
 #include "chessbox.h"
@@ -25,6 +26,8 @@ const int My = 100;
 
 const int piececnt = 10;
 
+const int BoxLimit = 1;
+
 
 GameRoom::GameRoom(QWidget *parent)
     : QWidget{parent}
@@ -33,6 +36,7 @@ GameRoom::GameRoom(QWidget *parent)
     this->setFocusPolicy(Qt::StrongFocus);
     this -> setFixedSize(1400, 800);
 
+    SR = new Settlement(this);
 
     // timer-update
     updateTimer.setInterval(16);
@@ -98,6 +102,7 @@ GameRoom::GameRoom(QWidget *parent)
         machine.moveUp();
         checkCross();
         updateMachinePrint();
+        checkend();
     });
 
     connect(this, &GameRoom :: downKeyPressed, [&](){
@@ -105,17 +110,20 @@ GameRoom::GameRoom(QWidget *parent)
         machine.moveDown();
         checkCross();
         updateMachinePrint();
+        checkend();
         // qDebug() << "I go down!";
     });
     connect(this, &GameRoom :: leftKeyPressed, [&](){
         machine.moveLeft();
         checkCross();
         updateMachinePrint();
+        checkend();
     });
     connect(this, &GameRoom :: rightKeyPressed, [&](){
         machine.moveRight();
         checkCross();
         updateMachinePrint();
+        checkend();
     });
 
 
@@ -123,21 +131,25 @@ GameRoom::GameRoom(QWidget *parent)
         human.moveUp();
         checkCross();
         updateHumanPrint();
+        checkend();
     });
     connect(this, &GameRoom :: aKeyPressed, [&](){
         human.moveLeft();
         checkCross();
         updateHumanPrint();
+        checkend();
     });
     connect(this, &GameRoom :: sKeyPressed, [&](){
         human.moveDown();
         checkCross();
         updateHumanPrint();
+        checkend();
     });
     connect(this, &GameRoom :: dKeyPressed, [&](){
         human.moveRight();
         checkCross();
         updateHumanPrint();
+        checkend();
     });
 
 
@@ -153,8 +165,8 @@ GameRoom::GameRoom(QWidget *parent)
     /* ----------generate chess box -------------*/
 
 
-    boxHuman = ChessBox(30);
-    boxMachine = ChessBox(30);
+    boxHuman = ChessBox(BoxLimit);
+    boxMachine = ChessBox(BoxLimit);
 
     humanText.setParent(this);
     machineText.setParent(this);
@@ -220,6 +232,23 @@ GameRoom::GameRoom(QWidget *parent)
 
 
 
+}
+
+
+void GameRoom :: checkend() {
+    int numMachine = boxMachine.lim - human.scores;
+    int numHuman = boxHuman.lim - machine.scores;
+    if(numMachine == 0 || numHuman == 0) {
+
+
+        SR -> show();
+        this -> close();
+        // emit back_to_select();
+        return ;
+    }
+    else {
+        return ;
+    }
 }
 
 

@@ -10,6 +10,7 @@
 
 #include "chesspiece.h"
 #include "chessbox.h"
+#include <settlement.h>
 class GameRoom : public QWidget
 {
     Q_OBJECT
@@ -18,6 +19,7 @@ public:
     void updateHumanPrint();
     void checkCross();
     void MachineModule();
+    void checkend();
     explicit GameRoom(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
@@ -28,7 +30,7 @@ public:
     ChessPiece Chess;
     ChessBox boxHuman, boxMachine;
     QLineEdit humanText, machineText;
-
+    Settlement *SR;
 private:
     QLabel *label;
 
