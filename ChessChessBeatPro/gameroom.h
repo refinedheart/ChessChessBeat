@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <QPainter>
 #include <player.h>
+#include <QLineEdit>
 #include <QTimer>
 
 #include "chesspiece.h"
@@ -13,6 +14,8 @@ class GameRoom : public QWidget
 {
     Q_OBJECT
 public:
+    void updateMachinePrint();
+    void updateHumanPrint();
     void checkCross();
     explicit GameRoom(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event) override;
@@ -23,6 +26,8 @@ public:
     Player human;
     ChessPiece Chess;
     ChessBox boxHuman, boxMachine;
+    QLineEdit humanText, machineText;
+
 private:
     QLabel *label;
 

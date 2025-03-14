@@ -30,6 +30,7 @@ GameRoom::GameRoom(QWidget *parent)
     : QWidget{parent}
 {
     // 页面设置
+    this->setFocusPolicy(Qt::StrongFocus);
     this -> setFixedSize(1400, 800);
 
 
@@ -96,39 +97,47 @@ GameRoom::GameRoom(QWidget *parent)
     connect(this, &GameRoom :: upKeyPressed, [&](){
         machine.moveUp();
         checkCross();
+        updateMachinePrint();
     });
 
     connect(this, &GameRoom :: downKeyPressed, [&](){
         // qDebug() << machine.pos.x() << " " << machine.pos.y();
         machine.moveDown();
         checkCross();
+        updateMachinePrint();
         // qDebug() << "I go down!";
     });
     connect(this, &GameRoom :: leftKeyPressed, [&](){
         machine.moveLeft();
         checkCross();
+        updateMachinePrint();
     });
     connect(this, &GameRoom :: rightKeyPressed, [&](){
         machine.moveRight();
         checkCross();
+        updateMachinePrint();
     });
 
 
     connect(this, &GameRoom :: wKeyPressed, [&](){
         human.moveUp();
         checkCross();
+        updateHumanPrint();
     });
     connect(this, &GameRoom :: aKeyPressed, [&](){
         human.moveLeft();
         checkCross();
+        updateHumanPrint();
     });
     connect(this, &GameRoom :: sKeyPressed, [&](){
         human.moveDown();
         checkCross();
+        updateHumanPrint();
     });
     connect(this, &GameRoom :: dKeyPressed, [&](){
         human.moveRight();
         checkCross();
+        updateHumanPrint();
     });
 
 
@@ -144,7 +153,27 @@ GameRoom::GameRoom(QWidget *parent)
     /* ----------generate chess box -------------*/
 
 
+    boxHuman = ChessBox(30);
+    boxMachine = ChessBox(30);
 
+    humanText.setParent(this);
+    machineText.setParent(this);
+    // limit - scores
+    humanText.setText(QString :: number(boxHuman.lim - machine.scores));
+    machineText.setText(QString :: number(boxMachine.lim - human.scores));
+
+    QFont humanFont("Roboto", 20, QFont :: Bold);
+    QFont machineFont("Consolas", 20, QFont :: Bold);
+
+    humanText.setFont(humanFont);
+    machineText.setFont(machineFont);
+
+    humanText.setGeometry(20, 20, 40, 40);
+    machineText.setGeometry(100, 20, 40, 40);
+    // humanText.setReadOnly(true);
+    // machineText.setReadOnly(true);
+    humanText.setFocusPolicy(Qt::NoFocus);
+    machineText.setFocusPolicy(Qt::NoFocus);
 
 
     // boxHuman.boxText -> setParent(this);
@@ -169,7 +198,16 @@ GameRoom::GameRoom(QWidget *parent)
 
 }
 
-
+void GameRoom :: updateHumanPrint() {
+    humanText.setText(QString :: number(boxHuman.lim - machine.scores));
+    humanText.update();
+    humanText.raise();
+}
+void GameRoom :: updateMachinePrint() {
+    machineText.setText(QString :: number(boxMachine.lim - human.scores));
+    machineText.update();
+    machineText.raise();
+}
 
 void GameRoom :: checkCross() {
     // human: eat black
@@ -187,6 +225,7 @@ void GameRoom :: checkCross() {
         if(Chess.Xpos[i] == regx && Chess.Ypos[i] == regy) {
             machine.scores ++;
             Chess.regeneratepos(i);
+            // qDebug() << "Machine points = " << machine.scores;
         }
     }
 }
