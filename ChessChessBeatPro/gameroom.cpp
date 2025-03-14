@@ -38,6 +38,7 @@ GameRoom::GameRoom(QWidget *parent)
     : QWidget{parent}
 {
     // 页面设置
+    // qDebug() <<
     this->setFocusPolicy(Qt::StrongFocus);
     this -> setFixedSize(1400, 800);
 
@@ -248,7 +249,7 @@ GameRoom::GameRoom(QWidget *parent)
     // human : white
     // machine : black
     if(GameModule == 0) {
-
+        // qDebug() << "Open Machine Module!";
         // 机器模式
 
 
@@ -262,7 +263,18 @@ GameRoom::GameRoom(QWidget *parent)
         QTimer MachineControl;
         MachineControl.setInterval(20);
         connect(&MachineControl, &QTimer :: timeout, [&](){
-
+            if(abs(machineMoveX) + abs(machineMoveY) == 0) {
+                updateMachineStrategy();
+            }
+            if(machineMoveX == 0 || machineMoveY == 0) {
+                if(machineMoveX == 0) machineMoveXopt();
+                else machineMoveYopt();
+            }
+            else {
+                int op = time(0) & 1;
+                if(op == 0) machineMoveXopt();
+                else machineMoveYopt();
+            }
         });
 
 
@@ -273,6 +285,42 @@ GameRoom::GameRoom(QWidget *parent)
 
 }
 
+
+void GameRoom :: machineMoveXopt() {
+    if(machineMoveX < 0) {
+        ++machineMoveX;
+        emit upKeyPressed();
+    }
+    else {
+        --machineMoveX;
+        emit downKeyPressed();
+    }
+}
+
+void GameRoom :: machineMoveYopt() {
+    if(machineMoveY < 0) {
+        ++machineMoveY;
+        emit leftKeyPressed();
+    }
+    else {
+        --machineMoveY;
+        emit rightKeyPressed();
+    }
+}
+
+void GameRoom :: updateMachineStrategy() {
+    int dis = 1000000000, posid = -1;
+    for(int i = Chess.whitechess.l; i <= Chess.whitechess.r; ++i) {
+        int nowdis = getDistance(machine.pos, i);
+        if(nowdis < dis) {
+            dis = nowdis;
+            posid = i;
+        }
+    }
+    assert(posid != -1);
+    machineMoveX = Chess.Xpos[posid] - regetposx(machine.pos.x());
+    machineMoveY = Chess.Ypos[posid] - regetposy(machine.pos.y());
+}
 
 void GameRoom :: updateInformation() {
 

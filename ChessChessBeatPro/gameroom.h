@@ -22,10 +22,14 @@ public:
     void MachineModule();
     bool checkend();
     void updateInformation();
+    void updateMachineStrategy();
+    void machineMoveXopt();
+    void machineMoveYopt();
     explicit GameRoom(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
     int GameModule;
+    int machineMoveX, machineMoveY;
     QTimer updateTimer;
     Player machine;
     Player human;
