@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     chessbox.cpp \
     chesspiece.cpp \
+    gameintroduction.cpp \
     gameroom.cpp \
     main.cpp \
     moduleselect.cpp \
@@ -22,6 +23,7 @@ SOURCES += \
 HEADERS += \
     chessbox.h \
     chesspiece.h \
+    gameintroduction.h \
     gameroom.h \
     moduleselect.h \
     player.h \

@@ -117,6 +117,17 @@ GameRoom::GameRoom(QWidget *parent)
         }
     });
 
+    /*---------------玩法简介------------------*/
+
+    QPushButton *Intro = new QPushButton(this);
+
+    Intro -> setText("戳我看玩法！！！");
+
+    Intro -> setFixedSize(200, 100);
+    Intro -> move(1200, 500);
+
+    /*--------------信号链接------------*/
+
     connect(this, &GameRoom :: downKeyPressed, [&](){
         // qDebug() << machine.pos.x() << " " << machine.pos.y();
         machine.moveDown();
