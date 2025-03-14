@@ -37,6 +37,9 @@ GameRoom::GameRoom(QWidget *parent)
     this -> setFixedSize(1400, 800);
 
     SR = new Settlement;
+    connect(SR, &Settlement :: back_to_module, [=](){
+        emit back_to_select();
+    });
 
     // timer-update
     updateTimer.setInterval(16);

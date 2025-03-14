@@ -13,6 +13,7 @@ public:
     void getMachine(int c);
     void GenerateRoom();
 signals:
+    void back_to_module();
 };
 
 #endif // SETTLEMENT_H
