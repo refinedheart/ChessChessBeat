@@ -18,6 +18,8 @@
 
 #include <QPainter>
 
+#include <QDockWidget>
+
 const int gridSize = 26;
 const int Radius = 10;
 
@@ -37,6 +39,11 @@ int GameRoom :: getDistance(QPoint machinePos, int id) {
 GameRoom::GameRoom(QWidget *parent)
     : QWidget{parent}
 {
+
+
+
+
+
     // 页面设置
     // qDebug() <<
     this->setFocusPolicy(Qt::StrongFocus);

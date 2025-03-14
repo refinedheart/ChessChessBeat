@@ -5,6 +5,8 @@
 #include <QFont>
 #include <QPushButton>
 #include <QPalette>
+#include <QDockWidget>
+#include <QTextEdit>
 ModuleSelect::ModuleSelect(QWidget *parent)
     : QWidget{parent}
 {
@@ -18,6 +20,27 @@ ModuleSelect::ModuleSelect(QWidget *parent)
 
     Intro -> setFixedSize(200, 100);
     Intro -> move(600, 0);
+
+    connect(Intro, &QPushButton :: clicked, [=](){
+        QDockWidget *docw = new QDockWidget("Introduction");
+        docw -> setFloating(true);
+        QTextEdit *textIntro = new QTextEdit();
+        docw -> setWidget(textIntro);
+        docw -> show();
+        docw -> setFixedSize(800, 800);
+        textIntro -> append("游戏玩法介绍：\n");
+        textIntro -> setReadOnly(true);
+        textIntro -> append("在游戏中，你将进入 2025 LG 杯决赛的赛场，与围棋世界冠军 LG 杯冠军卞相壹进行一场精彩的对决！\n");
+        textIntro -> append("玩家将使用经典的 WASD 键来对柯洁头像进行位置移动，对应上左下右的操作。\n");
+        textIntro -> append("同时，两位棋手的头顶上方存在计数器，表示再被吃多少颗棋子，他的棋盖就放不下了，根据韩国规则，该棋手判负。\n");
+        textIntro -> append("根据 LG 杯第二局，卞相壹棋手执黑棋，柯洁执白棋。故而，您对应的角色只能吃掉对手的棋子，而不能对本方棋子造成影响。\n");
+        textIntro -> append("吃子规则也很简单！当您的角色移动到棋盘上的对应位置时，如果位置上有您需要的棋子，它就会被吃掉。\n");
+        textIntro -> append("身为韩国围棋常年等级分前三的王牌世界冠军，请不要小瞧他的实力！\n");
+        textIntro -> append("我们将提供不同难度的棋手卞相壹供您挑战。\n");
+        textIntro -> append("除此之外，您还可以选择双人模式，叫您的小伙伴一起来切磋对抗！\n");
+        textIntro -> append("游戏中还可能会出现一些小道具，它们可能是你的救命法宝，也可能是终结比赛的利器，当然也可能是出乎意料的陷阱。\n");
+        textIntro -> append("快去探索吧！\n");
+    });
 
     /*---------------------------------------*/
 
