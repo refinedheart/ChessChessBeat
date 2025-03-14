@@ -259,10 +259,16 @@ GameRoom::GameRoom(QWidget *parent)
 }
 
 
+void GameRoom :: updateInformation() {
+
+}
+
 bool GameRoom :: checkend() {
     int numMachine = boxMachine.lim - human.scores;
     int numHuman = boxHuman.lim - machine.scores;
     if(numMachine == 0 || numHuman == 0) {
+        updateInformation();
+        SR -> GenerateRoom();
         return true;
     }
     else {

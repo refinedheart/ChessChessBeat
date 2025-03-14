@@ -20,6 +20,7 @@ public:
     void checkCross();
     void MachineModule();
     bool checkend();
+    void updateInformation();
     explicit GameRoom(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;

@@ -8,7 +8,10 @@ class Settlement : public QWidget
     Q_OBJECT
 public:
     explicit Settlement(QWidget *parent = nullptr);
-
+    int humanScore, machineScore;
+    void getHuman(int c);
+    void getMachine(int c);
+    void GenerateRoom();
 signals:
 };
 
