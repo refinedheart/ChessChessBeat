@@ -15,6 +15,7 @@ class GameRoom : public QWidget
 {
     Q_OBJECT
 public:
+    int getDistance(QPoint machinePos, int id);
     void updateMachinePrint();
     void updateHumanPrint();
     void checkCross();
