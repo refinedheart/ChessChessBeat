@@ -175,6 +175,25 @@ GameRoom::GameRoom(QWidget *parent)
     humanText.setFocusPolicy(Qt::NoFocus);
     machineText.setFocusPolicy(Qt::NoFocus);
 
+    humanText.setWindowFlags(Qt::FramelessWindowHint); // 无边框窗口
+    machineText.setAttribute(Qt::WA_TranslucentBackground);
+    humanText.setStyleSheet(
+        "QLineEdit {"
+        "   background-color: rgba(255, 255, 255, 0); /* 设置背景颜色为透明 */"
+        "   border: none; /* 设置边框样式 */"
+        "   color: black; /* 设置文字颜色 */"
+        "   padding: 5px; /* 设置内边距 */"
+        "}"
+    );
+    machineText.setStyleSheet(
+        "QLineEdit {"
+        "   background-color: rgba(255, 255, 255, 0); /* 设置背景颜色为透明 */"
+        "   border: none; /* 设置边框样式 */"
+        "   color: black; /* 设置文字颜色 */"
+        "   padding: 5px; /* 设置内边距 */"
+        "}"
+    );
+
 
     // boxHuman.boxText -> setParent(this);
     // boxHuman.boxText -> setGeometry(20, 20, 20, 20);
