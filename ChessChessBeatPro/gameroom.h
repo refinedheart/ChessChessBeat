@@ -17,6 +17,7 @@ public:
     void updateMachinePrint();
     void updateHumanPrint();
     void checkCross();
+    void MachineModule();
     explicit GameRoom(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;

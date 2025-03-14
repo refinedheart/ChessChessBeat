@@ -210,11 +210,21 @@ GameRoom::GameRoom(QWidget *parent)
 
         // 策略：减弱来时路的概率后随机
 
+        // 暴力计算确认下一个目标
 
+        // 实现后可以优化随机策略，从而进一步提升 bot 性能
+
+        QTimer MachineControl;
+        MachineControl.setInterval(20);
     }
 
 
 
+}
+
+
+void MachineModule() {
+    //
 }
 
 void GameRoom :: updateMachinePrint() {
