@@ -1,7 +1,7 @@
 #include "chesspiece.h"
 
 ChessPiece::ChessPiece(int PieceCnt) {
-    myrnd = new QRandomGenerator(12);
+    myrnd = new QRandomGenerator(time(0));
     cnt = PieceCnt;
     whitechess.l = 0;
     whitechess.r = cnt / 2 - 1;

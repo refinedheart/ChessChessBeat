@@ -168,8 +168,8 @@ GameRoom::GameRoom(QWidget *parent)
     humanText.setFont(humanFont);
     machineText.setFont(machineFont);
 
-    humanText.setGeometry(20, 20, 40, 40);
-    machineText.setGeometry(100, 20, 40, 40);
+    humanText.setGeometry(1000, 20, 100, 40);
+    machineText.setGeometry(300, 20, 100, 40);
     // humanText.setReadOnly(true);
     // machineText.setReadOnly(true);
     humanText.setFocusPolicy(Qt::NoFocus);
