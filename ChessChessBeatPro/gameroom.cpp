@@ -198,15 +198,19 @@ GameRoom::GameRoom(QWidget *parent)
 
 }
 
-void GameRoom :: updateHumanPrint() {
+void GameRoom :: updateMachinePrint() {
     humanText.setText(QString :: number(boxHuman.lim - machine.scores));
     humanText.update();
     humanText.raise();
+    humanText.repaint();
 }
-void GameRoom :: updateMachinePrint() {
+void GameRoom :: updateHumanPrint() {
     machineText.setText(QString :: number(boxMachine.lim - human.scores));
+    // qDebug() << "Correct Number = " << boxMachine.lim - human.scores;
+    // qDebug() << ""
     machineText.update();
     machineText.raise();
+    machineText.repaint();
 }
 
 void GameRoom :: checkCross() {
