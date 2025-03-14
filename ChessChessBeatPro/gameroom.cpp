@@ -9,7 +9,7 @@
 #include "chessbox.h"
 #include "chesspiece.h"
 
-// #include "chessbox.h"
+#include "chessbox.h"
 
 // #include "tool.h"
 
@@ -141,7 +141,16 @@ GameRoom::GameRoom(QWidget *parent)
     Chess = ChessPiece(piececnt);
 
 
+    /* ----------generate chess box -------------*/
 
+
+
+
+
+    // boxHuman.boxText -> setParent(this);
+    // boxHuman.boxText -> setGeometry(20, 20, 20, 20);
+
+    // boxMachine.boxText -> setParent(this);
 
 
     // human : white

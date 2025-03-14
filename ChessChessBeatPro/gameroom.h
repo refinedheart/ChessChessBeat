@@ -8,6 +8,7 @@
 #include <QTimer>
 
 #include "chesspiece.h"
+#include "chessbox.h"
 class GameRoom : public QWidget
 {
     Q_OBJECT
@@ -21,6 +22,7 @@ public:
     Player machine;
     Player human;
     ChessPiece Chess;
+    ChessBox boxHuman, boxMachine;
 private:
     QLabel *label;
 
