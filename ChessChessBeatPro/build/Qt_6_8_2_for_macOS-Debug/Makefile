@@ -54,6 +54,7 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../../chessbox.cpp \
 		../../chesspiece.cpp \
+		../../gameintroduction.cpp \
 		../../gameroom.cpp \
 		../../main.cpp \
 		../../moduleselect.cpp \
@@ -61,6 +62,7 @@ SOURCES       = ../../chessbox.cpp \
 		../../settlement.cpp \
 		../../tool.cpp \
 		../../widget.cpp qrc_res.cpp \
+		moc_gameintroduction.cpp \
 		moc_gameroom.cpp \
 		moc_moduleselect.cpp \
 		moc_settlement.cpp \
@@ -68,6 +70,7 @@ SOURCES       = ../../chessbox.cpp \
 		moc_widget.cpp
 OBJECTS       = chessbox.o \
 		chesspiece.o \
+		gameintroduction.o \
 		gameroom.o \
 		main.o \
 		moduleselect.o \
@@ -76,6 +79,7 @@ OBJECTS       = chessbox.o \
 		tool.o \
 		widget.o \
 		qrc_res.o \
+		moc_gameintroduction.o \
 		moc_gameroom.o \
 		moc_moduleselect.o \
 		moc_settlement.o \
@@ -436,6 +440,7 @@ DIST          = /Users/hewenshuo/Qt/6.8.2/macos/mkspecs/features/spec_pre.prf \
 		/Users/hewenshuo/Qt/6.8.2/macos/mkspecs/features/lex.prf \
 		../../../../ChessChessBeatPro.pro ../../chessbox.h \
 		../../chesspiece.h \
+		../../gameintroduction.h \
 		../../gameroom.h \
 		../../moduleselect.h \
 		../../player.h \
@@ -443,6 +448,7 @@ DIST          = /Users/hewenshuo/Qt/6.8.2/macos/mkspecs/features/spec_pre.prf \
 		../../tool.h \
 		../../widget.h ../../chessbox.cpp \
 		../../chesspiece.cpp \
+		../../gameintroduction.cpp \
 		../../gameroom.cpp \
 		../../main.cpp \
 		../../moduleselect.cpp \
@@ -1216,8 +1222,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../Image/res.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../../chessbox.h ../../chesspiece.h ../../gameroom.h ../../moduleselect.h ../../player.h ../../settlement.h ../../tool.h ../../widget.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../chessbox.cpp ../../chesspiece.cpp ../../gameroom.cpp ../../main.cpp ../../moduleselect.cpp ../../player.cpp ../../settlement.cpp ../../tool.cpp ../../widget.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../chessbox.h ../../chesspiece.h ../../gameintroduction.h ../../gameroom.h ../../moduleselect.h ../../player.h ../../settlement.h ../../tool.h ../../widget.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../chessbox.cpp ../../chesspiece.cpp ../../gameintroduction.cpp ../../gameroom.cpp ../../main.cpp ../../moduleselect.cpp ../../player.cpp ../../settlement.cpp ../../tool.cpp ../../widget.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../widget.ui $(DISTDIR)/
 
 
@@ -1263,9 +1269,15 @@ qrc_res.cpp: ../../Image/res.qrc \
 		../../Image/K-up.png
 	/Users/hewenshuo/Qt/6.8.2/macos/libexec/rcc -name res --no-zstd ../../Image/res.qrc -o qrc_res.cpp
 
-compiler_moc_header_make_all: moc_gameroom.cpp moc_moduleselect.cpp moc_settlement.cpp moc_tool.cpp moc_widget.cpp
+compiler_moc_header_make_all: moc_gameintroduction.cpp moc_gameroom.cpp moc_moduleselect.cpp moc_settlement.cpp moc_tool.cpp moc_widget.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_gameroom.cpp moc_moduleselect.cpp moc_settlement.cpp moc_tool.cpp moc_widget.cpp
+	-$(DEL_FILE) moc_gameintroduction.cpp moc_gameroom.cpp moc_moduleselect.cpp moc_settlement.cpp moc_tool.cpp moc_widget.cpp
+moc_gameintroduction.cpp: ../../gameintroduction.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/libexec/moc
+	/Users/hewenshuo/Qt/6.8.2/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=16 -D__clang_minor__=0 -D__clang_patchlevel__=0 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/hewenshuo/Qt/6.8.2/macos/mkspecs/macx-clang -I/Users/hewenshuo/C++Work/ChessChessBeat/ChessChessBeatPro -I/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers -I/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers -I/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/hewenshuo/Qt/6.8.2/macos/lib ../../gameintroduction.h -o moc_gameintroduction.cpp
+
 moc_gameroom.cpp: ../../gameroom.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qwidget.h \
@@ -1355,6 +1367,11 @@ chesspiece.o: ../../chesspiece.cpp ../../chesspiece.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/qrandom.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o chesspiece.o ../../chesspiece.cpp
 
+gameintroduction.o: ../../gameintroduction.cpp ../../gameintroduction.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qwidget.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gameintroduction.o ../../gameintroduction.cpp
+
 gameroom.o: ../../gameroom.cpp ../../gameroom.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qwidget.h \
@@ -1431,7 +1448,11 @@ player.o: ../../player.cpp ../../player.h \
 
 settlement.o: ../../settlement.cpp ../../settlement.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QWidget \
-		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qwidget.h
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QPushButton \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QLabel \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qlabel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o settlement.o ../../settlement.cpp
 
 tool.o: ../../tool.cpp ../../tool.h \
@@ -1464,6 +1485,9 @@ widget.o: ../../widget.cpp ../../widget.h \
 
 qrc_res.o: qrc_res.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_res.o qrc_res.cpp
+
+moc_gameintroduction.o: moc_gameintroduction.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_gameintroduction.o moc_gameintroduction.cpp
 
 moc_gameroom.o: moc_gameroom.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_gameroom.o moc_gameroom.cpp

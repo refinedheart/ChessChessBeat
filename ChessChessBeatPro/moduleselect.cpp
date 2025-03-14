@@ -9,6 +9,18 @@ ModuleSelect::ModuleSelect(QWidget *parent)
     : QWidget{parent}
 {
 
+
+    /*---------------玩法简介------------------*/
+
+    QPushButton *Intro = new QPushButton(this);
+
+    Intro -> setText("戳我看玩法！！！");
+
+    Intro -> setFixedSize(200, 100);
+    Intro -> move(600, 0);
+
+    /*---------------------------------------*/
+
     this -> setFixedSize(800, 700);
     QLabel *SelectHead = new QLabel(this);
     SelectHead -> setText("选择你的模式！");

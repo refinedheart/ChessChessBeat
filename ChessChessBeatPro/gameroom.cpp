@@ -26,7 +26,7 @@ const int My = 100;
 
 const int piececnt = 10;
 
-const int BoxLimit = 1;
+const int BoxLimit = 30;
 
 int GameRoom :: getDistance(QPoint machinePos, int id) {
     int x = regetposx(machinePos.x()), y = regetposy(machinePos.y());
@@ -116,15 +116,6 @@ GameRoom::GameRoom(QWidget *parent)
             this -> close();
         }
     });
-
-    /*---------------玩法简介------------------*/
-
-    QPushButton *Intro = new QPushButton(this);
-
-    Intro -> setText("戳我看玩法！！！");
-
-    Intro -> setFixedSize(200, 100);
-    Intro -> move(1200, 500);
 
     /*--------------信号链接------------*/
 
