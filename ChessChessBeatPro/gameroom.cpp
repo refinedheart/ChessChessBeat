@@ -36,7 +36,7 @@ GameRoom::GameRoom(QWidget *parent)
     this->setFocusPolicy(Qt::StrongFocus);
     this -> setFixedSize(1400, 800);
 
-    SR = new Settlement(this);
+    SR = new Settlement;
 
     // timer-update
     updateTimer.setInterval(16);
@@ -102,7 +102,10 @@ GameRoom::GameRoom(QWidget *parent)
         machine.moveUp();
         checkCross();
         updateMachinePrint();
-        checkend();
+        if(checkend()) {
+            SR -> show();
+            this -> close();
+        }
     });
 
     connect(this, &GameRoom :: downKeyPressed, [&](){
@@ -110,20 +113,29 @@ GameRoom::GameRoom(QWidget *parent)
         machine.moveDown();
         checkCross();
         updateMachinePrint();
-        checkend();
+        if(checkend()) {
+            SR -> show();
+            this -> close();
+        }
         // qDebug() << "I go down!";
     });
     connect(this, &GameRoom :: leftKeyPressed, [&](){
         machine.moveLeft();
         checkCross();
         updateMachinePrint();
-        checkend();
+        if(checkend()) {
+            SR -> show();
+            this -> close();
+        }
     });
     connect(this, &GameRoom :: rightKeyPressed, [&](){
         machine.moveRight();
         checkCross();
         updateMachinePrint();
-        checkend();
+        if(checkend()) {
+            SR -> show();
+            this -> close();
+        }
     });
 
 
@@ -131,25 +143,37 @@ GameRoom::GameRoom(QWidget *parent)
         human.moveUp();
         checkCross();
         updateHumanPrint();
-        checkend();
+        if(checkend()) {
+            SR -> show();
+            this -> close();
+        }
     });
     connect(this, &GameRoom :: aKeyPressed, [&](){
         human.moveLeft();
         checkCross();
         updateHumanPrint();
-        checkend();
+        if(checkend()) {
+            SR -> show();
+            this -> close();
+        }
     });
     connect(this, &GameRoom :: sKeyPressed, [&](){
         human.moveDown();
         checkCross();
         updateHumanPrint();
-        checkend();
+        if(checkend()) {
+            SR -> show();
+            this -> close();
+        }
     });
     connect(this, &GameRoom :: dKeyPressed, [&](){
         human.moveRight();
         checkCross();
         updateHumanPrint();
-        checkend();
+        if(checkend()) {
+            SR -> show();
+            this -> close();
+        }
     });
 
 
@@ -235,19 +259,14 @@ GameRoom::GameRoom(QWidget *parent)
 }
 
 
-void GameRoom :: checkend() {
+bool GameRoom :: checkend() {
     int numMachine = boxMachine.lim - human.scores;
     int numHuman = boxHuman.lim - machine.scores;
     if(numMachine == 0 || numHuman == 0) {
-
-
-        SR -> show();
-        this -> close();
-        // emit back_to_select();
-        return ;
+        return true;
     }
     else {
-        return ;
+        return false;
     }
 }
 

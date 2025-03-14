@@ -19,7 +19,7 @@ public:
     void updateHumanPrint();
     void checkCross();
     void MachineModule();
-    void checkend();
+    bool checkend();
     explicit GameRoom(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
