@@ -5,7 +5,7 @@
 #include <QDebug>
 #include "player.h"
 #include <settlement.h>
-
+#include <QThread>
 
 #include "chessbox.h"
 #include "chesspiece.h"
@@ -29,6 +29,62 @@ const int My = 100;
 const int piececnt = 10;
 
 const int BoxLimit = 1;
+
+class ModuleControlWorker : public QObject
+{
+    Q_OBJECT
+public:
+    explicit ModuleControlWorker(GameRoom *gameRoom, QObject *parent = nullptr)
+        : QObject(parent), gameRoom_(gameRoom) {}
+
+public slots:
+    void startWork()
+    {
+        timer_.setInterval(200);
+        connect(&timer_, &QTimer::timeout, this, &ModuleControlWorker::updateMachineStrategy);
+        timer_.start();
+    }
+
+signals:
+    void finished();
+
+private:
+    GameRoom *gameRoom_;
+    QTimer timer_;
+
+    void updateMachineStrategy()
+    {
+        // 这里是你的更新机器策略的逻辑
+        gameRoom_->updateMachineStrategy();
+        int dis = 1000000000, posid = -1;
+        for (int i = gameRoom_->Chess.whitechess.l; i <= gameRoom_->Chess.whitechess.r; ++i) {
+            int nowdis = gameRoom_->getDistance(gameRoom_->machine.pos, i);
+            if (nowdis < dis) {
+                dis = nowdis;
+                posid = i;
+            }
+        }
+        if (posid != -1) {
+            int machineMoveX = gameRoom_->Chess.Xpos[posid] - regetposx(gameRoom_->machine.pos.x());
+            int machineMoveY = gameRoom_->Chess.Ypos[posid] - regetposy(gameRoom_->machine.pos.y());
+
+            if (machineMoveX == 0 || machineMoveY == 0) {
+                if (machineMoveX == 0) {
+                    gameRoom_->machineMoveYopt();
+                } else {
+                    gameRoom_->machineMoveXopt();
+                }
+            } else {
+                if ((machineMoveX < 0) ^ (machineMoveY < 0)) {
+                    gameRoom_->machineMoveXopt();
+                } else {
+                    gameRoom_->machineMoveYopt();
+                }
+            }
+        }
+    }
+};
+
 
 int GameRoom :: getDistance(QPoint machinePos, int id) {
     int x = regetposx(machinePos.x()), y = regetposy(machinePos.y());
@@ -293,9 +349,6 @@ GameRoom::GameRoom(QWidget *parent, int Module)
         // qDebug() << "Open Machine Module!";
         // 机器模式
 
-
-        // 策略：减弱来时路的概率后随机
-
         // 暴力计算确认下一个目标
 
         // 实现后可以优化随机策略，从而进一步提升 bot 性能
@@ -305,6 +358,8 @@ GameRoom::GameRoom(QWidget *parent, int Module)
 
         // qDebug() << "???????";
         // qDebug() << "GameModule = " << GameModule;
+
+        /*--------------------------------------------------------*/
         MachineControl.setInterval(200);
         connect(&MachineControl, &QTimer :: timeout, [&](){
             // qDebug() << "machine move!";
@@ -326,8 +381,18 @@ GameRoom::GameRoom(QWidget *parent, int Module)
             // qDebug() << "posx = " << machine
         });
         MachineControl.start();
+        /*--------------------------------------------------------*/
 
 
+        // moduleControlThread = new QThread(this);
+        // ModuleControlWorker *moduleControlWorker = new ModuleControlWorker(this);
+        // moduleControlWorker->moveToThread(moduleControlThread);
+
+        // connect(moduleControlThread, &QThread::started, moduleControlWorker, &ModuleControlWorker::startWork);
+        // connect(moduleControlThread, &QThread::finished, moduleControlWorker, &QObject::deleteLater);
+        // connect(this, &GameRoom::back_to_select, moduleControlThread, &QThread::quit);
+
+        // moduleControlThread -> start();
     }
 
     connect(SR, &Settlement :: back_to_module, [=](){
@@ -535,4 +600,12 @@ void GameRoom :: keyPressEvent(QKeyEvent *event) {
     default:
         break;
     }
+}
+
+GameRoom :: ~GameRoom() {
+    if (moduleControlThread->isRunning()) {
+        moduleControlThread->quit();
+        moduleControlThread->wait();
+    }
+    delete moduleControlThread;
 }
