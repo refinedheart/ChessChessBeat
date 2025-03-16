@@ -11,6 +11,8 @@
 
 #include <QDockWidget>
 
+#include <QTableWidget>
+
 Settlement::Settlement(QWidget *parent)
     : QWidget{parent}
 {
@@ -70,7 +72,18 @@ Settlement::Settlement(QWidget *parent)
     connect(recordbtn, &QPushButton :: clicked, [&](){
         QDockWidget *countDoc = new QDockWidget("Final Record");
 
+        QTableWidget *table = new QTableWidget(2, 3);
+        table->setHorizontalHeaderLabels(QStringList() << "Player" << "Score" << "Points");
+        table->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        table -> item(0, 0) -> setText("卞相壹");
+        table -> item(1, 0) -> setText("柯洁");
+        table -> item(0, 1) -> setText(QString :: number(machineScore));
+        table -> item(1, 1) -> setText(QString :: number(humanScore));
+        // 调整列宽以适应内容
+        table->resizeColumnsToContents();
 
+        // 将表格添加到 QDockWidget 中
+        countDoc->setWidget(table);
         countDoc -> show();
     });
 
