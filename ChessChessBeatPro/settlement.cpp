@@ -16,8 +16,18 @@ Settlement::Settlement(QWidget *parent)
     bckbtn->setText("回到模式选择页面");
 
     QPalette buttonP = bckbtn -> palette();
-    buttonP.setColor(QPalette :: ButtonText, Qt :: black);
+    buttonP.setColor(QPalette :: ButtonText, Qt :: green);
     bckbtn -> setPalette(buttonP);
+    bckbtn->setStyleSheet(
+        "QPushButton {"
+        "   border: 2px solid red;" // 设置边框为2像素宽的红色实线
+        "   border-radius: 4px;"    // 设置边框圆角半径
+        "   padding: 5px;"          // 设置内边距
+        "}"
+        "QPushButton:hover {"
+        "   background-color: lightgray;" // 鼠标悬停时的背景颜色
+        "}"
+        );
     QFont bckFont("宋体", 20, QFont :: Bold);
     connect(bckbtn, &QPushButton :: clicked, [=](){
         qDebug() << "????";
@@ -26,8 +36,8 @@ Settlement::Settlement(QWidget *parent)
         this -> close();
     });
 
-    bckbtn -> setFixedSize(300, 200);
-    bckbtn -> move(400, 500);
+    bckbtn -> setFixedSize(300, 100);
+    bckbtn -> move(350, 500);
     QLabel *SHeadTitle = new QLabel(this);
     QFont TitleFont("宋体", 30, QFont :: Bold);
     QPalette TitleP = SHeadTitle -> palette();
