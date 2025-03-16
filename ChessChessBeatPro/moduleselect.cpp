@@ -127,14 +127,14 @@ ModuleSelect::ModuleSelect(QWidget *parent)
     friendbtn->setPalette(friendP);
 
     connect(friendbtn, &QPushButton :: clicked, [=](){
-        this -> close();
-        GameRoom *gameroom = new GameRoom;
+        GameRoom *gameroom = new GameRoom(nullptr, 1);
         connect(gameroom, &GameRoom :: back_to_select, [=](){
             gameroom -> close();
             this -> show();
         });
-        gameroom -> GameModule = 1;
+        // gameroom -> GameModule = 1;
         gameroom -> show();
+        this -> close();
     });
 
 

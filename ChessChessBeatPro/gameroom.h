@@ -25,7 +25,7 @@ public:
     void updateMachineStrategy();
     void machineMoveXopt();
     void machineMoveYopt();
-    explicit GameRoom(QWidget *parent = nullptr);
+    explicit GameRoom(QWidget *parent = nullptr, int Module = 0);
     void paintEvent(QPaintEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
     int GameModule;

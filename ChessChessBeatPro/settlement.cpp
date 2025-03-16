@@ -43,7 +43,7 @@ Settlement::Settlement(QWidget *parent)
     });
 
     bckbtn -> setFixedSize(300, 100);
-    bckbtn -> move(350, 500);
+    bckbtn -> move(350, 600);
     QLabel *SHeadTitle = new QLabel(this);
     QFont TitleFont("宋体", 30, QFont :: Bold);
     QPalette TitleP = SHeadTitle -> palette();
@@ -65,14 +65,51 @@ Settlement::Settlement(QWidget *parent)
 
     recordbtn -> setText("本场表现");
 
-    recordbtn -> setFixedSize(100, 100);
+    QFont recordFont = QFont("宋体", 25, QFont :: Bold);
 
+    recordbtn -> setFont(recordFont);
+
+    recordbtn -> move(380, 500);
+
+    recordbtn -> setFixedSize(200, 50);
+
+    QPalette recordP = recordbtn -> palette();
+    QColor goldC(225, 215, 0);
+    recordP.setColor(QPalette :: ButtonText, goldC);
+    recordbtn -> setPalette(recordP);
+
+
+    recordbtn->setStyleSheet(
+        "QPushButton {"
+        "   background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #FFD700, stop: 1 #FFA500);" // 金色渐变背景
+        "   color: white;" // 文字颜色为白色
+        "   border: none;" // 去掉边框
+        "   border-radius: 10px;" // 圆角
+        "   padding: 10px 20px;" // 内边距
+        "   font-family: 'Arial';" // 字体
+        "   font-size: 16px;" // 字号
+        "   font-weight: bold;" // 粗体
+        "}"
+        "QPushButton:hover {"
+        "   background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #FFA500, stop: 1 #FF8C00);" // 悬停时的渐变背景
+        "}"
+        "QPushButton:pressed {"
+        "   background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #FF8C00, stop: 1 #FF7F00);" // 按下时的渐变背景
+        "}"
+        );
 
 
     connect(recordbtn, &QPushButton :: clicked, [&](){
         QDockWidget *countDoc = new QDockWidget("Final Record");
 
         QTableWidget *table = new QTableWidget(2, 3);
+        for(int i = 0; i < 2; ++i) {
+            for(int j = 0; j < 3; ++j) {
+                QTableWidgetItem *item = new QTableWidgetItem;
+                item->setTextAlignment(Qt::AlignCenter);
+                table -> setItem(i, j, item);
+            }
+        }
         table->setHorizontalHeaderLabels(QStringList() << "Player" << "Score" << "Points");
         table->setEditTriggers(QAbstractItemView::NoEditTriggers);
         table -> item(0, 0) -> setText("卞相壹");

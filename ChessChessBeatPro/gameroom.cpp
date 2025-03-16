@@ -28,7 +28,7 @@ const int My = 100;
 
 const int piececnt = 10;
 
-const int BoxLimit = 30;
+const int BoxLimit = 1;
 
 int GameRoom :: getDistance(QPoint machinePos, int id) {
     int x = regetposx(machinePos.x()), y = regetposy(machinePos.y());
@@ -36,13 +36,12 @@ int GameRoom :: getDistance(QPoint machinePos, int id) {
 }
 
 
-GameRoom::GameRoom(QWidget *parent)
+GameRoom::GameRoom(QWidget *parent, int Module)
     : QWidget{parent}
 {
 
-
-
-
+    GameModule = Module;
+    qDebug() << "G = " << GameModule << " M = " << Module;
 
     // 页面设置
     // qDebug() <<
@@ -303,6 +302,9 @@ GameRoom::GameRoom(QWidget *parent)
         // Machine 模拟 M 吃白子 用上下左右键移动
 
         // QTimer MachineControl;
+
+        // qDebug() << "???????";
+        // qDebug() << "GameModule = " << GameModule;
         MachineControl.setInterval(200);
         connect(&MachineControl, &QTimer :: timeout, [&](){
             // qDebug() << "machine move!";
