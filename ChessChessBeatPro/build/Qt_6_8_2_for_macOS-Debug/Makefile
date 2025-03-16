@@ -1267,6 +1267,7 @@ qrc_res.cpp: ../../Image/res.qrc \
 		../../Image/Chess-19.jpeg \
 		../../Image/M-down.png \
 		../../Image/MachineWin.webp \
+		../../Image/ChessBox.png \
 		../../Image/HumanWin.jpg \
 		../../Image/K-up.png
 	/Users/hewenshuo/Qt/6.8.2/macos/libexec/rcc -name res --no-zstd ../../Image/res.qrc -o qrc_res.cpp
@@ -1338,8 +1339,43 @@ moc_widget.cpp: ../../widget.h \
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
-compiler_moc_source_make_all:
+compiler_moc_source_make_all: gameroom.moc
 compiler_moc_source_clean:
+	-$(DEL_FILE) gameroom.moc
+gameroom.moc: ../../gameroom.cpp \
+		../../gameroom.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QMouseEvent \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qevent.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QLabel \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qlabel.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPainter \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpainter.h \
+		../../player.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPixmap \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpixmap.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QLineEdit \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qlineedit.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/QTimer \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/qtimer.h \
+		../../chesspiece.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/QRandomGenerator \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/qrandom.h \
+		../../chessbox.h \
+		../../settlement.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPaintEvent \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QPushButton \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/QDebug \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/qdebug.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/QThread \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/qthread.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QDockWidget \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qdockwidget.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/libexec/moc
+	/Users/hewenshuo/Qt/6.8.2/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=16 -D__clang_minor__=0 -D__clang_patchlevel__=0 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/hewenshuo/Qt/6.8.2/macos/mkspecs/macx-clang -I/Users/hewenshuo/C++Work/ChessChessBeat/ChessChessBeatPro -I/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers -I/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers -I/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/hewenshuo/Qt/6.8.2/macos/lib ../../gameroom.cpp -o gameroom.moc
+
 compiler_uic_make_all: ui_widget.h
 compiler_uic_clean:
 	-$(DEL_FILE) ui_widget.h
@@ -1355,7 +1391,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_moc_source_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -1400,6 +1436,8 @@ gameroom.o: ../../gameroom.cpp ../../gameroom.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/QDebug \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/qdebug.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/QThread \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/qthread.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QDockWidget \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qdockwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gameroom.o ../../gameroom.cpp
@@ -1462,7 +1500,13 @@ settlement.o: ../../settlement.cpp ../../settlement.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QLabel \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qlabel.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPainter \
-		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpainter.h
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpainter.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPalette \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpalette.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QDockWidget \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qdockwidget.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QTableWidget \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qtablewidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o settlement.o ../../settlement.cpp
 
 tool.o: ../../tool.cpp ../../tool.h \

@@ -13,5 +13,6 @@
         <file>M-up.png</file>
         <file>MachineWin.webp</file>
         <file>HumanWin.jpg</file>
+        <file>ChessBox.png</file>
     </qresource>
 </RCC>

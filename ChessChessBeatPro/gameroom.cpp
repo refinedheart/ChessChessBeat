@@ -28,7 +28,7 @@ const int My = 100;
 
 const int piececnt = 10;
 
-const int BoxLimit = 1;
+const int BoxLimit = 100;
 
 class ModuleControlWorker : public QObject
 {
@@ -311,7 +311,7 @@ GameRoom::GameRoom(QWidget *parent, int Module)
     machineText.setFont(machineFont);
 
     humanText.setGeometry(1000, 20, 100, 40);
-    machineText.setGeometry(300, 20, 100, 40);
+    machineText.setGeometry(400, 20, 100, 40);
     // humanText.setReadOnly(true);
     // machineText.setReadOnly(true);
     humanText.setFocusPolicy(Qt::NoFocus);
@@ -561,6 +561,12 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
     // Draw human Player
     QPixmap humanG(human.graph);
     bufferPainter.drawPixmap(human.pos.x() - siz / 2, human.pos.y() - siz / 2, siz, siz, humanG);
+
+    QPixmap Box(":/ChessBox.png");
+    bufferPainter.drawPixmap(200, 0, 220, 140, Box);
+    bufferPainter.drawPixmap(1000, 0, 220, 140, Box);
+
+
     QPainter painter(this);
     painter.drawPixmap(0, 0, buffer);
 
