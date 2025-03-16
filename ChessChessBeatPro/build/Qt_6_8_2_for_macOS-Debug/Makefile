@@ -1266,6 +1266,8 @@ qrc_res.cpp: ../../Image/res.qrc \
 		../../Image/K-left.png \
 		../../Image/Chess-19.jpeg \
 		../../Image/M-down.png \
+		../../Image/MachineWin.webp \
+		../../Image/HumanWin.jpg \
 		../../Image/K-up.png
 	/Users/hewenshuo/Qt/6.8.2/macos/libexec/rcc -name res --no-zstd ../../Image/res.qrc -o qrc_res.cpp
 
@@ -1397,7 +1399,9 @@ gameroom.o: ../../gameroom.cpp ../../gameroom.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QPushButton \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/QDebug \
-		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/qdebug.h
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtCore.framework/Headers/qdebug.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QDockWidget \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qdockwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gameroom.o ../../gameroom.cpp
 
 main.o: ../../main.cpp ../../widget.h \
@@ -1434,7 +1438,11 @@ moduleselect.o: ../../moduleselect.cpp ../../moduleselect.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QPushButton \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPalette \
-		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpalette.h
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpalette.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QDockWidget \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qdockwidget.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QTextEdit \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qtextedit.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moduleselect.o ../../moduleselect.cpp
 
 player.o: ../../player.cpp ../../player.h \
@@ -1452,7 +1460,9 @@ settlement.o: ../../settlement.cpp ../../settlement.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QPushButton \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/QLabel \
-		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qlabel.h
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtWidgets.framework/Headers/qlabel.h \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/QPainter \
+		/Users/hewenshuo/Qt/6.8.2/macos/lib/QtGui.framework/Headers/qpainter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o settlement.o ../../settlement.cpp
 
 tool.o: ../../tool.cpp ../../tool.h \

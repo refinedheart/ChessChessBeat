@@ -11,5 +11,7 @@
         <file>M-left.png</file>
         <file>M-right.png</file>
         <file>M-up.png</file>
+        <file>MachineWin.webp</file>
+        <file>HumanWin.jpg</file>
     </qresource>
 </RCC>

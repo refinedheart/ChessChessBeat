@@ -50,9 +50,7 @@ GameRoom::GameRoom(QWidget *parent)
     this -> setFixedSize(1400, 800);
 
     SR = new Settlement;
-    connect(SR, &Settlement :: back_to_module, [=](){
-        emit back_to_select();
-    });
+
 
     // timer-update
     updateTimer.setInterval(16);
@@ -97,6 +95,7 @@ GameRoom::GameRoom(QWidget *parent)
     backbtn -> setPalette(backP);
     connect(backbtn, &QPushButton :: clicked, [=](){
         emit this -> back_to_select();
+        this -> close();
     });
     backbtn -> move(1200, 700);
     backbtn -> setFixedSize(150, 50);
@@ -120,7 +119,9 @@ GameRoom::GameRoom(QWidget *parent)
         updateMachinePrint();
         if(checkend()) {
             SR -> show();
+            // qDebug() << "continue?";
             this -> close();
+            MachineControl.stop();
         }
     });
 
@@ -133,7 +134,9 @@ GameRoom::GameRoom(QWidget *parent)
         updateMachinePrint();
         if(checkend()) {
             SR -> show();
+            // qDebug() << "continue?";
             this -> close();
+            MachineControl.stop();
         }
         // qDebug() << "I go down!";
     });
@@ -143,7 +146,9 @@ GameRoom::GameRoom(QWidget *parent)
         updateMachinePrint();
         if(checkend()) {
             SR -> show();
+            // qDebug() << "continue?";
             this -> close();
+            MachineControl.stop();
         }
     });
     connect(this, &GameRoom :: rightKeyPressed, [&](){
@@ -152,7 +157,9 @@ GameRoom::GameRoom(QWidget *parent)
         updateMachinePrint();
         if(checkend()) {
             SR -> show();
+            // qDebug() << "continue?";
             this -> close();
+            MachineControl.stop();
         }
     });
 
@@ -163,7 +170,9 @@ GameRoom::GameRoom(QWidget *parent)
         updateHumanPrint();
         if(checkend()) {
             SR -> show();
+            // qDebug() << "continue?";
             this -> close();
+            MachineControl.stop();
         }
     });
     connect(this, &GameRoom :: aKeyPressed, [&](){
@@ -172,7 +181,9 @@ GameRoom::GameRoom(QWidget *parent)
         updateHumanPrint();
         if(checkend()) {
             SR -> show();
+            // qDebug() << "continue?";
             this -> close();
+            MachineControl.stop();
         }
     });
     connect(this, &GameRoom :: sKeyPressed, [&](){
@@ -181,7 +192,9 @@ GameRoom::GameRoom(QWidget *parent)
         updateHumanPrint();
         if(checkend()) {
             SR -> show();
+            // qDebug() << "continue?";
             this -> close();
+            MachineControl.stop();
         }
     });
     connect(this, &GameRoom :: dKeyPressed, [&](){
@@ -190,7 +203,10 @@ GameRoom::GameRoom(QWidget *parent)
         updateHumanPrint();
         if(checkend()) {
             SR -> show();
+            // qDebug() << "continue?";
             this -> close();
+            // this -> stopAndClose();
+            MachineControl.stop();
         }
     });
 
@@ -270,7 +286,7 @@ GameRoom::GameRoom(QWidget *parent)
         // Machine 模拟 M 吃白子 用上下左右键移动
 
         // QTimer MachineControl;
-        MachineControl.setInterval(200);
+        MachineControl.setInterval(20);
         connect(&MachineControl, &QTimer :: timeout, [&](){
             // qDebug() << "machine move!";
             while(abs(machineMoveX) + abs(machineMoveY) == 0) {
@@ -295,7 +311,11 @@ GameRoom::GameRoom(QWidget *parent)
 
     }
 
-
+    connect(SR, &Settlement :: back_to_module, this, &GameRoom :: back_to_select);
+    connect(SR, &Settlement :: back_to_module, [&](){
+        SR -> close();
+        this -> close();
+    });
 
 }
 
@@ -344,6 +364,7 @@ void GameRoom :: updateInformation() {
 }
 
 bool GameRoom :: checkend() {
+    return true; //////////////////////////////////////////
     int numMachine = boxMachine.lim - human.scores;
     int numHuman = boxHuman.lim - machine.scores;
     if(numMachine == 0 || numHuman == 0) {
