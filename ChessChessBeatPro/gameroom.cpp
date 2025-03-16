@@ -303,7 +303,7 @@ GameRoom::GameRoom(QWidget *parent)
         // Machine 模拟 M 吃白子 用上下左右键移动
 
         // QTimer MachineControl;
-        MachineControl.setInterval(20);
+        MachineControl.setInterval(200);
         connect(&MachineControl, &QTimer :: timeout, [&](){
             // qDebug() << "machine move!";
             while(abs(machineMoveX) + abs(machineMoveY) == 0) {
@@ -328,11 +328,12 @@ GameRoom::GameRoom(QWidget *parent)
 
     }
 
-    connect(SR, &Settlement :: back_to_module, this, &GameRoom :: back_to_select);
-    connect(SR, &Settlement :: back_to_module, [&](){
+    connect(SR, &Settlement :: back_to_module, [=](){
+        emit back_to_select();
         SR -> close();
         this -> close();
     });
+
 
 }
 
@@ -381,7 +382,7 @@ void GameRoom :: updateInformation() {
 }
 
 bool GameRoom :: checkend() {
-    return true; //////////////////////////////////////////
+    // return true; //////////////////////////////////////////
     int numMachine = boxMachine.lim - human.scores;
     int numHuman = boxHuman.lim - machine.scores;
     if(numMachine == 0 || numHuman == 0) {

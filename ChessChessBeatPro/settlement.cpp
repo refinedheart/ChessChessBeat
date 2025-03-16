@@ -8,6 +8,9 @@
 
 #include <QPalette>
 
+
+#include <QDockWidget>
+
 Settlement::Settlement(QWidget *parent)
     : QWidget{parent}
 {
@@ -28,7 +31,8 @@ Settlement::Settlement(QWidget *parent)
         "   background-color: lightgray;" // 鼠标悬停时的背景颜色
         "}"
         );
-    QFont bckFont("宋体", 20, QFont :: Bold);
+    QFont bckFont("宋体", 30, QFont :: Bold);
+    bckbtn -> setFont(bckFont);
     connect(bckbtn, &QPushButton :: clicked, [=](){
         // qDebug() << "????";
         emit back_to_module();
@@ -53,6 +57,27 @@ Settlement::Settlement(QWidget *parent)
         SHeadTitle -> setText("柯洁九冠王！");
     }
     SHeadTitle -> move(300, 0);
+
+
+    QPushButton *recordbtn = new QPushButton(this);
+
+    recordbtn -> setText("本场表现");
+
+    recordbtn -> setFixedSize(100, 100);
+
+
+
+    connect(recordbtn, &QPushButton :: clicked, [&](){
+        QDockWidget *countDoc = new QDockWidget("Final Record");
+
+
+        countDoc -> show();
+    });
+
+    // 做一个包括反应时间、道具使用等的数据统计表格
+
+
+
 }
 
 void Settlement :: getHuman(int c) {
