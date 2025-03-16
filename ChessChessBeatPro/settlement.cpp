@@ -30,9 +30,9 @@ Settlement::Settlement(QWidget *parent)
         );
     QFont bckFont("宋体", 20, QFont :: Bold);
     connect(bckbtn, &QPushButton :: clicked, [=](){
-        qDebug() << "????";
+        // qDebug() << "????";
         emit back_to_module();
-        qDebug() << "here?";
+        // qDebug() << "here?";
         this -> close();
     });
 

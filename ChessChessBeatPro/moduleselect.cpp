@@ -16,9 +16,25 @@ ModuleSelect::ModuleSelect(QWidget *parent)
 
     QPushButton *Intro = new QPushButton(this);
 
+    Intro->setStyleSheet(
+        "QPushButton {"
+        "   background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #FFFFFF, stop: 1 #F0F0F0);" // 白色到浅灰色渐变
+        "   border: 2px solid #000000;"
+        "   border-radius: 10px;"
+        "   padding: 10px 20px;"
+        "   color: #000000;"
+        "   font-size: 16px;"
+        "   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);" // 添加阴影，增加立体感
+        "}"
+        "QPushButton:pressed {"
+        "   background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #E0E0E0, stop: 1 #D0D0D0);" // 按下时变暗
+        "   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);"
+        "}"
+        );
+
     Intro -> setText("戳我看玩法！！！");
 
-    Intro -> setFixedSize(200, 100);
+    Intro -> setFixedSize(200, 50);
     Intro -> move(600, 0);
 
     connect(Intro, &QPushButton :: clicked, [=](){
@@ -54,6 +70,24 @@ ModuleSelect::ModuleSelect(QWidget *parent)
     SelectHead -> setFont(SelectFont);
     SelectHead -> move(240, 50);
     QPushButton *machinebtn = new QPushButton(this);
+
+    machinebtn->setStyleSheet(
+        "QPushButton {"
+        "   background-color: #FF6B6B;" // 红色背景，增加视觉冲击力
+        "   border: 2px solid #000000;"
+        "   border-radius: 10px;"
+        "   padding: 10px 20px;"
+        "   color: #FFFFFF;"
+        "   font-size: 16px;"
+        "}"
+        "QPushButton:hover {"
+        "   background-color: #FF8787;" // 鼠标悬停时变浅
+        "}"
+        "QPushButton:pressed {"
+        "   background-color: #FF5252;" // 按下时变暗
+        "}"
+        );
+
     machinebtn -> setText("与机器对战！");
     QFont machineFont("宋体", 20, QFont :: Bold);
     machinebtn -> setFont(machineFont);
@@ -65,6 +99,24 @@ ModuleSelect::ModuleSelect(QWidget *parent)
 
 
     QPushButton *friendbtn = new QPushButton(this);
+
+    friendbtn->setStyleSheet(
+        "QPushButton {"
+        "   background-color: #A0522D;" // 鞍棕色背景，复古棋盘颜色
+        "   border: 2px solid #8B4513;" // 更深的棕色边框
+        "   border-radius: 4px;"
+        "   padding: 10px 20px;"
+        "   color: #FFFFFF;"
+        "   font-size: 16px;"
+        "}"
+        "QPushButton:hover {"
+        "   background-color: #CD853F;" // 鼠标悬停时变亮
+        "}"
+        "QPushButton:pressed {"
+        "   background-color: #8B4513;" // 按下时变暗
+        "}"
+        );
+
     friendbtn -> setText("双人对抗！");
     QFont friendFont("宋体", 20, QFont :: Bold);
     friendbtn -> setFont(friendFont);
@@ -100,6 +152,24 @@ ModuleSelect::ModuleSelect(QWidget *parent)
 
     QPushButton *backbtn = new QPushButton(this);
     backbtn -> setText("累了， 休息一下");
+
+    backbtn->setStyleSheet(
+        "QPushButton {"
+        "   background-color: #FFFFFF;" // 白色背景，类似白棋
+        "   border: 2px solid #000000;" // 黑色边框，模拟棋子边缘
+        "   border-radius: 10px;"       // 圆角，使按钮更像棋子
+        "   padding: 10px 20px;"
+        "   color: #000000;"
+        "   font-size: 16px;"
+        "}"
+        "QPushButton:hover {"
+        "   background-color: #F0F0F0;" // 鼠标悬停时变浅
+        "}"
+        "QPushButton:pressed {"
+        "   background-color: #E0E0E0;" // 按下时变暗
+        "}"
+        );
+
     QFont backFont("宋体", 16, QFont :: Bold);
     backbtn -> setFont(backFont);
     QPalette backP = backbtn -> palette();

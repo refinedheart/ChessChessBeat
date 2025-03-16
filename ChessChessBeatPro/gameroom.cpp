@@ -88,6 +88,23 @@ GameRoom::GameRoom(QWidget *parent)
     // backbtn
     QPushButton *backbtn = new QPushButton(this);
     backbtn -> setText("累了， 休息一下");
+
+    backbtn->setStyleSheet(
+        "QPushButton {"
+        "   background-color: #FFFFFF;" // 白色背景，类似白棋
+        "   border: 2px solid #000000;" // 黑色边框，模拟棋子边缘
+        "   border-radius: 10px;"       // 圆角，使按钮更像棋子
+        "   padding: 10px 20px;"
+        "   color: #000000;"
+        "   font-size: 16px;"
+        "}"
+        "QPushButton:hover {"
+        "   background-color: #F0F0F0;" // 鼠标悬停时变浅
+        "}"
+        "QPushButton:pressed {"
+        "   background-color: #E0E0E0;" // 按下时变暗
+        "}"
+        );
     QFont backFont("宋体", 16, QFont :: Bold);
     backbtn -> setFont(backFont);
     QPalette backP = backbtn -> palette();

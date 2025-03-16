@@ -12,10 +12,29 @@ Widget::Widget(QWidget *parent)
     ui->setupUi(this);
     this -> setFixedSize(800, 500);
     ui -> StartButton -> setText("对局开始");
+
+    ui->StartButton->setStyleSheet(
+        "QPushButton {"
+        "   background-color: #F5F5DC;" // 米色背景，类似棋盘颜色
+        "   border: 2px solid #000000;" // 黑色边框，模拟棋盘网格
+        "   border-radius: 8px;"
+        "   padding: 15px 30px;"
+        "   color: #000000;"
+        "   font-size: 20px;"
+        "   font-weight: bold;"
+        "}"
+        "QPushButton:hover {"
+        "   background-color: #E8E8E8;" // 鼠标悬停时变浅
+        "}"
+        "QPushButton:pressed {"
+        "   background-color: #D8D8D8;" // 按下时变暗
+        "}"
+        );
+
     QFont startfont("宋体", 32, QFont :: Bold);
     ui -> StartButton -> setFont(startfont);
-    ui -> StartButton -> setFixedSize(200, 120);
-    ui -> StartButton -> move(300, 300);
+    ui -> StartButton -> setFixedSize(200, 100);
+    ui -> StartButton -> move(300, 350);
     ui -> StartHeadTitle -> setText("Chess Chess Beat");
     QFont HeadFont("宋体", 50, QFont :: Bold);
     ui -> StartHeadTitle -> setFont(HeadFont);
