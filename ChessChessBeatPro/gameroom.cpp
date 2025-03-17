@@ -28,7 +28,7 @@ const int My = 100;
 
 const int piececnt = 10;
 
-const int BoxLimit = 100;
+const int BoxLimit = 21;
 
 class ModuleControlWorker : public QObject
 {
@@ -97,7 +97,7 @@ GameRoom::GameRoom(QWidget *parent, int Module)
 {
 
     GameModule = Module;
-    qDebug() << "G = " << GameModule << " M = " << Module;
+    // qDebug() << "G = " << GameModule << " M = " << Module;
 
     // 页面设置
     // qDebug() <<
@@ -170,7 +170,7 @@ GameRoom::GameRoom(QWidget *parent, int Module)
         this -> close();
     });
     backbtn -> move(1200, 700);
-    backbtn -> setFixedSize(150, 50);
+    backbtn -> setFixedSize(200, 50);
 
 
 
