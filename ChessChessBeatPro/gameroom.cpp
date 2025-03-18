@@ -395,6 +395,10 @@ GameRoom::GameRoom(QWidget *parent, int Module)
         // moduleControlThread -> start();
     }
 
+    else if(GameModule == 727) {
+
+    }
+
     connect(SR, &Settlement :: back_to_module, [=](){
         emit back_to_select();
         SR -> close();
