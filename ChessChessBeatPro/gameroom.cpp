@@ -30,60 +30,64 @@ const int piececnt = 10;
 
 const int BoxLimit = 21;
 
-class ModuleControlWorker : public QObject
-{
-    Q_OBJECT
-public:
-    explicit ModuleControlWorker(GameRoom *gameRoom, QObject *parent = nullptr)
-        : QObject(parent), gameRoom_(gameRoom) {}
+const int MultiTrapV = 40;
 
-public slots:
-    void startWork()
-    {
-        timer_.setInterval(200);
-        connect(&timer_, &QTimer::timeout, this, &ModuleControlWorker::updateMachineStrategy);
-        timer_.start();
-    }
 
-signals:
-    void finished();
 
-private:
-    GameRoom *gameRoom_;
-    QTimer timer_;
+// class ModuleControlWorker : public QObject
+// {
+//     Q_OBJECT
+// public:
+//     explicit ModuleControlWorker(GameRoom *gameRoom, QObject *parent = nullptr)
+//         : QObject(parent), gameRoom_(gameRoom) {}
 
-    void updateMachineStrategy()
-    {
-        // 这里是你的更新机器策略的逻辑
-        gameRoom_->updateMachineStrategy();
-        int dis = 1000000000, posid = -1;
-        for (int i = gameRoom_->Chess.whitechess.l; i <= gameRoom_->Chess.whitechess.r; ++i) {
-            int nowdis = gameRoom_->getDistance(gameRoom_->machine.pos, i);
-            if (nowdis < dis) {
-                dis = nowdis;
-                posid = i;
-            }
-        }
-        if (posid != -1) {
-            int machineMoveX = gameRoom_->Chess.Xpos[posid] - regetposx(gameRoom_->machine.pos.x());
-            int machineMoveY = gameRoom_->Chess.Ypos[posid] - regetposy(gameRoom_->machine.pos.y());
+// public slots:
+//     void startWork()
+//     {
+//         timer_.setInterval(200);
+//         connect(&timer_, &QTimer::timeout, this, &ModuleControlWorker::updateMachineStrategy);
+//         timer_.start();
+//     }
 
-            if (machineMoveX == 0 || machineMoveY == 0) {
-                if (machineMoveX == 0) {
-                    gameRoom_->machineMoveYopt();
-                } else {
-                    gameRoom_->machineMoveXopt();
-                }
-            } else {
-                if ((machineMoveX < 0) ^ (machineMoveY < 0)) {
-                    gameRoom_->machineMoveXopt();
-                } else {
-                    gameRoom_->machineMoveYopt();
-                }
-            }
-        }
-    }
-};
+// signals:
+//     void finished();
+
+// private:
+//     GameRoom *gameRoom_;
+//     QTimer timer_;
+
+//     void updateMachineStrategy()
+//     {
+//         // 这里是你的更新机器策略的逻辑
+//         gameRoom_->updateMachineStrategy();
+//         int dis = 1000000000, posid = -1;
+//         for (int i = gameRoom_->Chess.whitechess.l; i <= gameRoom_->Chess.whitechess.r; ++i) {
+//             int nowdis = gameRoom_->getDistance(gameRoom_->machine.pos, i);
+//             if (nowdis < dis) {
+//                 dis = nowdis;
+//                 posid = i;
+//             }
+//         }
+//         if (posid != -1) {
+//             int machineMoveX = gameRoom_->Chess.Xpos[posid] - regetposx(gameRoom_->machine.pos.x());
+//             int machineMoveY = gameRoom_->Chess.Ypos[posid] - regetposy(gameRoom_->machine.pos.y());
+
+//             if (machineMoveX == 0 || machineMoveY == 0) {
+//                 if (machineMoveX == 0) {
+//                     gameRoom_->machineMoveYopt();
+//                 } else {
+//                     gameRoom_->machineMoveXopt();
+//                 }
+//             } else {
+//                 if ((machineMoveX < 0) ^ (machineMoveY < 0)) {
+//                     gameRoom_->machineMoveXopt();
+//                 } else {
+//                     gameRoom_->machineMoveYopt();
+//                 }
+//             }
+//         }
+//     }
+// };
 
 
 int GameRoom :: getDistance(QPoint machinePos, int id) {
@@ -113,6 +117,7 @@ GameRoom::GameRoom(QWidget *parent, int Module)
         update();
     });
     updateTimer.start();
+    for(int i = 0; i < 10; ++i) deadtime[i].setSingleShot(true);
     // make sure the first position
     // Tool *now = new Tool;
     // now -> show();
@@ -174,8 +179,6 @@ GameRoom::GameRoom(QWidget *parent, int Module)
 
 
 
-
-
     // LeftTop = (466, 188)
     // Delta d = 26
 
@@ -183,6 +186,37 @@ GameRoom::GameRoom(QWidget *parent, int Module)
     // machine.item -> setParent(this); // A player, up down
     // qDebug() << machine.pos.x() << " " << machine.pos.y();
     human = Player(":/K-up.png", 1);
+
+    int trapnode = 0;
+
+
+
+
+    machine.restTraps = 3;
+    human.restTraps = 3; // 最多可以布置在场的三个陷阱
+    machine.trapScale = human.trapScale = 0;
+    machine.vec.resize(3);
+    human.vec.resize(3);
+    machine.id.resize(3);
+    human.id.resize(3);
+    // scale * staytime = 40
+
+    for(int i = 0; i < 3; ++i) {
+        machine.vec[i] = Player :: TrapItem(0, 0, 0, 0);
+        machine.id[i] = trapnode++;
+    }
+    for(int i = 0; i < 3; ++i) {
+        human.vec[i] = Player :: TrapItem(0, 0, 0, 0);
+        human.id[i] = trapnode++;
+    }
+
+
+
+    // qDebug() << "?????"
+
+
+
+
     // human.item -> setParent(this); // B player, WASD
     // qDebug() << machine.pos.x() << " " << machine.pos.y();
     connect(this, &GameRoom :: upKeyPressed, [&](){
@@ -284,11 +318,22 @@ GameRoom::GameRoom(QWidget *parent, int Module)
 
 
     connect(this, &GameRoom :: fKeyPressed, [&](){
-        human.LayTrap();
+        // human.LayTrap();
+        HLayTrap();
     });
     connect(this, &GameRoom :: lKeyPressed, [&](){
-        machine.LayTrap();
+        // machine.LayTrap();
+        MLayTrap();
     });
+
+    connect(this, &GameRoom :: pKeyPressed, [&](){
+        machine.changeTrapScale();
+    });
+    connect(this, &GameRoom :: rKeyPressed, [&](){
+        human.changeTrapScale();
+    });
+
+
 
     /*---------- generate chess------------*/
 
@@ -640,15 +685,47 @@ void GameRoom :: keyPressEvent(QKeyEvent *event) {
     case Qt :: Key_L:
         emit lKeyPressed();
         break;
+    case Qt :: Key_P:
+        emit pKeyPressed();
+        break;
+    case Qt :: Key_R:
+        emit rKeyPressed();
+        break;
     default:
         break;
     }
 }
 
 GameRoom :: ~GameRoom() {
-    if (moduleControlThread->isRunning()) {
-        moduleControlThread->quit();
-        moduleControlThread->wait();
-    }
-    delete moduleControlThread;
+    // if (moduleControlThread->isRunning()) {
+    //     moduleControlThread->quit();
+    //     moduleControlThread->wait();
+    // }
+    // delete moduleControlThread;
 }
+
+void GameRoom :: MLayTrap() {
+    if(machine.restTraps == 0) return ;
+    --machine.restTraps;
+    int goalpos = 0;
+    while(machine.vec[goalpos].flag != 0) ++goalpos;
+    assert(goalpos < 3);
+    int ID = machine.id[goalpos];
+    machine.vec[goalpos] = Player :: TrapItem(2, TrapScaleVal[machine.trapScale], machine.pos.x(), machine.pos.y());
+    deadtime[ID].setInterval(MultiTrapV / TrapScaleVal[machine.trapScale]);
+    deadtime[ID].start();
+}
+
+void GameRoom :: HLayTrap() {
+    if(human.restTraps == 0) return ;
+    --human.restTraps;
+    int goalpos = 0;
+    while(human.vec[goalpos].flag != 0) ++goalpos;
+    assert(goalpos < 3);
+    int ID = human.id[goalpos];
+    human.vec[goalpos] = Player :: TrapItem(2, TrapScaleVal[human.trapScale], human.pos.x(), human.pos.y());
+    deadtime[ID].setInterval(MultiTrapV / TrapScaleVal[human.trapScale]);
+    deadtime[ID].start();
+}
+
+

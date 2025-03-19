@@ -8,6 +8,8 @@
 
 #include <vector>
 
+#include <QTimer>
+
 
 // LeftTop = (466, 188)
 // Delta d = 26
@@ -26,6 +28,8 @@ const int RIGHT = 3;
 const int dx[] = {0, -1, 0, 1};
 const int dy[] = {-1, 0, 1, 0};
 const int limitTraps = 3;
+
+const int TrapScaleVal[] = {1, 2, 4, 5, 8};
 
 inline QPoint GetNextPos(QPoint now, int dir) {
     int x = now.x(), y = now.y();
@@ -57,25 +61,35 @@ public:
     // int scores;
     Player(QString pic = "", int fg = 0);
     ~Player();
+    struct TrapItem {
+        int flag; // human1 or machine2
+        int val; // stop options
+        int x, y; // pixel position
+        TrapItem(int flag_ = 0, int val_ = 0, int x_ = 0, int y_ = 0) {
+            flag = flag_;
+            val = val_;
+            x = x_;
+            y = y_;
+        }
+    };
+
+    std :: vector <TrapItem> vec;
+    std :: vector <int> id;
+    int restTraps, layableTraps;
+    int trapScale;
     bool checkStop();
     void moveUp();
     void moveDown();
     void moveLeft();
     void moveRight();
     void UpdatePos();
-    void LayTrap();
     bool checkOutOfWidget(QPoint npos);
+    void changeTrapScale() {
+        ++trapScale;
+        trapScale %= 5;
+    }
 
-    struct TrapItem {
-        int flag; // human or machine
-        int val; // stop options
-        int x, y;
-    };
-
-    std :: vector <TrapItem> vec;
-    int sumTrapval = 7; // sigma val <= sumTrapval
-    int restTraps, layableTraps;
-
+    // void keyPressEvent(QKeyEvent *event) override;
 
 
 };

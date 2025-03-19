@@ -92,7 +92,3 @@ bool Player :: checkOutOfWidget(QPoint npos) {
     return false;
 }
 
-
-void Player :: LayTrap() {
-
-}

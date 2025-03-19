@@ -48,7 +48,11 @@ static constexpr auto qt_meta_stringdata_ZN8GameRoomE = QtMocHelpers::stringData
     "wKeyPressed",
     "aKeyPressed",
     "sKeyPressed",
-    "dKeyPressed"
+    "dKeyPressed",
+    "fKeyPressed",
+    "lKeyPressed",
+    "pKeyPressed",
+    "rKeyPressed"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -60,25 +64,33 @@ Q_CONSTINIT static const uint qt_meta_data_ZN8GameRoomE[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       9,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       9,       // signalCount
+      13,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   68,    2, 0x06,    1 /* Public */,
-       3,    0,   69,    2, 0x06,    2 /* Public */,
-       4,    0,   70,    2, 0x06,    3 /* Public */,
-       5,    0,   71,    2, 0x06,    4 /* Public */,
-       6,    0,   72,    2, 0x06,    5 /* Public */,
-       7,    0,   73,    2, 0x06,    6 /* Public */,
-       8,    0,   74,    2, 0x06,    7 /* Public */,
-       9,    0,   75,    2, 0x06,    8 /* Public */,
-      10,    0,   76,    2, 0x06,    9 /* Public */,
+       1,    0,   92,    2, 0x06,    1 /* Public */,
+       3,    0,   93,    2, 0x06,    2 /* Public */,
+       4,    0,   94,    2, 0x06,    3 /* Public */,
+       5,    0,   95,    2, 0x06,    4 /* Public */,
+       6,    0,   96,    2, 0x06,    5 /* Public */,
+       7,    0,   97,    2, 0x06,    6 /* Public */,
+       8,    0,   98,    2, 0x06,    7 /* Public */,
+       9,    0,   99,    2, 0x06,    8 /* Public */,
+      10,    0,  100,    2, 0x06,    9 /* Public */,
+      11,    0,  101,    2, 0x06,   10 /* Public */,
+      12,    0,  102,    2, 0x06,   11 /* Public */,
+      13,    0,  103,    2, 0x06,   12 /* Public */,
+      14,    0,  104,    2, 0x06,   13 /* Public */,
 
  // signals: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -118,6 +130,14 @@ Q_CONSTINIT const QMetaObject GameRoom::staticMetaObject = { {
         // method 'sKeyPressed'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'dKeyPressed'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'fKeyPressed'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'lKeyPressed'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'pKeyPressed'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'rKeyPressed'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -137,6 +157,10 @@ void GameRoom::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 6: _t->aKeyPressed(); break;
         case 7: _t->sKeyPressed(); break;
         case 8: _t->dKeyPressed(); break;
+        case 9: _t->fKeyPressed(); break;
+        case 10: _t->lKeyPressed(); break;
+        case 11: _t->pKeyPressed(); break;
+        case 12: _t->rKeyPressed(); break;
         default: ;
         }
     }
@@ -205,6 +229,34 @@ void GameRoom::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
                 return;
             }
         }
+        {
+            using _q_method_type = void (GameRoom::*)();
+            if (_q_method_type _q_method = &GameRoom::fKeyPressed; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
+                *result = 9;
+                return;
+            }
+        }
+        {
+            using _q_method_type = void (GameRoom::*)();
+            if (_q_method_type _q_method = &GameRoom::lKeyPressed; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
+                *result = 10;
+                return;
+            }
+        }
+        {
+            using _q_method_type = void (GameRoom::*)();
+            if (_q_method_type _q_method = &GameRoom::pKeyPressed; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
+                *result = 11;
+                return;
+            }
+        }
+        {
+            using _q_method_type = void (GameRoom::*)();
+            if (_q_method_type _q_method = &GameRoom::rKeyPressed; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
+                *result = 12;
+                return;
+            }
+        }
     }
 }
 
@@ -227,14 +279,14 @@ int GameRoom::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 13;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 9)
+        if (_id < 13)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 9;
+        _id -= 13;
     }
     return _id;
 }
@@ -291,5 +343,29 @@ void GameRoom::sKeyPressed()
 void GameRoom::dKeyPressed()
 {
     QMetaObject::activate(this, &staticMetaObject, 8, nullptr);
+}
+
+// SIGNAL 9
+void GameRoom::fKeyPressed()
+{
+    QMetaObject::activate(this, &staticMetaObject, 9, nullptr);
+}
+
+// SIGNAL 10
+void GameRoom::lKeyPressed()
+{
+    QMetaObject::activate(this, &staticMetaObject, 10, nullptr);
+}
+
+// SIGNAL 11
+void GameRoom::pKeyPressed()
+{
+    QMetaObject::activate(this, &staticMetaObject, 11, nullptr);
+}
+
+// SIGNAL 12
+void GameRoom::rKeyPressed()
+{
+    QMetaObject::activate(this, &staticMetaObject, 12, nullptr);
 }
 QT_WARNING_POP

@@ -25,14 +25,17 @@ public:
     void updateMachineStrategy();
     void machineMoveXopt();
     void machineMoveYopt();
+    void MLayTrap();
+    void HLayTrap();
     explicit GameRoom(QWidget *parent = nullptr, int Module = 0);
     ~GameRoom();
     void paintEvent(QPaintEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
     int GameModule;
     int machineMoveX, machineMoveY;
-    QThread *moduleControlThread = nullptr;
+    // QThread *moduleControlThread = nullptr;
     QTimer updateTimer, MachineControl;
+    QTimer deadtime[10];
     Player machine;
     Player human;
     ChessPiece Chess;
@@ -63,6 +66,8 @@ signals:
     void dKeyPressed();
     void fKeyPressed();
     void lKeyPressed();
+    void pKeyPressed();
+    void rKeyPressed();
 };
 
 #endif // GAMEROOM_H
