@@ -25,6 +25,7 @@ const int RIGHT = 3;
 
 const int dx[] = {0, -1, 0, 1};
 const int dy[] = {-1, 0, 1, 0};
+const int limitTraps = 3;
 
 inline QPoint GetNextPos(QPoint now, int dir) {
     int x = now.x(), y = now.y();
@@ -71,8 +72,8 @@ public:
     };
 
     std :: vector <TrapItem> vec;
-
-    int restTraps, layableTraps, limitTraps;
+    int sumTrapval = 7; // sigma val <= sumTrapval
+    int restTraps, layableTraps;
 
 
 
