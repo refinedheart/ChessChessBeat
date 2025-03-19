@@ -289,7 +289,7 @@ GameRoom::GameRoom(QWidget *parent, int Module)
 
     // [1, cnt / 2] = white
 
-    Chess = ChessPiece(piececnt);
+    Chess = ChessPiece(piececnt, 3);
 
 
     /* ----------generate chess box -------------*/
@@ -505,6 +505,18 @@ void GameRoom :: checkCross() {
             // qDebug() << "Machine points = " << machine.scores;
         }
     }
+    for(int i = 0; i < Chess.Itemcnt; ++i) {
+        int regx = regetposx(human.pos.x()), regy = regetposy(human.pos.y());
+        if(Chess.XS[i] == regx && Chess.YS[i] == regy) {
+            machine.Stopcnt += 3;
+            Chess.regenerateStopItem(i);
+        }
+        regx = regetposx(machine.pos.x()), regy = regetposy(machine.pos.y());
+        if(Chess.XS[i] == regx && Chess.YS[i] == regy) {
+            human.Stopcnt += 3;
+            Chess.regenerateStopItem(i);
+        }
+    }
 }
 
 void GameRoom :: paintEvent(QPaintEvent *event) {
@@ -556,7 +568,16 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
         // (x, y)
         bufferPainter.drawEllipse(xx - Radius, yy - Radius, Radius * 2, Radius * 2);
     }
-
+    for(int i = 0; i < Chess.Itemcnt; ++i) {
+        int x = Chess.XS[i], y = Chess.YS[i];
+        bufferPainter.setPen(Qt :: red);
+        QPoint Zp = GetCoordPos(x, y);
+        int xx = Zp.x(), yy = Zp.y();
+        for(int k = 0; k < 3; ++k) {
+            int r = Radius >> k;
+            bufferPainter.drawEllipse(xx - r, yy - r, r << 1, r << 1);
+        }
+    }
 
     // Draw Player Icon
     QPixmap machineG(machine.graph);

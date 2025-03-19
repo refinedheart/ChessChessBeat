@@ -50,9 +50,11 @@ public:
     QPoint pos;
     QString graph;
     int scores;
+    int Stopcnt;
     // int scores;
     Player(QString pic = "", int fg = 0);
     ~Player();
+    bool checkStop();
     void moveUp();
     void moveDown();
     void moveLeft();

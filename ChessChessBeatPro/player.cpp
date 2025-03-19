@@ -6,6 +6,7 @@
 
 Player::Player(QString pic, int fg)
 {
+    Stopcnt = 0;
     scores = 0;
     graph = pic;
     if(fg == 0) pos = QPoint(StartXpos, StartYpos);
@@ -33,6 +34,16 @@ Player :: ~Player() {
 }
 
 
+bool Player :: checkStop() {
+    // return false;
+    if(Stopcnt > 0) {
+        // qDebug() << "S = " << Stopcnt;
+        --Stopcnt;
+        return true;
+    }
+    return false;
+}
+
 void Player :: UpdatePos() {
     // item -> close();
     // QPoint getpos = QPoint(pos.x() - siz / 2, pos.y() - siz/2);
@@ -41,12 +52,14 @@ void Player :: UpdatePos() {
 }
 
 void Player :: moveUp() {
+    if(checkStop()) return ;
     QPoint npos = GetNextPos(pos, UP);
     if(checkOutOfWidget(npos)) return ;
     pos = npos;
     UpdatePos();
 }
 void Player :: moveLeft() {
+    if(checkStop()) return ;
     QPoint npos = GetNextPos(pos, LEFT);
     if(checkOutOfWidget(npos)) return ;
     pos = npos;
@@ -54,6 +67,7 @@ void Player :: moveLeft() {
     // qDebug() << "Left!";
 }
 void Player :: moveDown() {
+    if(checkStop()) return ;
     // qDebug() << "down??";
     // qDebug() << pos.x() << " " << pos.y();
     QPoint npos = GetNextPos(pos, DOWN);
@@ -65,6 +79,7 @@ void Player :: moveDown() {
     // qDebug() << "Down!";
 }
 void Player :: moveRight() {
+    if(checkStop()) return ;
     QPoint npos = GetNextPos(pos, RIGHT);
     if(checkOutOfWidget(npos)) return ;
     pos = npos;
