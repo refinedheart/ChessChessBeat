@@ -63,6 +63,7 @@ public:
     void moveLeft();
     void moveRight();
     void UpdatePos();
+    void LayTrap();
     bool checkOutOfWidget(QPoint npos);
 
     struct TrapItem {

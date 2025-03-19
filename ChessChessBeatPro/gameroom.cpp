@@ -628,6 +628,12 @@ void GameRoom :: keyPressEvent(QKeyEvent *event) {
     case Qt :: Key_D:
         emit dKeyPressed();
         break;
+    case Qt :: Key_F:
+        emit fKeyPressed();
+        break;
+    case Qt :: Key_L:
+        emit lKeyPressed();
+        break;
     default:
         break;
     }

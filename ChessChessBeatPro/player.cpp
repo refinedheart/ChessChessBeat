@@ -91,3 +91,8 @@ bool Player :: checkOutOfWidget(QPoint npos) {
     if(npos.x() > StartXpos + 18 * gapx || npos.y() > StartYpos + 18 * gapy) return true;
     return false;
 }
+
+
+void Player :: LayTrap() {
+
+}

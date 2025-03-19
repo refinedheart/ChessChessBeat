@@ -61,6 +61,8 @@ signals:
     void aKeyPressed();
     void sKeyPressed();
     void dKeyPressed();
+    void fKeyPressed();
+    void lKeyPressed();
 };
 
 #endif // GAMEROOM_H
