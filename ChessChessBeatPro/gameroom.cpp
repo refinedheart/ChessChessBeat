@@ -283,6 +283,12 @@ GameRoom::GameRoom(QWidget *parent, int Module)
     });
 
 
+    connect(this, &GameRoom :: fKeyPressed, [&](){
+        human.LayTrap();
+    });
+    connect(this, &GameRoom :: lKeyPressed, [&](){
+        machine.LayTrap();
+    });
 
     /*---------- generate chess------------*/
 
