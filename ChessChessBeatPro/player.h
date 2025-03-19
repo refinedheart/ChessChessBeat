@@ -6,6 +6,8 @@
 #include <QLabel>
 
 
+#include <vector>
+
 
 // LeftTop = (466, 188)
 // Delta d = 26
@@ -61,6 +63,19 @@ public:
     void moveRight();
     void UpdatePos();
     bool checkOutOfWidget(QPoint npos);
+
+    struct TrapItem {
+        int flag; // human or machine
+        int val; // stop options
+        int x, y;
+    };
+
+    std :: vector <TrapItem> vec;
+
+    int restTraps, layableTraps, limitTraps;
+
+
+
 };
 
 #endif // PLAYER_H
