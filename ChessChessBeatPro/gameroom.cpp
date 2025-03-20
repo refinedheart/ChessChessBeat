@@ -572,7 +572,7 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
         QPoint Zp = GetCoordPos(x, y);
         int xx = Zp.x(), yy = Zp.y();
         // (x, y)
-        bufferPainter.drawEllipse(xx - Radius, yy - Radius, Radius * 2, Radius * 2);
+        bufferPainter.drawEllipse(xx - Radius, yy - Radius, Radius << 1, Radius << 1);
     }
     bufferPainter.setBrush(Qt :: black);
     for(int i = Chess.blackchess.l; i <= Chess.blackchess.r; ++i) {
@@ -580,7 +580,7 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
         QPoint Zp = GetCoordPos(x, y);
         int xx = Zp.x(), yy = Zp.y();
         // (x, y)
-        bufferPainter.drawEllipse(xx - Radius, yy - Radius, Radius * 2, Radius * 2);
+        bufferPainter.drawEllipse(xx - Radius, yy - Radius, Radius << 1, Radius << 1);
     }
     for(int i = 0; i < Chess.Itemcnt; ++i) {
         int x = Chess.XS[i], y = Chess.YS[i];
@@ -594,8 +594,17 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
     }
 
     // Draw Trap
-    for(int i = 0; i < 3; ++i) {
 
+    bufferPainter.setPen(Qt :: gray);
+    for(int i = 0; i < 3; ++i) {
+        int x = machine.vec[i].x, y = machine.vec[i].y;
+        if(x == 0 && y == 0) continue;
+        bufferPainter.drawRect(x - Radius, y - Radius, Radius << 1, Radius << 1);
+    }
+    for(int i = 0; i < 3; ++i) {
+        int x = human.vec[i].x, y = human.vec[i].y;
+        if(x == 0 && y == 0) continue;
+        bufferPainter.drawRect(x - Radius, y - Radius, Radius << 1, Radius << 1);
     }
 
     // Draw Player Icon
