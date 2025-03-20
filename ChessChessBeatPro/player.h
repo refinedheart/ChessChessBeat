@@ -58,6 +58,8 @@ public:
     QString graph;
     int scores;
     int Stopcnt;
+    int layTrapcnt;
+    int successTrapcnt;
     // int scores;
     Player(QString pic = "", int fg = 0);
     ~Player();

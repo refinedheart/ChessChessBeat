@@ -665,6 +665,8 @@ void GameRoom :: MLayTrap() {
     int rx = regetposx(machine.pos.x());
     int ry = regetposy(machine.pos.y());
     if(Trapinq[rx][ry]) return ;
+    Trapinq[rx][ry] = 1;
+    ++machine.layTrapcnt;
     --machine.restTraps;
     int goalpos = 0;
     while(machine.vec[goalpos].flag != 0) ++goalpos;
@@ -682,6 +684,7 @@ void GameRoom :: HLayTrap() {
     if(Trapinq[rx][ry]) return ;
     Trapinq[rx][ry] = 1;
     --human.restTraps;
+    ++human.layTrapcnt;
     int goalpos = 0;
     while(human.vec[goalpos].flag != 0) ++goalpos;
     assert(goalpos < 3);
