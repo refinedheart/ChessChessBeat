@@ -11,6 +11,7 @@
 #include "chesspiece.h"
 #include "chessbox.h"
 #include <settlement.h>
+#include <vector>
 class GameRoom : public QWidget
 {
     Q_OBJECT
@@ -35,16 +36,18 @@ public:
     void keyPressEvent(QKeyEvent *event) override;
     int GameModule;
     int machineMoveX, machineMoveY;
-    bool Trapinq[20][20];
+    std :: vector < std :: vector < int > > Trapinq;
+
     // QThread *moduleControlThread = nullptr;
     QTimer updateTimer, MachineControl;
-    QTimer deadtime[10];
     Player machine;
     Player human;
     ChessPiece Chess;
     ChessBox boxHuman, boxMachine;
     QLineEdit humanText, machineText;
     Settlement *SR;
+    QTimer **deadtime = nullptr;
+
 private:
     QLabel *label;
 

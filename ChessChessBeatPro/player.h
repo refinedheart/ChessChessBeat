@@ -76,10 +76,19 @@ public:
         }
     };
 
-    std :: vector <TrapItem> vec;
-    std :: vector <int> id;
+
     int restTraps;
     int trapScale;
+// private:
+    // std :: vector <TrapItem> m_vec;
+    TrapItem **vec;
+    int **id;
+    // std :: vector <int> *m_id_ptr;
+    // void init(){
+    //     m_id_ptr = new std::vector<int>;
+    //     delete m_id_ptr;
+    // }
+public:
     bool checkStop();
     void moveUp();
     void moveDown();

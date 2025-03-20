@@ -54,15 +54,27 @@ GameRoom::GameRoom(QWidget *parent, int Module)
     this -> setFixedSize(1400, 800);
 
     SR = new Settlement;
-
-
+    Trapinq.resize(20);
+    for(int i = 0; i < 20; ++i) Trapinq[i].resize(20);
+    deadtime = new QTimer*[10];
+    for(int i = 0; i < 10; ++i) {
+        deadtime[i] = new QTimer(this);
+        deadtime[i] -> setSingleShot(true);
+    }
+    // deadtime.resize(10);
+    // std :: vector < QTimer > deadtime;
+    // for(int i = 0; i < 10; ++i) {
+    //     deadtime[i] = new QTimer(this);
+    //     deadtime[i] -> setSingleShot(true);
+    // }
+    // memset(Trapinq, 0, sizeof Trapinq);
     // timer-update
     updateTimer.setInterval(16);
     connect(&updateTimer, &QTimer :: timeout, [=](){
         update();
     });
     updateTimer.start();
-    for(int i = 0; i < 10; ++i) deadtime[i].setSingleShot(true);
+    // for(int i = 0; i < 10; ++i) deadtime[i].setSingleShot(true);
     // make sure the first position
     // Tool *now = new Tool;
     // now -> show();
@@ -137,30 +149,30 @@ GameRoom::GameRoom(QWidget *parent, int Module)
 
 
 
-    machine.restTraps = 3;
-    human.restTraps = 3; // 最多可以布置在场的三个陷阱
-    machine.trapScale = human.trapScale = 0;
-    machine.vec.resize(3);
-    human.vec.resize(3);
-    machine.id.resize(3);
-    human.id.resize(3);
-    // scale * staytime = 40
+    // machine.restTraps = 3;
+    // human.restTraps = 3; // 最多可以布置在场的三个陷阱
+    // machine.trapScale = human.trapScale = 0;
+    // machine.vec.resize(3);
+    // human.vec.resize(3);
+    // machine.id.resize(3);
+    // human.id.resize(3);
+    // // scale * staytime = 40
 
-    for(int i = 0; i < 3; ++i) {
-        machine.vec[i] = Player :: TrapItem(0, 0, 0, 0);
-        machine.id[i] = trapnode++;
-        connect(&deadtime[machine.id[i]], &QTimer :: timeout, [&](){
-            MRecycleTrap(i);
-        });
-    }
-    for(int i = 0; i < 3; ++i) {
-        human.vec[i] = Player :: TrapItem(0, 0, 0, 0);
-        human.id[i] = trapnode++;
-        connect(&deadtime[human.id[i]], &QTimer :: timeout, [&](){
-            HRecycleTrap(i);
-        });
-    }
-
+    // for(int i = 0; i < 3; ++i) {
+    //     machine.vec[i] = Player :: TrapItem(0, 0, 0, 0);
+    //     machine.id[i] = trapnode++;
+    //     connect(&deadtime[machine.id[i]], &QTimer :: timeout, [&](){
+    //         MRecycleTrap(i);
+    //     });
+    // }
+    // for(int i = 0; i < 3; ++i) {
+    //     human.vec[i] = Player :: TrapItem(0, 0, 0, 0);
+    //     human.id[i] = trapnode++;
+    //     connect(&deadtime[human.id[i]], &QTimer :: timeout, [&](){
+    //         HRecycleTrap(i);
+    //     });
+    // }
+    // qDebug() << trapnode;
 
 
     // qDebug() << "?????"
@@ -268,21 +280,24 @@ GameRoom::GameRoom(QWidget *parent, int Module)
     });
 
 
-    connect(this, &GameRoom :: fKeyPressed, [&](){
-        // human.LayTrap();
-        HLayTrap();
-    });
-    connect(this, &GameRoom :: lKeyPressed, [&](){
-        // machine.LayTrap();
-        MLayTrap();
-    });
+    // connect(this, &GameRoom :: fKeyPressed, [&](){
+    //     // human.LayTrap();
+    //     // qDebug() << "WWWWWWW";
+    //     HLayTrap();
+    //     // qDebug() << ">>>>>>>";
+    // });
+    // connect(this, &GameRoom :: lKeyPressed, [&](){
+    //     // machine.LayTrap();
+    //     // qDebug() << "wdnmd";
+    //     MLayTrap();
+    // });
 
-    connect(this, &GameRoom :: pKeyPressed, [&](){
-        machine.changeTrapScale();
-    });
-    connect(this, &GameRoom :: rKeyPressed, [&](){
-        human.changeTrapScale();
-    });
+    // connect(this, &GameRoom :: pKeyPressed, [&](){
+    //     machine.changeTrapScale();
+    // });
+    // connect(this, &GameRoom :: rKeyPressed, [&](){
+    //     human.changeTrapScale();
+    // });
 
 
 
@@ -379,7 +394,7 @@ GameRoom::GameRoom(QWidget *parent, int Module)
                 if(op == 0) machineMoveXopt();
                 else machineMoveYopt();
             }
-            // qDebug() << "Xpos = " << machineMoveX << " Ypos = " << machineMoveY;
+            qDebug() << "Xpos = " << machineMoveX << " Ypos = " << machineMoveY;
             // qDebug() << "posx = " << machine
         });
         MachineControl.start();
@@ -445,6 +460,7 @@ void GameRoom :: updateMachineStrategy() {
         }
     }
     assert(posid != -1);
+    // qDebug() << "id = " << posid;
     machineMoveX = Chess.Xpos[posid] - regetposx(machine.pos.x());
     machineMoveY = Chess.Ypos[posid] - regetposy(machine.pos.y());
 }
@@ -519,18 +535,18 @@ void GameRoom :: checkCross() {
             Chess.regenerateStopItem(i);
         }
     }
-    for(int i = 0; i < 3; ++i) {
-        if(human.pos.x() == machine.vec[i].x && human.pos.y() == machine.vec[i].y) {
-            ++machine.successTrapcnt;
-            human.Stopcnt += machine.vec[i].val;
-            MRecycleTrap(i);
-        }
-        if(machine.pos.x() == human.vec[i].x && machine.pos.y() == human.vec[i].y) {
-            ++human.successTrapcnt;
-            machine.Stopcnt += human.vec[i].val;
-            HRecycleTrap(i);
-        }
-    }
+    // for(int i = 0; i < 3; ++i) {
+    //     if(human.pos.x() == machine.vec[i].x && human.pos.y() == machine.vec[i].y) {
+    //         ++machine.successTrapcnt;
+    //         human.Stopcnt += machine.vec[i].val;
+    //         MRecycleTrap(i);
+    //     }
+    //     if(machine.pos.x() == human.vec[i].x && machine.pos.y() == human.vec[i].y) {
+    //         ++human.successTrapcnt;
+    //         machine.Stopcnt += human.vec[i].val;
+    //         HRecycleTrap(i);
+    //     }
+    // }
 }
 
 void GameRoom :: paintEvent(QPaintEvent *event) {
@@ -597,12 +613,12 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
 
     bufferPainter.setPen(Qt :: gray);
     for(int i = 0; i < 3; ++i) {
-        int x = machine.vec[i].x, y = machine.vec[i].y;
+        int x = machine.vec[i]->x, y = machine.vec[i]->y;
         if(x == 0 && y == 0) continue;
         bufferPainter.drawRect(x - Radius, y - Radius, Radius << 1, Radius << 1);
     }
     for(int i = 0; i < 3; ++i) {
-        int x = human.vec[i].x, y = human.vec[i].y;
+        int x = human.vec[i]->x, y = human.vec[i]->y;
         if(x == 0 && y == 0) continue;
         bufferPainter.drawRect(x - Radius, y - Radius, Radius << 1, Radius << 1);
     }
@@ -690,12 +706,12 @@ void GameRoom :: MLayTrap() {
     ++machine.layTrapcnt;
     --machine.restTraps;
     int goalpos = 0;
-    while(machine.vec[goalpos].flag != 0) ++goalpos;
+    while(machine.vec[goalpos]->flag != 0) ++goalpos;
     assert(goalpos < 3);
-    int ID = machine.id[goalpos];
-    machine.vec[goalpos] = Player :: TrapItem(2, TrapScaleVal[machine.trapScale], machine.pos.x(), machine.pos.y());
-    deadtime[ID].setInterval(MultiTrapV / TrapScaleVal[machine.trapScale]);
-    deadtime[ID].start();
+    int ID = *machine.id[goalpos];
+    *machine.vec[goalpos] = Player :: TrapItem(2, TrapScaleVal[machine.trapScale], machine.pos.x(), machine.pos.y());
+    deadtime[ID] -> setInterval(MultiTrapV / TrapScaleVal[machine.trapScale]);
+    deadtime[ID] -> start();
 }
 
 void GameRoom :: HLayTrap() {
@@ -703,33 +719,35 @@ void GameRoom :: HLayTrap() {
     int rx = regetposx(human.pos.x());
     int ry = regetposy(human.pos.y());
     if(Trapinq[rx][ry]) return ;
+    // qDebug() << "wdnmd";
     Trapinq[rx][ry] = 1;
     --human.restTraps;
     ++human.layTrapcnt;
     int goalpos = 0;
-    while(human.vec[goalpos].flag != 0) ++goalpos;
+    while(human.vec[goalpos]->flag != 0) ++goalpos;
+    // qDebug() << "goal = " << goalpos;
     assert(goalpos < 3);
-    int ID = human.id[goalpos];
-    human.vec[goalpos] = Player :: TrapItem(2, TrapScaleVal[human.trapScale], human.pos.x(), human.pos.y());
-    deadtime[ID].setInterval(MultiTrapV / TrapScaleVal[human.trapScale]);
-    deadtime[ID].start();
+    int ID = *human.id[goalpos];
+    *human.vec[goalpos] = Player :: TrapItem(2, TrapScaleVal[human.trapScale], human.pos.x(), human.pos.y());
+    deadtime[ID] -> setInterval(MultiTrapV / TrapScaleVal[human.trapScale]);
+    deadtime[ID] -> start();
 }
 
 void GameRoom :: MRecycleTrap(int x) {
     // machine.vec[x]
-    deadtime[machine.id[x]].stop();
-    int rx = regetposx(machine.vec[x].x);
-    int ry = regetposy(machine.vec[x].x);
+    deadtime[*machine.id[x]] -> stop();
+    int rx = regetposx(machine.vec[x]->x);
+    int ry = regetposy(machine.vec[x]->x);
     Trapinq[rx][ry] = 0;
-    machine.vec[x] = Player :: TrapItem(0, 0, 0, 0);
+    *machine.vec[x] = Player :: TrapItem(0, 0, 0, 0);
     machine.restTraps++;
 }
 
 void GameRoom :: HRecycleTrap(int x) {
-    deadtime[human.id[x]].stop();
-    int rx = regetposx(human.vec[x].x);
-    int ry = regetposy(human.vec[x].x);
+    deadtime[*human.id[x]] -> stop();
+    int rx = regetposx(human.vec[x]->x);
+    int ry = regetposy(human.vec[x]->x);
     Trapinq[rx][ry] = 0;
-    human.vec[x] = Player :: TrapItem(0, 0, 0, 0);
+    *human.vec[x] = Player :: TrapItem(0, 0, 0, 0);
     human.restTraps++;
 }

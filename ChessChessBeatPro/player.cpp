@@ -14,6 +14,12 @@ Player::Player(QString pic, int fg)
         pos = GetCoordPos(19, 19);
         // qDebug() << "Initial X = " << pos.x() << " Y = " << pos.y();
     }
+    vec = new TrapItem*[3];
+    for(int i = 0; i < 3; ++i) vec[i] = new TrapItem(0, 0, 0, 0);
+    id = new int*[3];
+    for(int i = 0; i < 3; ++i) id[i] = new int;
+    // vec.resize(3);
+    // id.resize(3);
     // item = new QLabel();
 
     // item->setScaledContents(true);

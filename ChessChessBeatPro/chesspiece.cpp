@@ -9,8 +9,8 @@ ChessPiece::ChessPiece(int PieceCnt, int ItemCnt) {
     blackchess.r = cnt - 1;
     memset(vis, 0, sizeof vis);
     memset(inq, 0, sizeof inq);
-    Xpos.resize(PieceCnt);
-    Ypos.resize(PieceCnt);
+    Xpos.resize(PieceCnt + 1);
+    Ypos.resize(PieceCnt + 1);
     for(int i = 0; i < cnt; ++i) {
         Xpos[i] = rd(1, 19);
         Ypos[i] = rd(1, 19);
