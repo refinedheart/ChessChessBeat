@@ -147,7 +147,8 @@ GameRoom::GameRoom(QWidget *parent, int Module)
     int trapnode = 0;
 
 
-
+    for(int i = 0; i < 3; ++i) *machine.id[i] = trapnode ++;
+    for(int i = 0; i < 3; ++i) *human.id[i] = trapnode ++;
 
     // machine.restTraps = 3;
     // human.restTraps = 3; // 最多可以布置在场的三个陷阱
@@ -280,24 +281,24 @@ GameRoom::GameRoom(QWidget *parent, int Module)
     });
 
 
-    // connect(this, &GameRoom :: fKeyPressed, [&](){
-    //     // human.LayTrap();
-    //     // qDebug() << "WWWWWWW";
-    //     HLayTrap();
-    //     // qDebug() << ">>>>>>>";
-    // });
-    // connect(this, &GameRoom :: lKeyPressed, [&](){
-    //     // machine.LayTrap();
-    //     // qDebug() << "wdnmd";
-    //     MLayTrap();
-    // });
+    connect(this, &GameRoom :: fKeyPressed, [&](){
+        // human.LayTrap();
+        // qDebug() << "WWWWWWW";
+        HLayTrap();
+        // qDebug() << ">>>>>>>";
+    });
+    connect(this, &GameRoom :: lKeyPressed, [&](){
+        // machine.LayTrap();
+        // qDebug() << "wdnmd";
+        MLayTrap();
+    });
 
-    // connect(this, &GameRoom :: pKeyPressed, [&](){
-    //     machine.changeTrapScale();
-    // });
-    // connect(this, &GameRoom :: rKeyPressed, [&](){
-    //     human.changeTrapScale();
-    // });
+    connect(this, &GameRoom :: pKeyPressed, [&](){
+        machine.changeTrapScale();
+    });
+    connect(this, &GameRoom :: rKeyPressed, [&](){
+        human.changeTrapScale();
+    });
 
 
 
@@ -622,7 +623,7 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
         if(x == 0 && y == 0) continue;
         bufferPainter.drawRect(x - Radius, y - Radius, Radius << 1, Radius << 1);
     }
-
+    // qDebug() << "Drawed the trap";
     // Draw Player Icon
     QPixmap machineG(machine.graph);
     bufferPainter.drawPixmap(machine.pos.x() - siz / 2, machine.pos.y() - siz / 2, siz, siz, machineG);
