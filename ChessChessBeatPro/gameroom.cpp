@@ -522,10 +522,12 @@ void GameRoom :: checkCross() {
     for(int i = 0; i < 3; ++i) {
         if(human.pos.x() == machine.vec[i].x && human.pos.y() == machine.vec[i].y) {
             ++machine.successTrapcnt;
+            human.Stopcnt += machine.vec[i].val;
             MRecycleTrap(i);
         }
         if(machine.pos.x() == human.vec[i].x && machine.pos.y() == human.vec[i].y) {
             ++human.successTrapcnt;
+            machine.Stopcnt += human.vec[i].val;
             HRecycleTrap(i);
         }
     }

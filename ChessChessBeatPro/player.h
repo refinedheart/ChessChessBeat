@@ -60,6 +60,7 @@ public:
     int Stopcnt;
     int layTrapcnt;
     int successTrapcnt;
+    // int Penalty
     // int scores;
     Player(QString pic = "", int fg = 0);
     ~Player();
