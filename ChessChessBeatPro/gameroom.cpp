@@ -519,6 +519,16 @@ void GameRoom :: checkCross() {
             Chess.regenerateStopItem(i);
         }
     }
+    for(int i = 0; i < 3; ++i) {
+        if(human.pos.x() == machine.vec[i].x && human.pos.y() == machine.vec[i].y) {
+            ++machine.successTrapcnt;
+            MRecycleTrap(i);
+        }
+        if(machine.pos.x() == human.vec[i].x && machine.pos.y() == human.vec[i].y) {
+            ++human.successTrapcnt;
+            HRecycleTrap(i);
+        }
+    }
 }
 
 void GameRoom :: paintEvent(QPaintEvent *event) {
