@@ -34,61 +34,6 @@ const int MultiTrapV = 40;
 
 
 
-// class ModuleControlWorker : public QObject
-// {
-//     Q_OBJECT
-// public:
-//     explicit ModuleControlWorker(GameRoom *gameRoom, QObject *parent = nullptr)
-//         : QObject(parent), gameRoom_(gameRoom) {}
-
-// public slots:
-//     void startWork()
-//     {
-//         timer_.setInterval(200);
-//         connect(&timer_, &QTimer::timeout, this, &ModuleControlWorker::updateMachineStrategy);
-//         timer_.start();
-//     }
-
-// signals:
-//     void finished();
-
-// private:
-//     GameRoom *gameRoom_;
-//     QTimer timer_;
-
-//     void updateMachineStrategy()
-//     {
-//         // 这里是你的更新机器策略的逻辑
-//         gameRoom_->updateMachineStrategy();
-//         int dis = 1000000000, posid = -1;
-//         for (int i = gameRoom_->Chess.whitechess.l; i <= gameRoom_->Chess.whitechess.r; ++i) {
-//             int nowdis = gameRoom_->getDistance(gameRoom_->machine.pos, i);
-//             if (nowdis < dis) {
-//                 dis = nowdis;
-//                 posid = i;
-//             }
-//         }
-//         if (posid != -1) {
-//             int machineMoveX = gameRoom_->Chess.Xpos[posid] - regetposx(gameRoom_->machine.pos.x());
-//             int machineMoveY = gameRoom_->Chess.Ypos[posid] - regetposy(gameRoom_->machine.pos.y());
-
-//             if (machineMoveX == 0 || machineMoveY == 0) {
-//                 if (machineMoveX == 0) {
-//                     gameRoom_->machineMoveYopt();
-//                 } else {
-//                     gameRoom_->machineMoveXopt();
-//                 }
-//             } else {
-//                 if ((machineMoveX < 0) ^ (machineMoveY < 0)) {
-//                     gameRoom_->machineMoveXopt();
-//                 } else {
-//                     gameRoom_->machineMoveYopt();
-//                 }
-//             }
-//         }
-//     }
-// };
-
 
 int GameRoom :: getDistance(QPoint machinePos, int id) {
     int x = regetposx(machinePos.x()), y = regetposy(machinePos.y());
@@ -204,10 +149,16 @@ GameRoom::GameRoom(QWidget *parent, int Module)
     for(int i = 0; i < 3; ++i) {
         machine.vec[i] = Player :: TrapItem(0, 0, 0, 0);
         machine.id[i] = trapnode++;
+        connect(&deadtime[machine.id[i]], &QTimer :: timeout, [&](){
+            MRecycleTrap(i);
+        });
     }
     for(int i = 0; i < 3; ++i) {
         human.vec[i] = Player :: TrapItem(0, 0, 0, 0);
         human.id[i] = trapnode++;
+        connect(&deadtime[human.id[i]], &QTimer :: timeout, [&](){
+            HRecycleTrap(i);
+        });
     }
 
 
@@ -630,6 +581,11 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
         }
     }
 
+    // Draw Trap
+    for(int i = 0; i < 3; ++i) {
+
+    }
+
     // Draw Player Icon
     QPixmap machineG(machine.graph);
     bufferPainter.drawPixmap(machine.pos.x() - siz / 2, machine.pos.y() - siz / 2, siz, siz, machineG);
@@ -706,6 +662,9 @@ GameRoom :: ~GameRoom() {
 
 void GameRoom :: MLayTrap() {
     if(machine.restTraps == 0) return ;
+    int rx = regetposx(machine.pos.x());
+    int ry = regetposy(machine.pos.y());
+    if(Trapinq[rx][ry]) return ;
     --machine.restTraps;
     int goalpos = 0;
     while(machine.vec[goalpos].flag != 0) ++goalpos;
@@ -718,6 +677,10 @@ void GameRoom :: MLayTrap() {
 
 void GameRoom :: HLayTrap() {
     if(human.restTraps == 0) return ;
+    int rx = regetposx(human.pos.x());
+    int ry = regetposy(human.pos.y());
+    if(Trapinq[rx][ry]) return ;
+    Trapinq[rx][ry] = 1;
     --human.restTraps;
     int goalpos = 0;
     while(human.vec[goalpos].flag != 0) ++goalpos;
@@ -728,4 +691,21 @@ void GameRoom :: HLayTrap() {
     deadtime[ID].start();
 }
 
+void GameRoom :: MRecycleTrap(int x) {
+    // machine.vec[x]
+    deadtime[machine.id[x]].stop();
+    int rx = regetposx(machine.vec[x].x);
+    int ry = regetposy(machine.vec[x].x);
+    Trapinq[rx][ry] = 0;
+    machine.vec[x] = Player :: TrapItem(0, 0, 0, 0);
+    machine.restTraps++;
+}
 
+void GameRoom :: HRecycleTrap(int x) {
+    deadtime[human.id[x]].stop();
+    int rx = regetposx(human.vec[x].x);
+    int ry = regetposy(human.vec[x].x);
+    Trapinq[rx][ry] = 0;
+    human.vec[x] = Player :: TrapItem(0, 0, 0, 0);
+    human.restTraps++;
+}

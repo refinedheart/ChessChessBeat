@@ -75,7 +75,7 @@ public:
 
     std :: vector <TrapItem> vec;
     std :: vector <int> id;
-    int restTraps, layableTraps;
+    int restTraps;
     int trapScale;
     bool checkStop();
     void moveUp();

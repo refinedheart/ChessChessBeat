@@ -27,12 +27,15 @@ public:
     void machineMoveYopt();
     void MLayTrap();
     void HLayTrap();
+    void MRecycleTrap(int x);
+    void HRecycleTrap(int x);
     explicit GameRoom(QWidget *parent = nullptr, int Module = 0);
     ~GameRoom();
     void paintEvent(QPaintEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
     int GameModule;
     int machineMoveX, machineMoveY;
+    bool Trapinq[20][20];
     // QThread *moduleControlThread = nullptr;
     QTimer updateTimer, MachineControl;
     QTimer deadtime[10];
