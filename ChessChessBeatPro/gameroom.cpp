@@ -150,9 +150,9 @@ GameRoom::GameRoom(QWidget *parent, int Module)
     for(int i = 0; i < 3; ++i) *machine.id[i] = trapnode ++;
     for(int i = 0; i < 3; ++i) *human.id[i] = trapnode ++;
 
-    // machine.restTraps = 3;
-    // human.restTraps = 3; // 最多可以布置在场的三个陷阱
-    // machine.trapScale = human.trapScale = 0;
+    machine.restTraps = 3;
+    human.restTraps = 3; // 最多可以布置在场的三个陷阱
+    machine.trapScale = human.trapScale = 0;
     // machine.vec.resize(3);
     // human.vec.resize(3);
     // machine.id.resize(3);
@@ -283,7 +283,7 @@ GameRoom::GameRoom(QWidget *parent, int Module)
 
     connect(this, &GameRoom :: fKeyPressed, [&](){
         // human.LayTrap();
-        // qDebug() << "WWWWWWW";
+        qDebug() << "WWWWWWW";
         HLayTrap();
         // qDebug() << ">>>>>>>";
     });
@@ -395,7 +395,7 @@ GameRoom::GameRoom(QWidget *parent, int Module)
                 if(op == 0) machineMoveXopt();
                 else machineMoveYopt();
             }
-            qDebug() << "Xpos = " << machineMoveX << " Ypos = " << machineMoveY;
+            // qDebug() << "Xpos = " << machineMoveX << " Ypos = " << machineMoveY;
             // qDebug() << "posx = " << machine
         });
         MachineControl.start();
@@ -613,6 +613,7 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
     // Draw Trap
 
     bufferPainter.setPen(Qt :: gray);
+    bufferPainter.setBrush(Qt :: NoBrush);
     for(int i = 0; i < 3; ++i) {
         int x = machine.vec[i]->x, y = machine.vec[i]->y;
         if(x == 0 && y == 0) continue;
@@ -720,6 +721,7 @@ void GameRoom :: HLayTrap() {
     int rx = regetposx(human.pos.x());
     int ry = regetposy(human.pos.y());
     if(Trapinq[rx][ry]) return ;
+    // qDebug() << "!!!!";
     // qDebug() << "wdnmd";
     Trapinq[rx][ry] = 1;
     --human.restTraps;
