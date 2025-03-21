@@ -74,6 +74,12 @@ GameRoom::GameRoom(QWidget *parent, int Module)
         update();
     });
     updateTimer.start();
+
+    /*------------------------------------Animation--------------------------------------*/
+
+    // trapAnimation = new QPropertyAnimation(this, "opacity", this);
+    // trapAnimation -> setDuration(2000);
+    /*------------------------------------------------------------------------------------*/
     // for(int i = 0; i < 10; ++i) deadtime[i].setSingleShot(true);
     // make sure the first position
     // Tool *now = new Tool;
@@ -762,3 +768,12 @@ void GameRoom :: HRecycleTrap(int x) {
     *human.vec[x] = Player :: TrapItem(0, 0, 0, 0);
     human.restTraps++;
 }
+
+// qreal GameRoom :: opacity() const {
+//     return m_opacity;
+// }
+
+// void GameRoom :: setOpacity(qreal opacity) {
+//     m_opacity = opacity;
+//     update();
+// }

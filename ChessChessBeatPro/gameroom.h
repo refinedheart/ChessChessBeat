@@ -12,9 +12,11 @@
 #include "chessbox.h"
 #include <settlement.h>
 #include <vector>
+#include <QPropertyAnimation>
 class GameRoom : public QWidget
 {
     Q_OBJECT
+    // Q_PROPERTY(qreal opacity READ opacity WRITE setOpacity)
 public:
     int getDistance(QPoint machinePos, int id);
     void updateMachinePrint();
@@ -47,6 +49,8 @@ public:
     QLineEdit humanText, machineText;
     Settlement *SR;
     QTimer **deadtime = nullptr;
+    // qreal m_opacity;
+    // QPropertyAnimation *trapAnimation;
 
 private:
     QLabel *label;
