@@ -29,7 +29,7 @@ const int dx[] = {0, -1, 0, 1};
 const int dy[] = {-1, 0, 1, 0};
 const int limitTraps = 3;
 
-const int TrapScaleVal[] = {1, 2, 4, 5, 8};
+const int TrapScaleVal[] = {1, 2, 4, 5, 10};
 
 inline QPoint GetNextPos(QPoint now, int dir) {
     int x = now.x(), y = now.y();

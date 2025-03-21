@@ -30,10 +30,10 @@ const int piececnt = 10;
 
 const int BoxLimit = 21;
 
-const int MultiTrapV = 40;
+const int MultiTrapV = 20;
 
 
-
+const int TrapCntLimit = 3;
 
 int GameRoom :: getDistance(QPoint machinePos, int id) {
     int x = regetposx(machinePos.x()), y = regetposy(machinePos.y());
@@ -147,11 +147,19 @@ GameRoom::GameRoom(QWidget *parent, int Module)
     int trapnode = 0;
 
 
-    for(int i = 0; i < 3; ++i) *machine.id[i] = trapnode ++;
-    for(int i = 0; i < 3; ++i) *human.id[i] = trapnode ++;
+    for(int i = 0; i < TrapCntLimit; ++i) *machine.id[i] = trapnode ++;
+    for(int i = 0; i < TrapCntLimit; ++i) *human.id[i] = trapnode ++;
+    for(int i = 0; i < TrapCntLimit; ++i) {
+        connect(deadtime[*machine.id[i]], &QTimer :: timeout, [=](){
+            MRecycleTrap(i);
+        });
+        connect(deadtime[*human.id[i]], &QTimer :: timeout, [=](){
+            HRecycleTrap(i);
+        });
+    }
 
-    machine.restTraps = 3;
-    human.restTraps = 3; // 最多可以布置在场的三个陷阱
+    machine.restTraps = TrapCntLimit;
+    human.restTraps = TrapCntLimit; // 最多可以布置在场的三个陷阱
     machine.trapScale = human.trapScale = 0;
     // machine.vec.resize(3);
     // human.vec.resize(3);
@@ -536,18 +544,18 @@ void GameRoom :: checkCross() {
             Chess.regenerateStopItem(i);
         }
     }
-    // for(int i = 0; i < 3; ++i) {
-    //     if(human.pos.x() == machine.vec[i].x && human.pos.y() == machine.vec[i].y) {
-    //         ++machine.successTrapcnt;
-    //         human.Stopcnt += machine.vec[i].val;
-    //         MRecycleTrap(i);
-    //     }
-    //     if(machine.pos.x() == human.vec[i].x && machine.pos.y() == human.vec[i].y) {
-    //         ++human.successTrapcnt;
-    //         machine.Stopcnt += human.vec[i].val;
-    //         HRecycleTrap(i);
-    //     }
-    // }
+    for(int i = 0; i < 3; ++i) {
+        if(human.pos.x() == machine.vec[i]->x && human.pos.y() == machine.vec[i]->y) {
+            ++machine.successTrapcnt;
+            human.Stopcnt += machine.vec[i]->val;
+            MRecycleTrap(i);
+        }
+        if(machine.pos.x() == human.vec[i]->x && machine.pos.y() == human.vec[i]->y) {
+            ++human.successTrapcnt;
+            machine.Stopcnt += human.vec[i]->val;
+            HRecycleTrap(i);
+        }
+    }
 }
 
 void GameRoom :: paintEvent(QPaintEvent *event) {
@@ -614,12 +622,12 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
 
     bufferPainter.setPen(Qt :: gray);
     bufferPainter.setBrush(Qt :: NoBrush);
-    for(int i = 0; i < 3; ++i) {
+    for(int i = 0; i < TrapCntLimit; ++i) {
         int x = machine.vec[i]->x, y = machine.vec[i]->y;
         if(x == 0 && y == 0) continue;
         bufferPainter.drawRect(x - Radius, y - Radius, Radius << 1, Radius << 1);
     }
-    for(int i = 0; i < 3; ++i) {
+    for(int i = 0; i < TrapCntLimit; ++i) {
         int x = human.vec[i]->x, y = human.vec[i]->y;
         if(x == 0 && y == 0) continue;
         bufferPainter.drawRect(x - Radius, y - Radius, Radius << 1, Radius << 1);
@@ -709,10 +717,10 @@ void GameRoom :: MLayTrap() {
     --machine.restTraps;
     int goalpos = 0;
     while(machine.vec[goalpos]->flag != 0) ++goalpos;
-    assert(goalpos < 3);
+    assert(goalpos < TrapCntLimit);
     int ID = *machine.id[goalpos];
     *machine.vec[goalpos] = Player :: TrapItem(2, TrapScaleVal[machine.trapScale], machine.pos.x(), machine.pos.y());
-    deadtime[ID] -> setInterval(MultiTrapV / TrapScaleVal[machine.trapScale]);
+    deadtime[ID] -> setInterval(1000 * MultiTrapV / TrapScaleVal[machine.trapScale]);
     deadtime[ID] -> start();
 }
 
@@ -729,10 +737,10 @@ void GameRoom :: HLayTrap() {
     int goalpos = 0;
     while(human.vec[goalpos]->flag != 0) ++goalpos;
     // qDebug() << "goal = " << goalpos;
-    assert(goalpos < 3);
+    assert(goalpos < TrapCntLimit);
     int ID = *human.id[goalpos];
     *human.vec[goalpos] = Player :: TrapItem(2, TrapScaleVal[human.trapScale], human.pos.x(), human.pos.y());
-    deadtime[ID] -> setInterval(MultiTrapV / TrapScaleVal[human.trapScale]);
+    deadtime[ID] -> setInterval(1000 * MultiTrapV / TrapScaleVal[human.trapScale]);
     deadtime[ID] -> start();
 }
 
