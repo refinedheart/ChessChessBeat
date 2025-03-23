@@ -6,6 +6,7 @@
 #include "player.h"
 #include <settlement.h>
 #include <QThread>
+#include <QFile>
 
 #include "chessbox.h"
 #include "chesspiece.h"
@@ -44,7 +45,7 @@ int GameRoom :: getDistance(QPoint machinePos, int id) {
 GameRoom::GameRoom(QWidget *parent, int Module)
     : QWidget{parent}
 {
-
+    startTime = time(0);
     GameModule = Module;
     // qDebug() << "G = " << GameModule << " M = " << Module;
 
@@ -565,7 +566,7 @@ void GameRoom :: checkCross() {
 }
 
 void GameRoom :: paintEvent(QPaintEvent *event) {
-
+    // assert(0);
     Q_UNUSED(event);
     QPixmap buffer(size());
     // buffer.fill(Qt :: transparent);
@@ -597,6 +598,7 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
 
 
     // Draw ChessPiece
+
     bufferPainter.setBrush(Qt :: white);
     for(int i = Chess.whitechess.l; i <= Chess.whitechess.r; ++i) {
         int x = Chess.Xpos[i], y = Chess.Ypos[i];
@@ -613,16 +615,21 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
         // (x, y)
         bufferPainter.drawEllipse(xx - Radius, yy - Radius, Radius << 1, Radius << 1);
     }
-    for(int i = 0; i < Chess.Itemcnt; ++i) {
-        int x = Chess.XS[i], y = Chess.YS[i];
-        bufferPainter.setPen(Qt :: red);
-        QPoint Zp = GetCoordPos(x, y);
-        int xx = Zp.x(), yy = Zp.y();
-        for(int k = 0; k < 3; ++k) {
-            int r = Radius >> k;
-            bufferPainter.drawEllipse(xx - r, yy - r, r << 1, r << 1);
+
+    qDebug() << time(0) - startTime;
+    // if(abs(time(0) - startTime) >= 1000) {
+        for(int i = 0; i < Chess.Itemcnt; ++i) {
+            int x = Chess.XS[i], y = Chess.YS[i];
+            bufferPainter.setPen(Qt :: red);
+            QPoint Zp = GetCoordPos(x, y);
+            int xx = Zp.x(), yy = Zp.y();
+            for(int k = 0; k < 3; ++k) {
+                int r = Radius >> k;
+                bufferPainter.drawEllipse(xx - r, yy - r, r << 1, r << 1);
+            }
         }
-    }
+    // }
+
 
     // Draw Trap
 
@@ -767,6 +774,18 @@ void GameRoom :: HRecycleTrap(int x) {
     Trapinq[rx][ry] = 0;
     *human.vec[x] = Player :: TrapItem(0, 0, 0, 0);
     human.restTraps++;
+}
+
+void GameRoom :: loadHistory() {
+    QFile file("history.txt");
+    if(file.open(QFile :: ReadOnly | QFile :: Text)) {
+        QTextStream in(&file);
+        while(!in.atEnd()) {
+            QString line = in.readLine();
+            m_history << line;
+        }
+        file.close();
+    }
 }
 
 // qreal GameRoom :: opacity() const {

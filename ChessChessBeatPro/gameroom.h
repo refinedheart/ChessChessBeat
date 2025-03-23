@@ -37,7 +37,9 @@ public:
     void paintEvent(QPaintEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
     int GameModule;
+    int startTime;
     int machineMoveX, machineMoveY;
+    // int stopItemCnt;
     std :: vector < std :: vector < int > > Trapinq;
 
     // QThread *moduleControlThread = nullptr;
@@ -47,6 +49,7 @@ public:
     ChessPiece Chess;
     ChessBox boxHuman, boxMachine;
     QLineEdit humanText, machineText;
+    QStringList m_history;
     Settlement *SR;
     QTimer **deadtime = nullptr;
     // qreal m_opacity;
