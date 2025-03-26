@@ -59,7 +59,7 @@ public:
     ChessPiece Chess;
     ChessBox boxHuman, boxMachine;
     QLineEdit humanText, machineText;
-    QStringList nowHistory;
+    // QStringList nowHistory;
     Settlement *SR;
     QTimer **deadtime = nullptr;
     // qreal m_opacity;
@@ -68,7 +68,7 @@ public:
 private:
     QLabel *label;
 
-    void loadHistory();
+    // void loadHistory();
 
 protected:
     // void mouseMoveEvent(QMouseEvent *event) override {

@@ -301,7 +301,7 @@ GameRoom::GameRoom(QWidget *parent, int Module)
 
     connect(this, &GameRoom :: fKeyPressed, [&](){
         // human.LayTrap();
-        qDebug() << "WWWWWWW";
+        // qDebug() << "WWWWWWW";
         HLayTrap();
         // qDebug() << ">>>>>>>";
     });
@@ -414,7 +414,7 @@ GameRoom::GameRoom(QWidget *parent, int Module)
                 else machineMoveYopt();
             }
             // assert(0);
-            qDebug() << "Xpos = " << machineMoveX << " Ypos = " << machineMoveY;
+            // qDebug() << "Xpos = " << machineMoveX << " Ypos = " << machineMoveY;
             // qDebug() << "posx = " << machine
         });
         MachineControl.start();
@@ -626,7 +626,7 @@ void GameRoom :: paintEvent(QPaintEvent *event) {
         bufferPainter.drawEllipse(xx - Radius, yy - Radius, Radius << 1, Radius << 1);
     }
 
-    qDebug() << time(0) - startTime;
+    // qDebug() << time(0) - startTime;
     // if(abs(time(0) - startTime) >= 1000) {
         for(int i = 0; i < Chess.Itemcnt; ++i) {
             int x = Chess.XS[i], y = Chess.YS[i];
@@ -786,18 +786,7 @@ void GameRoom :: HRecycleTrap(int x) {
     human.restTraps++;
 }
 
-void GameRoom :: loadHistory() {
-    nowHistory.clear();
-    QFile fileee("history.txt");
-    if(fileee.open(QFile :: ReadOnly | QFile :: Text)) {
-        QTextStream inrrr(&fileee);
-        while(!inrrr.atEnd()) {
-            QString linenow = inrrr.readLine();
-            nowHistory << linenow;
-        }
-        fileee.close();
-    }
-}
+
 
 void GameRoom :: ActivateChess() {
     QDockWidget *chessDoc = new QDockWidget("Chess Introduce");
@@ -829,27 +818,56 @@ void GameRoom :: ActivateTrap() {
     chessDoc -> setFixedSize(800, 800);
 }
 
+// void GameRoom :: loadHistory() {
+//     nowHistory.clear();
+//     QFile fileee("history.txt");
+//     if(fileee.open(QFile :: ReadOnly | QFile :: Text)) {
+//         QTextStream inrrr(&fileee);
+//         while(!inrrr.atEnd()) {
+//             QString linenow = inrrr.readLine();
+//             nowHistory << linenow;
+//         }
+//         fileee.close();
+//     }
+// }
+
 void GameRoom :: ActivateUnknownIconShow(QString qwq) {
-    loadHistory();
+    QStringList m_history; m_history.clear();
+    QFile file("/Users/hewenshuo/C++Work/ChessChessBeat/ChessChessBeatPro/history.txt");
+    if(file.open(QFile :: ReadOnly | QFile :: Text)) {
+        QTextStream in(&file);
+        while(!in.atEnd()) {
+            QString linenow = in.readLine();
+            // qDebug() << "line = " << linenow;
+            m_history << linenow;
+        }
+        file.close();
+    }
+
+    // qDebug() << "now = " << qwq;
     bool fg = false;
-    for(auto itm : nowHistory) {
+    for(auto itm : m_history) {
+        // qDebug() << "itm = " << itm;
         if(itm == qwq) {
             fg = true;
-            break;
+            // break;
         }
     }
+
+    // qDebug() << "fg = " << fg;
     if(!fg) {
+        // qDebug() << "!!!!!!!!!!!!!!!";
         if(qwq == "CHESS") ActivateChess();
         if(qwq == "TRAP") ActivateTrap();
         if(qwq == "ITEM") ActivateItem();
+        if(file.open(QIODevice :: Append | QIODevice :: Text)) {
+            QTextStream out(&file);
+            out << qwq << '\n';
+            file.close();
+        }
     }
     if(fg) return ;
-    QFile file("history.txt");
-    if(file.open(QIODevice :: Append | QIODevice :: Text)) {
-        QTextStream out(&file);
-        out << qwq << '\n';
-        file.close();
-    }
+
 }
 
 // qreal GameRoom :: opacity() const {
