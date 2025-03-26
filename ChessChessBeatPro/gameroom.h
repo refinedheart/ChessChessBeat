@@ -14,6 +14,11 @@
 #include <vector>
 #include <QPropertyAnimation>
 #include <QStringList>
+
+
+const QString chessTag = "CHESS";
+const QString trapTag = "TRAP";
+const QString temTag = "ITEMTAG";
 class GameRoom : public QWidget
 {
     Q_OBJECT
@@ -33,6 +38,10 @@ public:
     void HLayTrap();
     void MRecycleTrap(int x);
     void HRecycleTrap(int x);
+    void ActivateChess();
+    void ActivateTrap();
+    void ActivateItem();
+    void ActivateUnknownIconShow(QString qwq);
     explicit GameRoom(QWidget *parent = nullptr, int Module = 0);
     ~GameRoom();
     void paintEvent(QPaintEvent *event) override;

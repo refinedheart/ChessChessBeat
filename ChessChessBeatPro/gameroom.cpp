@@ -7,7 +7,7 @@
 #include <settlement.h>
 #include <QThread>
 #include <QFile>
-
+#include <QTextEdit>
 #include "chessbox.h"
 #include "chesspiece.h"
 
@@ -45,6 +45,8 @@ int GameRoom :: getDistance(QPoint machinePos, int id) {
 GameRoom::GameRoom(QWidget *parent, int Module)
     : QWidget{parent}
 {
+    // ActivateChess();
+    // loadHistory();
     startTime = time(0);
     GameModule = Module;
     // qDebug() << "G = " << GameModule << " M = " << Module;
@@ -528,6 +530,7 @@ void GameRoom :: checkCross() {
         if(Chess.Xpos[i] == regx && Chess.Ypos[i] == regy) {
             human.scores ++;
             Chess.regeneratepos(i);
+            ActivateUnknownIconShow("CHESS");
             // qDebug() << "success!";
         }
     }
@@ -536,6 +539,7 @@ void GameRoom :: checkCross() {
         if(Chess.Xpos[i] == regx && Chess.Ypos[i] == regy) {
             machine.scores ++;
             Chess.regeneratepos(i);
+            ActivateUnknownIconShow("CHESS");
             // qDebug() << "Machine points = " << machine.scores;
         }
     }
@@ -544,11 +548,13 @@ void GameRoom :: checkCross() {
         if(Chess.XS[i] == regx && Chess.YS[i] == regy) {
             machine.Stopcnt += 3;
             Chess.regenerateStopItem(i);
+            ActivateUnknownIconShow(("ITEM"));
         }
         regx = regetposx(machine.pos.x()), regy = regetposy(machine.pos.y());
         if(Chess.XS[i] == regx && Chess.YS[i] == regy) {
             human.Stopcnt += 3;
             Chess.regenerateStopItem(i);
+            ActivateUnknownIconShow("ITEM");
         }
     }
     for(int i = 0; i < 3; ++i) {
@@ -556,11 +562,13 @@ void GameRoom :: checkCross() {
             ++machine.successTrapcnt;
             human.Stopcnt += machine.vec[i]->val;
             MRecycleTrap(i);
+            ActivateUnknownIconShow("TRAP");
         }
         if(machine.pos.x() == human.vec[i]->x && machine.pos.y() == human.vec[i]->y) {
             ++human.successTrapcnt;
             machine.Stopcnt += human.vec[i]->val;
             HRecycleTrap(i);
+            ActivateUnknownIconShow("TRAP");
         }
     }
 }
@@ -777,6 +785,7 @@ void GameRoom :: HRecycleTrap(int x) {
 }
 
 void GameRoom :: loadHistory() {
+    nowHistory.clear();
     QFile fileee("history.txt");
     if(fileee.open(QFile :: ReadOnly | QFile :: Text)) {
         QTextStream inrrr(&fileee);
@@ -786,6 +795,41 @@ void GameRoom :: loadHistory() {
         }
         fileee.close();
     }
+}
+
+void GameRoom :: ActivateChess() {
+    QDockWidget *chessDoc = new QDockWidget("Chess Introduce");
+    chessDoc -> setFloating(true);
+    QTextEdit *textnow = new QTextEdit();
+    textnow -> setReadOnly(true);
+    chessDoc -> show();
+    chessDoc -> setWidget(textnow);
+    chessDoc -> setFixedSize(800, 800);
+}
+
+void GameRoom :: ActivateItem() {
+    QDockWidget *chessDoc = new QDockWidget("Item Introduce");
+    chessDoc -> setFloating(true);
+    QTextEdit *textnow = new QTextEdit();
+    textnow -> setReadOnly(true);
+    chessDoc -> show();
+    chessDoc -> setWidget(textnow);
+    chessDoc -> setFixedSize(800, 800);
+}
+
+void GameRoom :: ActivateTrap() {
+    QDockWidget *chessDoc = new QDockWidget("Trap Introduce");
+    chessDoc -> setFloating(true);
+    QTextEdit *textnow = new QTextEdit();
+    textnow -> setReadOnly(true);
+    chessDoc -> show();
+    chessDoc -> setWidget(textnow);
+    chessDoc -> setFixedSize(800, 800);
+}
+
+void GameRoom :: ActivateUnknownIconShow(QString qwq) {
+    loadHistory();
+
 }
 
 // qreal GameRoom :: opacity() const {

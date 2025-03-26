@@ -6,7 +6,7 @@
 
 #include <QRandomGenerator>
 
-
+#include <QString>
 
 
 
