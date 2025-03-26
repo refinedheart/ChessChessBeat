@@ -7,6 +7,7 @@
 #include <settlement.h>
 #include <QThread>
 #include <QFile>
+#include <QTextStream>
 #include <QTextEdit>
 #include "chessbox.h"
 #include "chesspiece.h"
@@ -412,7 +413,8 @@ GameRoom::GameRoom(QWidget *parent, int Module)
                 if(op == 0) machineMoveXopt();
                 else machineMoveYopt();
             }
-            // qDebug() << "Xpos = " << machineMoveX << " Ypos = " << machineMoveY;
+            // assert(0);
+            qDebug() << "Xpos = " << machineMoveX << " Ypos = " << machineMoveY;
             // qDebug() << "posx = " << machine
         });
         MachineControl.start();
@@ -829,7 +831,25 @@ void GameRoom :: ActivateTrap() {
 
 void GameRoom :: ActivateUnknownIconShow(QString qwq) {
     loadHistory();
-
+    bool fg = false;
+    for(auto itm : nowHistory) {
+        if(itm == qwq) {
+            fg = true;
+            break;
+        }
+    }
+    if(!fg) {
+        if(qwq == "CHESS") ActivateChess();
+        if(qwq == "TRAP") ActivateTrap();
+        if(qwq == "ITEM") ActivateItem();
+    }
+    if(fg) return ;
+    QFile file("history.txt");
+    if(file.open(QIODevice :: Append | QIODevice :: Text)) {
+        QTextStream out(&file);
+        out << qwq << '\n';
+        file.close();
+    }
 }
 
 // qreal GameRoom :: opacity() const {
