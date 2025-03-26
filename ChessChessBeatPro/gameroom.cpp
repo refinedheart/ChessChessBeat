@@ -777,14 +777,14 @@ void GameRoom :: HRecycleTrap(int x) {
 }
 
 void GameRoom :: loadHistory() {
-    QFile file("history.txt");
-    if(file.open(QFile :: ReadOnly | QFile :: Text)) {
-        QTextStream in(&file);
-        while(!in.atEnd()) {
-            QString line = in.readLine();
-            m_history << line;
+    QFile fileee("history.txt");
+    if(fileee.open(QFile :: ReadOnly | QFile :: Text)) {
+        QTextStream inrrr(&fileee);
+        while(!inrrr.atEnd()) {
+            QString linenow = inrrr.readLine();
+            nowHistory << linenow;
         }
-        file.close();
+        fileee.close();
     }
 }
 

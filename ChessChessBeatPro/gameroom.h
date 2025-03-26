@@ -13,6 +13,7 @@
 #include <settlement.h>
 #include <vector>
 #include <QPropertyAnimation>
+#include <QStringList>
 class GameRoom : public QWidget
 {
     Q_OBJECT
@@ -49,7 +50,7 @@ public:
     ChessPiece Chess;
     ChessBox boxHuman, boxMachine;
     QLineEdit humanText, machineText;
-    QStringList m_history;
+    QStringList nowHistory;
     Settlement *SR;
     QTimer **deadtime = nullptr;
     // qreal m_opacity;
@@ -57,6 +58,8 @@ public:
 
 private:
     QLabel *label;
+
+    void loadHistory();
 
 protected:
     // void mouseMoveEvent(QMouseEvent *event) override {
