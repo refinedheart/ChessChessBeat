@@ -102,15 +102,16 @@ Settlement::Settlement(QWidget *parent)
     connect(recordbtn, &QPushButton :: clicked, [&](){
         QDockWidget *countDoc = new QDockWidget("Final Record");
 
-        QTableWidget *table = new QTableWidget(2, 3);
+        QTableWidget *table = new QTableWidget(2, 5);
+        table -> setFixedSize(100, 700);
         for(int i = 0; i < 2; ++i) {
-            for(int j = 0; j < 3; ++j) {
+            for(int j = 0; j < 5; ++j) {
                 QTableWidgetItem *item = new QTableWidgetItem;
                 item->setTextAlignment(Qt::AlignCenter);
                 table -> setItem(i, j, item);
             }
         }
-        table->setHorizontalHeaderLabels(QStringList() << "Player" << "Score" << "Points");
+        table->setHorizontalHeaderLabels(QStringList() << "Player" << "Score" << "Points" << "ItemUse" << "ReactionTime");
         table->setEditTriggers(QAbstractItemView::NoEditTriggers);
         table -> item(0, 0) -> setText("卞相壹");
         table -> item(1, 0) -> setText("柯洁");

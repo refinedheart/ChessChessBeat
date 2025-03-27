@@ -37,8 +37,6 @@ const int MultiTrapV = 20;
 
 const int TrapCntLimit = 3;
 
-QEventLoop m_eventLoop;
-
 int GameRoom :: getDistance(QPoint machinePos, int id) {
     int x = regetposx(machinePos.x()), y = regetposy(machinePos.y());
     return abs(x - Chess.Xpos[id]) + abs(y - Chess.Ypos[id]);
@@ -416,7 +414,7 @@ GameRoom::GameRoom(QWidget *parent, int Module)
                 else machineMoveYopt();
             }
             // assert(0);
-            qDebug() << "Xpos = " << machineMoveX << " Ypos = " << machineMoveY;
+            // qDebug() << "Xpos = " << machineMoveX << " Ypos = " << machineMoveY;
             // qDebug() << "posx = " << machine
         });
         MachineControl.start();
@@ -799,16 +797,27 @@ void GameRoom :: ActivateChess() {
     chessDoc -> setWidget(textnow);
     chessDoc -> setFixedSize(800, 800);
 
+    Suspend(chessDoc);
+   // bool fg = false;
+    // connect(chessDoc, &QDockWidget :: visibilityChanged, this, [&](bool vis) {
+    //     if(!vis) {
+    //         fg = true;
+    //     }
+    // });
+    // while(!fg);
+
+    // QEventLoop m_eventLoop;
 
 
-    connect(chessDoc, &QDockWidget :: visibilityChanged, this, [&](bool vis){
-        if(!vis) {
-            m_eventLoop.exit();
-        }
-    });
+    // connect(chessDoc, &QDockWidget :: visibilityChanged, this, [&](bool vis){
+    //     if(!vis) {
+    //         m_eventLoop.exit();
+    //         // qDebug() << "close successful";
+    //     }
+    // });
 
 
-    m_eventLoop.exec();
+    // m_eventLoop.exec();
 
 }
 
@@ -822,18 +831,35 @@ void GameRoom :: ActivateItem() {
     chessDoc -> setFixedSize(800, 800);
 
 
+    Suspend(chessDoc);
+    // bool fg = false;
+    // connect(chessDoc, &QDockWidget :: visibilityChanged, this, [&](bool vis) {
+    //     if(!vis) {
+    //         fg = true;
+    //     }
+    // });
+    // while(!fg);
 
-    connect(chessDoc, &QDockWidget :: visibilityChanged, this, [&](bool vis){
-        if(!vis) {
-            m_eventLoop.exit();
-        }
-    });
+    // QEventLoop m_eventLoop;
 
 
-    m_eventLoop.exec();
+    // connect(chessDoc, &QDockWidget :: visibilityChanged, this, [&](bool vis){
+    //     if(!vis) {
+    //         // qDebug() << "stop?";
+    //         m_eventLoop.exit();
+    //         // qDebug() << "back successful";
+    //     }
+    // });
+
+
+    // m_eventLoop.exec();
 }
 
 void GameRoom :: ActivateTrap() {
+    // qDebug() << "????";
+
+
+    //QEventLoop m_eventLoop;
     QDockWidget *chessDoc = new QDockWidget("Trap Introduce");
     chessDoc -> setFloating(true);
     QTextEdit *textnow = new QTextEdit();
@@ -842,16 +868,25 @@ void GameRoom :: ActivateTrap() {
     chessDoc -> setWidget(textnow);
     chessDoc -> setFixedSize(800, 800);
 
+    Suspend(chessDoc);
+
+    // bool fg = false;
+    // connect(chessDoc, &QDockWidget :: visibilityChanged, this, [&](bool vis) {
+    //     if(!vis) {
+    //         fg = true;
+    //     }
+    // });
+    // while(!fg);
 
 
-    connect(chessDoc, &QDockWidget :: visibilityChanged, this, [&](bool vis){
-        if(!vis) {
-            m_eventLoop.exit();
-        }
-    });
+    // connect(chessDoc, &QDockWidget :: visibilityChanged, this, [&](bool vis){
+    //     if(!vis) {
+    //         m_eventLoop.exit();
+    //     }
+    // });
 
 
-    m_eventLoop.exec();
+    // m_eventLoop.exec();
 
 }
 
@@ -907,6 +942,21 @@ void GameRoom :: ActivateUnknownIconShow(QString qwq) {
 
 }
 
+void GameRoom :: Suspend(QDockWidget* chessDoc) {
+    QEventLoop m_eventLoop;
+
+
+    connect(chessDoc, &QDockWidget :: visibilityChanged, this, [&](bool vis){
+        if(!vis) {
+            // qDebug() << "stop?";
+            m_eventLoop.exit();
+            // qDebug() << "back successful";
+        }
+    });
+
+
+    m_eventLoop.exec();
+}
 
 // qreal GameRoom :: opacity() const {
 //     return m_opacity;

@@ -14,6 +14,7 @@
 #include <vector>
 #include <QPropertyAnimation>
 #include <QStringList>
+#include <QDockWidget>
 
 
 const QString chessTag = "CHESS";
@@ -41,6 +42,7 @@ public:
     void ActivateChess();
     void ActivateTrap();
     void ActivateItem();
+    void Suspend(QDockWidget* chessDoc);
     void ActivateUnknownIconShow(QString qwq);
     explicit GameRoom(QWidget *parent = nullptr, int Module = 0);
     ~GameRoom();
