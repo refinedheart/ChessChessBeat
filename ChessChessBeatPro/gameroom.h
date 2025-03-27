@@ -49,6 +49,7 @@ public:
     int GameModule;
     int startTime;
     int machineMoveX, machineMoveY;
+    // QEventLoop m_eventLoop;
     // int stopItemCnt;
     std :: vector < std :: vector < int > > Trapinq;
 
@@ -67,7 +68,6 @@ public:
 
 private:
     QLabel *label;
-
     // void loadHistory();
 
 protected:
