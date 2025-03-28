@@ -17,6 +17,7 @@ SOURCES += \
     moduleselect.cpp \
     player.cpp \
     settlement.cpp \
+    suspendfunction.cpp \
     tool.cpp \
     widget.cpp
 
@@ -28,6 +29,7 @@ HEADERS += \
     moduleselect.h \
     player.h \
     settlement.h \
+    suspendfunction.h \
     tool.h \
     widget.h
 

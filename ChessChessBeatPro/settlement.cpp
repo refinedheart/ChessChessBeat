@@ -103,7 +103,7 @@ Settlement::Settlement(QWidget *parent)
         QDockWidget *countDoc = new QDockWidget("Final Record");
 
         QTableWidget *table = new QTableWidget(2, 5);
-        table -> setFixedSize(100, 700);
+        table -> setFixedSize(700, 200);
         for(int i = 0; i < 2; ++i) {
             for(int j = 0; j < 5; ++j) {
                 QTableWidgetItem *item = new QTableWidgetItem;

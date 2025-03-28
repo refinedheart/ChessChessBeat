@@ -10,6 +10,7 @@
 
 #include "chesspiece.h"
 #include "chessbox.h"
+#include <suspendfunction.h>
 #include <settlement.h>
 #include <vector>
 #include <QPropertyAnimation>
@@ -59,6 +60,7 @@ public:
     QTimer updateTimer, MachineControl;
     Player machine;
     Player human;
+    // SuspendFunction Stp;
     ChessPiece Chess;
     ChessBox boxHuman, boxMachine;
     QLineEdit humanText, machineText;

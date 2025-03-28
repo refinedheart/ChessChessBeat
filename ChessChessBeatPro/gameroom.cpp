@@ -11,7 +11,7 @@
 #include <QTextEdit>
 #include "chessbox.h"
 #include "chesspiece.h"
-
+#include "suspendfunction.h"
 #include "chessbox.h"
 
 // #include "tool.h"
@@ -30,7 +30,7 @@ const int My = 100;
 
 const int piececnt = 10;
 
-const int BoxLimit = 21;
+const int BoxLimit = 1;
 
 const int MultiTrapV = 20;
 
@@ -414,7 +414,7 @@ GameRoom::GameRoom(QWidget *parent, int Module)
                 else machineMoveYopt();
             }
             // assert(0);
-            // qDebug() << "Xpos = " << machineMoveX << " Ypos = " << machineMoveY;
+            qDebug() << "Xpos = " << machineMoveX << " Ypos = " << machineMoveY;
             // qDebug() << "posx = " << machine
         });
         MachineControl.start();
@@ -532,7 +532,7 @@ void GameRoom :: checkCross() {
         if(Chess.Xpos[i] == regx && Chess.Ypos[i] == regy) {
             human.scores ++;
             Chess.regeneratepos(i);
-            ActivateUnknownIconShow("CHESS");
+            // ActivateUnknownIconShow("CHESS");
             // qDebug() << "success!";
         }
     }
@@ -550,7 +550,7 @@ void GameRoom :: checkCross() {
         if(Chess.XS[i] == regx && Chess.YS[i] == regy) {
             machine.Stopcnt += 3;
             Chess.regenerateStopItem(i);
-            ActivateUnknownIconShow(("ITEM"));
+            // ActivateUnknownIconShow(("ITEM"));
         }
         regx = regetposx(machine.pos.x()), regy = regetposy(machine.pos.y());
         if(Chess.XS[i] == regx && Chess.YS[i] == regy) {
@@ -564,7 +564,7 @@ void GameRoom :: checkCross() {
             ++machine.successTrapcnt;
             human.Stopcnt += machine.vec[i]->val;
             MRecycleTrap(i);
-            ActivateUnknownIconShow("TRAP");
+            // ActivateUnknownIconShow("TRAP");
         }
         if(machine.pos.x() == human.vec[i]->x && machine.pos.y() == human.vec[i]->y) {
             ++human.successTrapcnt;
@@ -943,6 +943,7 @@ void GameRoom :: ActivateUnknownIconShow(QString qwq) {
 }
 
 void GameRoom :: Suspend(QDockWidget* chessDoc) {
+    // Stp.Suspend(chessDoc);
     QEventLoop m_eventLoop;
 
 
