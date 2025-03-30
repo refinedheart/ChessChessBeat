@@ -796,7 +796,9 @@ void GameRoom :: ActivateChess() {
     chessDoc -> show();
     chessDoc -> setWidget(textnow);
     chessDoc -> setFixedSize(800, 800);
-
+    textnow -> append("棋子是决定你胜负的重要物品！\n");
+    textnow -> append("每当你吃到对方的一颗棋子，你的棋盒承载量就会减一！\n");
+    textnow -> append("游戏双方谁的棋盒承载量到达极限就意味着失败");
     Suspend(chessDoc);
    // bool fg = false;
     // connect(chessDoc, &QDockWidget :: visibilityChanged, this, [&](bool vis) {
@@ -829,7 +831,7 @@ void GameRoom :: ActivateItem() {
     chessDoc -> show();
     chessDoc -> setWidget(textnow);
     chessDoc -> setFixedSize(800, 800);
-
+    textnow -> append("控制对方棋子三次移动操作无效");
 
     Suspend(chessDoc);
     // bool fg = false;
@@ -867,7 +869,14 @@ void GameRoom :: ActivateTrap() {
     chessDoc -> show();
     chessDoc -> setWidget(textnow);
     chessDoc -> setFixedSize(800, 800);
-
+    textnow -> append("你拥有三次设下陷阱的机会！\n");
+    textnow -> append("被陷阱标记的棋盘格会标有灰色框线！");
+    textnow -> append("场上一个玩家最多只能同时留存 3 个陷阱！\n");
+    textnow -> append("设下陷阱的玩家不会被自己的陷阱捕捉，被捕捉的玩家将会收到目前档位对应的回合数的行动限制。\n");
+    textnow -> append("两位选手可以分别通过 R P 键来调节档位，分别对应 1 2 4 5 10 回合的行动限制\n");
+    textnow -> append("陷阱会有存活时间，对于限制回合数为 x 的陷阱，其存活时间为 40 / x 秒。\n");
+    textnow -> append("陷阱自动消失后，你当前可放置的陷阱个数会恢复一个。");
+    textnow -> append("棋盘不会显示任何陷阱的存活剩余时间和控制级别。\n");
     Suspend(chessDoc);
 
     // bool fg = false;
