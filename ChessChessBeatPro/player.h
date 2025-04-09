@@ -50,6 +50,12 @@ inline int regetposy(int y) {
     return (y - StartYpos) / gapy + 1;
 }
 
+inline long long getTime() {
+    auto now = std::chrono::system_clock::now();
+    auto timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count();
+    return timestamp;
+}
+
 class Player
 {
 public:
@@ -79,6 +85,7 @@ public:
 
     int restTraps;
     int trapScale;
+    // int Uptime, Downtime, Lefttime, Righttime;
 // private:
     // std :: vector <TrapItem> m_vec;
     TrapItem **vec;

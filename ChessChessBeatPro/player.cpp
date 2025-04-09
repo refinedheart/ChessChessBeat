@@ -2,6 +2,9 @@
 
 #include <QLabel>
 #include <QDebug>
+#include <chrono>
+
+// #include <QDataTime>
 
 
 Player::Player(QString pic, int fg)
@@ -18,7 +21,9 @@ Player::Player(QString pic, int fg)
     for(int i = 0; i < limitTraps; ++i) vec[i] = new TrapItem(0, 0, 0, 0);
     id = new int*[limitTraps];
     for(int i = 0; i < limitTraps; ++i) id[i] = new int;
-
+    // auto t = std :: chrono :: system_clock :: now();
+    // auto tt = std :: chrono :: duration_cast<std :: chrono :: milliseconds> (t.time_since_epoch()).count();
+    // qDebug() << tt;
     // vec.resize(3);
     // id.resize(3);
     // item = new QLabel();
