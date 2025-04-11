@@ -131,6 +131,11 @@ Settlement::Settlement(QWidget *parent)
 
 }
 
+void Settlement :: setPlayer(Player M, Player H) {
+    machine = M;
+    human = H;
+}
+
 void Settlement :: getHuman(int c) {
     humanScore = c;
 }

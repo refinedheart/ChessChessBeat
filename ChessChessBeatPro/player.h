@@ -69,6 +69,10 @@ public:
     struct moveMent {
         int dir;
         long long t;
+        moveMent(int dir_ = 0, long long t_ = 0) {
+            dir = dir_;
+            t = t_;
+        }
     };
 
 

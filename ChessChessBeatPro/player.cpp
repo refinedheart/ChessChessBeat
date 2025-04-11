@@ -67,6 +67,7 @@ void Player :: moveUp() {
     if(checkStop()) return ;
     QPoint npos = GetNextPos(pos, UP);
     if(checkOutOfWidget(npos)) return ;
+    kp.push_back((moveMent){0, getTime()});
     pos = npos;
     UpdatePos();
 }
@@ -74,6 +75,7 @@ void Player :: moveLeft() {
     if(checkStop()) return ;
     QPoint npos = GetNextPos(pos, LEFT);
     if(checkOutOfWidget(npos)) return ;
+    kp.push_back((moveMent){1, getTime()});
     pos = npos;
     UpdatePos();
     // qDebug() << "Left!";
@@ -86,6 +88,7 @@ void Player :: moveDown() {
     // qDebug() << StartXpos << ' ' << StartYpos << ' ' << npos.x() << " " << npos.y();
     // qDebug() << checkOutOfWidget(npos) << '\n';
     if(checkOutOfWidget(npos)) return ;
+    kp.push_back((moveMent){2, getTime()});
     pos = npos;
     UpdatePos();
     // qDebug() << "Down!";
@@ -94,6 +97,7 @@ void Player :: moveRight() {
     if(checkStop()) return ;
     QPoint npos = GetNextPos(pos, RIGHT);
     if(checkOutOfWidget(npos)) return ;
+    kp.push_back((moveMent){3, getTime()});
     pos = npos;
     UpdatePos();
 }

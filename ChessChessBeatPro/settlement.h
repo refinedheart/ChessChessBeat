@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include <player.h>
+
 class Settlement : public QWidget
 {
     Q_OBJECT
@@ -13,6 +15,8 @@ public:
     void getHuman(int c);
     void getMachine(int c);
     void GenerateRoom();
+    Player machine, human;
+    void setPlayer(Player M, Player H);
 signals:
     void back_to_module();
     // void paintEvent(QPaintEvent *event);

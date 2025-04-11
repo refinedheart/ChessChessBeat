@@ -208,6 +208,7 @@ GameRoom::GameRoom(QWidget *parent, int Module)
         checkCross();
         updateMachinePrint();
         if(checkend()) {
+            SR -> setPlayer(machine, human);
             SR -> show();
             // qDebug() << "continue?";
             this -> close();
@@ -223,6 +224,7 @@ GameRoom::GameRoom(QWidget *parent, int Module)
         checkCross();
         updateMachinePrint();
         if(checkend()) {
+            SR -> setPlayer(machine, human);
             SR -> show();
             // qDebug() << "continue?";
             this -> close();
@@ -235,6 +237,7 @@ GameRoom::GameRoom(QWidget *parent, int Module)
         checkCross();
         updateMachinePrint();
         if(checkend()) {
+            SR -> setPlayer(machine, human);
             SR -> show();
             // qDebug() << "continue?";
             this -> close();
@@ -246,6 +249,7 @@ GameRoom::GameRoom(QWidget *parent, int Module)
         checkCross();
         updateMachinePrint();
         if(checkend()) {
+            SR -> setPlayer(machine, human);
             SR -> show();
             // qDebug() << "continue?";
             this -> close();
@@ -259,6 +263,7 @@ GameRoom::GameRoom(QWidget *parent, int Module)
         checkCross();
         updateHumanPrint();
         if(checkend()) {
+            SR -> setPlayer(machine, human);
             SR -> show();
             // qDebug() << "continue?";
             this -> close();
@@ -270,6 +275,7 @@ GameRoom::GameRoom(QWidget *parent, int Module)
         checkCross();
         updateHumanPrint();
         if(checkend()) {
+            SR -> setPlayer(machine, human);
             SR -> show();
             // qDebug() << "continue?";
             this -> close();
@@ -281,6 +287,7 @@ GameRoom::GameRoom(QWidget *parent, int Module)
         checkCross();
         updateHumanPrint();
         if(checkend()) {
+            SR -> setPlayer(machine, human);
             SR -> show();
             // qDebug() << "continue?";
             this -> close();
@@ -292,6 +299,7 @@ GameRoom::GameRoom(QWidget *parent, int Module)
         checkCross();
         updateHumanPrint();
         if(checkend()) {
+            SR -> setPlayer(machine, human);
             SR -> show();
             // qDebug() << "continue?";
             this -> close();
