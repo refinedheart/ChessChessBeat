@@ -66,6 +66,13 @@ public:
     int Stopcnt;
     int layTrapcnt;
     int successTrapcnt;
+    struct moveMent {
+        int dir;
+        long long t;
+    };
+
+
+    std :: vector <moveMent> kp;
     // int Penalty
     // int scores;
     Player(QString pic = "", int fg = 0);

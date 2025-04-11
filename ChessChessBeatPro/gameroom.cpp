@@ -38,7 +38,9 @@ const int MultiTrapV = 20;
 const int TrapCntLimit = 3;
 
 int GameRoom :: getDistance(QPoint machinePos, int id) {
+    assert(id >= 0);
     int x = regetposx(machinePos.x()), y = regetposy(machinePos.y());
+    // qDebug() << "dis x = " << x << "dis y = " << y << '\n';
     return abs(x - Chess.Xpos[id]) + abs(y - Chess.Ypos[id]);
 }
 
@@ -397,6 +399,8 @@ GameRoom::GameRoom(QWidget *parent, int Module)
 
         /*--------------------------------------------------------*/
         MachineControl.setInterval(200);
+        machineMoveX = 0; machineMoveY = 0;
+        // qDebug() << "start x = " << machineMoveX << " y = " << machineMoveY;
         connect(&MachineControl, &QTimer :: timeout, [&](){
             // qDebug() << "machine move!";
             while(abs(machineMoveX) + abs(machineMoveY) == 0) {
@@ -409,7 +413,7 @@ GameRoom::GameRoom(QWidget *parent, int Module)
             }
             else {
                 assert(machineMoveX != 0 && machineMoveY != 0);
-                int op = time(0) & 1;
+                int op = getTime() & 1;
                 if(op == 0) machineMoveXopt();
                 else machineMoveYopt();
             }
@@ -479,7 +483,7 @@ void GameRoom :: updateMachineStrategy() {
             posid = i;
         }
     }
-    assert(posid != -1);
+    assert(posid >= 0);
     // qDebug() << "id = " << posid;
     machineMoveX = Chess.Xpos[posid] - regetposx(machine.pos.x());
     machineMoveY = Chess.Ypos[posid] - regetposy(machine.pos.y());
