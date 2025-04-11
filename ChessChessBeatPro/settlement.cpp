@@ -13,6 +13,10 @@
 
 #include <QTableWidget>
 
+inline long long lmin(long long x, long long y) {
+    return x < y ? x : y;
+}
+
 Settlement::Settlement(QWidget *parent)
     : QWidget{parent}
 {
@@ -100,23 +104,43 @@ Settlement::Settlement(QWidget *parent)
 
 
     connect(recordbtn, &QPushButton :: clicked, [&](){
+
+        // machine: reaction time = 200 ms
+        int hsiz = human.kp.size();
+        long long hrt = 1000;
+        long long hrt_t = 1000;
+        if(hsiz > 0) {
+            for(int i = 1; i < hsiz; ++i) {
+                if(human.kp[i].dir != human.kp[i - 1].dir) {
+                    hrt = lmin(hrt, abs(human.kp[i].t - human.kp[i - 1].t));
+                }
+                else {
+                    hrt_t = lmin(hrt_t, abs(human.kp[i].t - human.kp[i - 1].t));
+                }
+            }
+        }
+
         QDockWidget *countDoc = new QDockWidget("Final Record");
 
-        QTableWidget *table = new QTableWidget(2, 5);
+        QTableWidget *table = new QTableWidget(2, 6);
         table -> setFixedSize(700, 200);
         for(int i = 0; i < 2; ++i) {
-            for(int j = 0; j < 5; ++j) {
+            for(int j = 0; j < 6; ++j) {
                 QTableWidgetItem *item = new QTableWidgetItem;
                 item->setTextAlignment(Qt::AlignCenter);
                 table -> setItem(i, j, item);
             }
         }
-        table->setHorizontalHeaderLabels(QStringList() << "Player" << "Score" << "Points" << "ItemUse" << "ReactionTime");
+        table->setHorizontalHeaderLabels(QStringList() << "Player" << "Score" << "Points" << "ItemUse" << "Reaction time of directional change" << "Reaction time in the same direction");
         table->setEditTriggers(QAbstractItemView::NoEditTriggers);
         table -> item(0, 0) -> setText("卞相壹");
         table -> item(1, 0) -> setText("柯洁");
         table -> item(0, 1) -> setText(QString :: number(machineScore));
         table -> item(1, 1) -> setText(QString :: number(humanScore));
+        table -> item(0, 4) -> setText(QString :: number(200));
+        table -> item(0, 5) -> setText(QString :: number(200));
+        table -> item(1, 4) -> setText(QString :: number(hrt));
+        table -> item(1, 5) -> setText(QString :: number(hrt_t));
         // 调整列宽以适应内容
         table->resizeColumnsToContents();
 
