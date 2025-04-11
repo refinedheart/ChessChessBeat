@@ -30,7 +30,7 @@ const int My = 100;
 
 const int piececnt = 10;
 
-const int BoxLimit = 1;
+const int BoxLimit = 10;
 
 const int MultiTrapV = 20;
 
@@ -560,12 +560,14 @@ void GameRoom :: checkCross() {
     for(int i = 0; i < Chess.Itemcnt; ++i) {
         int regx = regetposx(human.pos.x()), regy = regetposy(human.pos.y());
         if(Chess.XS[i] == regx && Chess.YS[i] == regy) {
+            human.getItemCnt ++;
             machine.Stopcnt += 3;
             Chess.regenerateStopItem(i);
             // ActivateUnknownIconShow(("ITEM"));
         }
         regx = regetposx(machine.pos.x()), regy = regetposy(machine.pos.y());
         if(Chess.XS[i] == regx && Chess.YS[i] == regy) {
+            machine.getItemCnt ++;
             human.Stopcnt += 3;
             Chess.regenerateStopItem(i);
             ActivateUnknownIconShow("ITEM");

@@ -66,6 +66,7 @@ public:
     int Stopcnt;
     int layTrapcnt;
     int successTrapcnt;
+    int getItemCnt;
     struct moveMent {
         int dir;
         long long t;
