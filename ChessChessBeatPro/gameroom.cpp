@@ -30,7 +30,7 @@ const int My = 100;
 
 const int piececnt = 10;
 
-const int BoxLimit = 10;
+const int BoxLimit = 1;
 
 const int MultiTrapV = 20;
 
@@ -410,6 +410,15 @@ GameRoom::GameRoom(QWidget *parent, int Module)
         machineMoveX = 0; machineMoveY = 0;
         // qDebug() << "start x = " << machineMoveX << " y = " << machineMoveY;
         connect(&MachineControl, &QTimer :: timeout, [&](){
+            int nowp = Chess.rd(1, 100);
+            // qDebug() << "nowp = " << nowp;
+            if(nowp <= 5) {
+                emit lKeyPressed();
+            }
+            int nowrp = Chess.rd(1, 100);
+            if(nowrp <= 15) {
+                emit pKeyPressed();
+            }
             // qDebug() << "machine move!";
             while(abs(machineMoveX) + abs(machineMoveY) == 0) {
                 updateMachineStrategy();
