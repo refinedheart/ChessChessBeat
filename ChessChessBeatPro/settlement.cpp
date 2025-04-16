@@ -143,6 +143,8 @@ Settlement::Settlement(QWidget *parent)
         table -> item(1, 5) -> setText(QString :: number(hrt_t));
         table -> item(0, 3) -> setText(QString :: number(machine.getItemCnt));
         table -> item(1, 3) -> setText(QString :: number(human.getItemCnt));
+        table -> item(0, 6) -> setText(QString :: number(TrapCalc(machine.successTrapcnt)));
+        table -> item(1, 6) -> setText(QString :: number(TrapCalc(human.successTrapcnt)));
         // 调整列宽以适应内容
         table->resizeColumnsToContents();
 
