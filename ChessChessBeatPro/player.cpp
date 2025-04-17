@@ -13,6 +13,9 @@ Player::Player(QString pic, int fg)
     scores = 0;
     graph = pic;
     getItemCnt = 0;
+    layTrapcnt = 0;
+    successTrapcnt = 0;
+
     if(fg == 0) pos = QPoint(StartXpos, StartYpos);
     else {
         pos = GetCoordPos(19, 19);

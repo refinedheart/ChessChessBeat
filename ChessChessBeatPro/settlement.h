@@ -15,6 +15,7 @@ public:
     void getHuman(int c);
     void getMachine(int c);
     void GenerateRoom();
+    int TrapCalc(int suc, int lac);
     Player machine, human;
     void setPlayer(Player M, Player H);
 signals:
