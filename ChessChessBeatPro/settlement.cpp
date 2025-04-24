@@ -122,31 +122,31 @@ Settlement::Settlement(QWidget *parent)
 
         QDockWidget *countDoc = new QDockWidget("Final Record");
 
-        QTableWidget *table = new QTableWidget(2, 8);
+        QTableWidget *table = new QTableWidget(2, 7);
         table -> setFixedSize(700, 200);
         for(int i = 0; i < 2; ++i) {
-            for(int j = 0; j < 8; ++j) {
+            for(int j = 0; j < 7; ++j) {
                 QTableWidgetItem *item = new QTableWidgetItem;
                 item->setTextAlignment(Qt::AlignCenter);
                 table -> setItem(i, j, item);
             }
         }
-        table->setHorizontalHeaderLabels(QStringList() << "Player" << "Score" << "Points" << "Item Use" << "Reaction time of directional change" << "Reaction time in the same direction" << "Success Trap" <<"Trap Use");
+        table->setHorizontalHeaderLabels(QStringList() << "Player" << "RestPieces" << "Item Use" << "Reaction time of directional change" << "Reaction time in the same direction" << "Success Trap" <<"Trap Use");
         table->setEditTriggers(QAbstractItemView::NoEditTriggers);
         table -> item(0, 0) -> setText("卞相壹");
         table -> item(1, 0) -> setText("柯洁");
         table -> item(0, 1) -> setText(QString :: number(machineScore));
         table -> item(1, 1) -> setText(QString :: number(humanScore));
-        table -> item(0, 4) -> setText(QString :: number(200));
-        table -> item(0, 5) -> setText(QString :: number(200));
-        table -> item(1, 4) -> setText(QString :: number(hrt));
-        table -> item(1, 5) -> setText(QString :: number(hrt_t));
-        table -> item(0, 3) -> setText(QString :: number(machine.getItemCnt));
-        table -> item(1, 3) -> setText(QString :: number(human.getItemCnt));
-        table -> item(0, 6) -> setText(QString :: number((machine.successTrapcnt)));
-        table -> item(1, 6) -> setText(QString :: number((human.successTrapcnt)));
-        table -> item(0, 7) -> setText(QString :: number(machine.layTrapcnt));
-        table -> item(1, 7) -> setText(QString :: number(human.layTrapcnt));
+        table -> item(0, 4 - 1) -> setText(QString :: number(200));
+        table -> item(0, 5 - 1) -> setText(QString :: number(200));
+        table -> item(1, 4 - 1) -> setText(QString :: number(hrt));
+        table -> item(1, 5 - 1) -> setText(QString :: number(hrt_t));
+        table -> item(0, 3 - 1) -> setText(QString :: number(machine.getItemCnt));
+        table -> item(1, 3 - 1) -> setText(QString :: number(human.getItemCnt));
+        table -> item(0, 6 - 1) -> setText(QString :: number((machine.successTrapcnt)));
+        table -> item(1, 6 - 1) -> setText(QString :: number((human.successTrapcnt)));
+        table -> item(0, 7 - 1) -> setText(QString :: number(machine.layTrapcnt));
+        table -> item(1, 7 - 1) -> setText(QString :: number(human.layTrapcnt));
         // 调整列宽以适应内容
         table->resizeColumnsToContents();
 

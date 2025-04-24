@@ -30,7 +30,7 @@ const int My = 100;
 
 const int piececnt = 10;
 
-const int BoxLimit = 1;
+const int BoxLimit = 15;
 
 const int MultiTrapV = 20;
 
