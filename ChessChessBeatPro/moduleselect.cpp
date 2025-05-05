@@ -46,7 +46,7 @@ ModuleSelect::ModuleSelect(QWidget *parent)
         docw -> setFixedSize(800, 800);
         textIntro -> append("游戏玩法介绍：\n");
         textIntro -> setReadOnly(true);
-        textIntro -> append("在游戏中，你将进入 2025 LG 杯决赛的赛场，与围棋世界冠军 LG 杯冠军卞相壹进行一场精彩的对决！\n");
+        textIntro -> append("在游戏中，你将进入 LG 杯决赛的赛场，与围棋世界冠军 LG 杯冠军卞相壹进行一场精彩的对决！\n");
         textIntro -> append("玩家将使用经典的 WASD 键来对柯洁头像进行位置移动，对应上左下右的操作。\n");
         textIntro -> append("同时，两位棋手的头顶上方存在计数器，表示再被吃多少颗棋子，他的棋盖就放不下了，根据韩国规则，该棋手判负。\n");
         textIntro -> append("根据 LG 杯第二局，卞相壹棋手执黑棋，柯洁执白棋。故而，您对应的角色只能吃掉对手的棋子，而不能对本方棋子造成影响。\n");
